@@ -2,13 +2,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const registerApi = require('./api');
+const knexfile = require('../knexfile');
 
 // DB stuff
-const Model = require('objection');
+const Model = require('objection').Model;
 const Knex = require('knex');
 
 // Port application is running on
 const PORT = 3000;
+
+const knex = Knex(knexfile.development);
+Model.knex(knex);
 
 // Express initiation
 const app = express()
@@ -19,10 +24,13 @@ const app = express()
     .use(morgan('dev'))
     .use(express.static('/'));
 
+// Pull server into API context
+registerApi(app);
+
 // Error handler
 app.use((err, req, res, next) => {
     if(err) {
-        req.status(err.statusCode || err.status || 500).send(err.data || err.message || {});
+        res.status(err.statusCode || err.status || 500).send(err.data || err.message || {});
     } else {
         next();
     }
