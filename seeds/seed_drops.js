@@ -1,10 +1,10 @@
 exports.seed = function (knex, Promise) {
   return knex.raw('SET foreign_key_checks = 0;')
     .then(() => {
-      return knex('drops').del()
+      return knex('deadDrops').del()
         .then(function () {
-          // Inserts seed drops
-          return knex('drops').insert([
+          // Inserts seed deadDrops
+          return knex('deadDrops').insert([
             {
               id: 1,
               title: 'Secret Mission #1',

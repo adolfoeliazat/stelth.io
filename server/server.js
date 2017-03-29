@@ -2,13 +2,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-
 // DB stuff
-const Model = require('objection');
+const Model = require('objection').Model;
 const Knex = require('knex');
+const knexfile = require('../knexfile')
+const deadDrop_api = require('./deadDrop_api');
+const knex = Knex(knexfile.development);
+Model.knex(knex);
+
+// dotenv.load();
 
 // Port application is running on
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 
 // Express initiation
 const app = express()
@@ -19,10 +25,12 @@ const app = express()
     .use(morgan('dev'))
     .use(express.static('/'));
 
+deadDrop_api(app)
+
 // Error handler
 app.use((err, req, res, next) => {
     if(err) {
-        req.status(err.statusCode || err.status || 500).send(err.data || err.message || {});
+        res.status(err.statusCode || err.status || 500).send(err.data || err.message || {});
     } else {
         next();
     }
