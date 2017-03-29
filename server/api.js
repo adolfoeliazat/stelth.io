@@ -3,26 +3,26 @@ const User = require('./models/User');
 const DeadDrop = require('./models/DeadDrop');
 
 module.exports = (app) => {
-    app.get('/users', (req, res, next) => {
-      User
-        .query()
-        .skipUndefined()
-        .where('users.id', req.query.id)
-        .then(users => {
-            res.send(users)
-        })
-        .catch(next);
-    })
+  app.get('/users', (req, res, next) => {
+    User
+      .query()
+      .skipUndefined()
+      .where('users.id', req.query.id)
+      .then(users => {
+        res.send(users)
+      })
+      .catch(next);
+  })
 
-    app.post('/users', (req, res, next) => {
-        User
-        .query()
-        .insertAndFetch(req.body)
-        .then(user => {
-            res.send(user)
-        })
-        .catch(next)
-})
+  app.post('/users', (req, res, next) => {
+    User
+      .query()
+      .insertAndFetch(req.body)
+      .then(user => {
+        res.send(user)
+      })
+      .catch(next)
+  })
 
   app.get('/deadDrops', (req, res, next) => {
     DeadDrop
