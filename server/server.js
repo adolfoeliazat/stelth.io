@@ -3,7 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
-
 // DB stuff
 const registerApi = require('./api');
 const Model = require('objection').Model;
