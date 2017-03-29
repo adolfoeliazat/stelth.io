@@ -8,7 +8,7 @@ class Drop extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['title', 'body', 'lat', 'lng', 'ownderID', 'receiverID'],
+      required: ['title', 'data', 'lat', 'lng', 'ownerID', 'receiverID'],
 
       properties: {
         id:         { type: 'integer' },
