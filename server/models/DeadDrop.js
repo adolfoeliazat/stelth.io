@@ -1,8 +1,8 @@
 const Model = require('objection').Model;
 
-class Drop extends Model {
+class DeadDrop extends Model {
   static get tableName() {
-    return 'drops'
+    return 'deadDrops'
   }
 
   static get jsonSchema() {
@@ -13,7 +13,7 @@ class Drop extends Model {
       properties: {
         id:         { type: 'integer' },
         title:      { type: 'string', minLength: 1, maxLength: 255 },
-        data:       { type: 'string', minLength: 1, maxLength: 255 },
+        data:       { type: 'string', minLength: 1 },
         lat:        { type: 'number', minLength: 1 },
         lng:        { type: 'number', minLength: 1 },
         ownerID:    { type: 'integer', minLength: 1 },
@@ -29,7 +29,7 @@ class Drop extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: __dirname + '/User',
         join: {
-          from: 'drops.ownerID',
+          from: 'deadDrops.ownerID',
           to: 'users.id' // primary key in users table
         }
       },
@@ -39,7 +39,7 @@ class Drop extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: __dirname + '/User',
         join: {
-          from: 'drops.receiverID',
+          from: 'deadDrops.receiverID',
           to: 'users.id' // primary key in users table
         }
       }
@@ -47,4 +47,4 @@ class Drop extends Model {
   }
 }
 
-module.exports = Drop;
+module.exports = DeadDrop;

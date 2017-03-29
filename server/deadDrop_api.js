@@ -1,20 +1,20 @@
 const objection = require('objection');
-const Drop = require('./models/Drop');
+const DeadDrop = require('./models/DeadDrop');
 
 module.exports = (app) => {
-  app.get('/drops', (req, res, next) => {
-    Drop
+  app.get('/deadDrops', (req, res, next) => {
+    DeadDrop
       .query()
       .skipUndefined()
       .where('id', req.query.id)
       .where('ownerID', req.query.ownerID)
-      .then((drops) => {
-        res.send(drops)
+      .then((deadDrops) => {
+        res.send(deadDrops)
       })
       .catch(next);
   })
 
-  app.post('/drops', (req, res, next) => {
+  app.post('/deadDrops', (req, res, next) => {
     let _ownerID = parseInt(req.body.ownerID);
     let _receiverID = parseInt(req.body.receiverID);
     let _lat = parseFloat(req.body.lat);
@@ -27,9 +27,9 @@ module.exports = (app) => {
       ownerID: _ownerID,
       receiverID: _receiverID
     }
-    Drop.query()
+    DeadDrop.query()
       .insertAndFetch(formattedDrop)
-      .then((drops) => { res.send(drops) })
+      .then((deadDrops) => { res.send(deadDrops) })
       .catch(next);
   })
 }
