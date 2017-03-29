@@ -8,7 +8,9 @@ module.exports = (app) => {
       .skipUndefined()
       .where('id', req.query.id)
       .where('ownerID', req.query.ownerID)
-      .then((drops) => { res.send(drops) })
+      .then((drops) => {
+        res.send(drops)
+      })
       .catch(next);
   })
 
