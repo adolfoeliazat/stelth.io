@@ -30,7 +30,7 @@ app.use((err, req, res, next) => {
 
 app.get('/', (res, req, next) => {
     console.log("HELLO WORLD!");
-    console.log("sup bro");
+    // console.log("sup bro");
 })
 
 // Server listener
