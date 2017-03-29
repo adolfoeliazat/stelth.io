@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/FILDI/stelth.io.git"
   },
-  "author": "Armen Rostamian, Regina Lee and Alexadre Kim",
+  "author": "Armen Rostamian, Regina Lee, and Alexadre Kim",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/FILDI/stelth.io/issues"
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/FILDI/stelth.io#readme",
   "dependencies": {
     "body-parser": "^1.17.1",
+    "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "knex": "^0.12.9",
     "morgan": "^1.8.1",
