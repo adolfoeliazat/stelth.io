@@ -1,0 +1,75 @@
+const objection = require('objection');
+const User = require('./models/User');
+const DeadDrop = require('./models/DeadDrop');
+
+module.exports = (app) => {
+    app.get('/users', (req, res, next) => {
+      User
+        .query()
+        .skipUndefined()
+        .where('users.id', req.query.id)
+        .then(users => {
+            if(users.length === 0) {
+                User
+                .query()
+                .insertAndFetch({
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    email: req.body.email,
+                    publicKey: req.body.publicKey
+                })
+                .then(user => {
+                    res.send(user)
+                })
+                .catch(err => {
+                    console.log("this shit is not working properly foo", err)
+                    next(err)
+                })
+            } else {
+                res.send(users)
+            }
+        })
+        .catch(next);
+    })
+
+    app.post('/users', (req, res, next) => {
+        User
+        .query()
+        .insertAndFetch(req.body)
+        .then(user => {
+            res.send(user)
+        })
+        .catch(next)
+})
+
+  app.get('/deadDrops', (req, res, next) => {
+    DeadDrop
+      .query()
+      .skipUndefined()
+      .where('id', req.query.id)
+      .where('ownerID', req.query.ownerID)
+      .then((deadDrops) => {
+        res.send(deadDrops)
+      })
+      .catch(next);
+  })
+
+  app.post('/deadDrops', (req, res, next) => {
+    let _ownerID = parseInt(req.body.ownerID);
+    let _receiverID = parseInt(req.body.receiverID);
+    let _lat = parseFloat(req.body.lat);
+    let _lng = parseFloat(req.body.lng);
+    let formattedDrop = {
+      title: req.body.title,
+      data: req.body.data,
+      lat: _lat,
+      lng: _lng,
+      ownerID: _ownerID,
+      receiverID: _receiverID
+    }
+    DeadDrop.query()
+      .insertAndFetch(formattedDrop)
+      .then((deadDrops) => { res.send(deadDrops) })
+      .catch(next);
+  })
+}
