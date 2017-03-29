@@ -2,18 +2,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const registerApi = require('./api');
-const knexfile = require('../knexfile');
+
 
 // DB stuff
+const registerApi = require('./api');
 const Model = require('objection').Model;
 const Knex = require('knex');
-
-// Port application is running on
-const PORT = 3000;
+const knexfile = require('../knexfile')
 
 const knex = Knex(knexfile.development);
 Model.knex(knex);
+
+// Port application is running on
+const PORT = process.env.PORT || 3000;
 
 // Express initiation
 const app = express()

@@ -11,9 +11,9 @@ exports.up = function (knex, Promise) {
       // table.string('authID');
       table.timestamps(true);
     })
-    .createTable('drops', (table) => {
+    .createTable('deadDrops', (table) => {
       table.increments('id').primary();
-      table.string('title', 20);
+      table.string('title', 50);
       table.string('data', 20);
       table.decimal('lat', 24, 12);
       table.decimal('lng', 24, 12);
@@ -26,5 +26,5 @@ exports.up = function (knex, Promise) {
 exports.down = function (knex, Promise) {
   return knex.schema
     .dropTableIfExists('users')
-    .dropTableIfExists('drops')
+    .dropTableIfExists('deadDrops')
 };
