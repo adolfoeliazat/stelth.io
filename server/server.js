@@ -13,7 +13,7 @@ const knex = Knex(knexfile.development);
 Model.knex(knex);
 
 // Port application is running on
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 // Express initiation
 const app = express()
