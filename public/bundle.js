@@ -9476,13 +9476,17 @@ var Map = function (_React$Component) {
   }
 
   _createClass(Map, [{
-    key: 'render',
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.map = new google.maps.Map(this.refs.mapCanvas, {
+        zoom: 5,
+        center: { lat: -25.363, lng: 131.044 }
+      });
+    }
+  }, {
+    key: "render",
     value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        'SUP HOLMES!'
-      );
+      return _react2.default.createElement("div", { className: "map", ref: "mapCanvas" });
     }
   }]);
 
