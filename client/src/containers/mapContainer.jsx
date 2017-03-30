@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Map extends React.Component {
+class MapContainer extends React.Component {
   componentDidMount() {
     window.map = new google.maps.Map(this.refs.mapCanvas, {
       zoom: 13,
@@ -18,4 +18,4 @@ class Map extends React.Component {
   }
 }
 
-export default Map;
+export default MapContainer;
