@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import GameMasterView from './containers/GameMasterView.jsx';
 import { Router, Route, Link, IndexRoute } from 'react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
-import App from './App'
+import App from './App.jsx';
+import GameMasterView from './containers/GameMasterView.jsx';
 
-const stelthHistory = createBrowserHistory()
+const customHistory = createBrowserHistory()
+console.log("this is the customHistory ", customHistory)
 
 render(
-  // <App />
-  <Router history={stelthHistory} >
-    <Route exact path={'/'} component={App}>
-      <Route path='/home' component={GameMasterView} />
+  <Router history={customHistory} >
+    <Route path={'/'} component={App}>
     </Route>
   </Router>
   , document.getElementById('root')
