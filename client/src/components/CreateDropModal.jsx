@@ -19,13 +19,17 @@ class CreateDropModal extends React.Component {
   render() {
     return (
         <Modal show={this.state.showModal} onHide={this.close}>
+          <p>what is going on?!</p>
           <Modal.Header>Add a new Drop</Modal.Header>
-          <Modal.Body >
-            <p>What's going on?</p>
-          </Modal.Body>
           <Modal.Footer>
             <button>CLOSE</button>
           </Modal.Footer>
+          {/*<Modal.Body >
+            <p>What's going on?</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <button>CLOSE</button>*/}
+          {/*</Modal.Footer>*/}
         </Modal>
     )
   }
