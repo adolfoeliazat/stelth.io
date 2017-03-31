@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Router, Route, Link, IndexRoute } from 'react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
-import App from './App.jsx';
+import App from './router/App.jsx';
 import GameMasterView from './containers/GameMasterView.jsx';
 
 const customHistory = createBrowserHistory()

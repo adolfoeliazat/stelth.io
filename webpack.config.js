@@ -10,7 +10,7 @@ const BUILD_DIR = path.resolve(__dirname, 'client/build');
 
 const config = {
   entry: {
-    main: path.resolve(SRC_DIR, 'routes.jsx'),
+    main: path.resolve(SRC_DIR, 'index.jsx'),
   },
   output: {
     path: BUILD_DIR,
