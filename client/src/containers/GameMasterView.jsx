@@ -13,7 +13,7 @@ class GameMasterView extends Component {
   }
 
   toggleModal() {
-    this.setState({ modalClicked: true })
+    this.setState({ modalClicked: !this.state.modalClicked })
   }
 
   render() {
