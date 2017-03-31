@@ -2,13 +2,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
-const path = require('path')
+const path = require('path');
+const cors = require('cors');
 
 // DB stuff
 const registerApi = require('./api');
 const Model = require('objection').Model;
 const Knex = require('knex');
-const knexfile = require('../knexfile')
+const knexfile = require('../knexfile');
 
 const knex = Knex(knexfile.development);
 Model.knex(knex);
@@ -20,6 +21,7 @@ console.log(path.join(__dirname, '/../client/build'))
 
 // Express initiation
 const app = express()
+  .use(cors())
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({
     extended: true
