@@ -10,7 +10,8 @@ const stelthHistory = createBrowserHistory()
 
 render(
   <Router history={stelthHistory} >
-    <Route exact path={'/'} component={App}>
+    <Route>
+    {/*<Route exact path={'/'} component={App}>*/}
       <Route path='/home' component={GameMasterView} />
     </Route>
   </Router>

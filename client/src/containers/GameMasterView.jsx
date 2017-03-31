@@ -20,6 +20,7 @@ class GameMasterView extends Component {
     return(
       <div className="gamemaster-view">
         <MapContainer />
+        <p>wha?</p>
         {console.log("button", this.state.modalClicked)}
         <Button onClick={this.toggleModal}> Create New Drop </Button>
         {this.state.modalClicked ? <CreateDropModal /> : ''}
