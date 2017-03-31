@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Modal, Header, Body, Footer } from 'semantic-ui-react'
-// import { Button, Modal, ControlLabel, Header } from 'react-bootstrap';
 
 // modal for creating a deaddrop on web client
 class CreateDropModal extends React.Component {
@@ -18,9 +17,7 @@ class CreateDropModal extends React.Component {
   }
 
   render() {
-    console.log("this is modal ", Modal)
     return (
-      <div>
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header>Add a new Drop</Modal.Header>
           <Modal.Body >
@@ -30,7 +27,6 @@ class CreateDropModal extends React.Component {
             <button>CLOSE</button>
           </Modal.Footer>
         </Modal>
-      </div>
     )
   }
 }
