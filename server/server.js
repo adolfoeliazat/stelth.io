@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const path = require('path')
 
 // DB stuff
 const registerApi = require('./api');
@@ -15,6 +16,8 @@ Model.knex(knex);
 // Port application is running on
 const PORT = 3000;
 
+console.log(path.join(__dirname, '/../client/build'))
+
 // Express initiation
 const app = express()
   .use(bodyParser.json())
@@ -22,7 +25,7 @@ const app = express()
     extended: true
   }))
   .use(morgan('dev'))
-  .use(express.static('/'));
+  .use(express.static(path.join(__dirname, '/../client/build')))
 
 // Pull server into API context
 registerApi(app);
@@ -36,9 +39,12 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.get('/', (res, req, next) => {
+app.get('/', (req, res, next) => {
   console.log("HELLO WORLD!");
-  // console.log("sup bro");
+})
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/public/index.html'))
 })
 
 // Server listener

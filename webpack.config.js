@@ -67,7 +67,7 @@ const config = {
   ],
   watch: true,
   stats: { colors: true },
-  devtool: 'eval'
+  devtool: 'inline-sourcemap'
 };
 
 module.exports = config;
