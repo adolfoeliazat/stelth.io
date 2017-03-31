@@ -14,6 +14,7 @@ render(
     {/*<Route exact path={'/'} component={App}>*/}
       <Route path='/home' component={GameMasterView} />
     </Route>
+    {/*</Route>*/}
   </Router>
   , document.getElementById('app')
 )
