@@ -22,7 +22,7 @@ class GameMasterView extends Component {
         <MapContainer />
         {console.log("this is the state changing holmes, this coo af ", this.state.modalClicked)}
         <Button onClick={this.toggleModal}> Create New Drop </Button>
-        {this.state.modalClicked ? <CreateDropModal /> : ''}
+        {this.state.modalClicked ? <CreateDropModal toggleModal={this.toggleModal} modalClicked={this.state.modalClicked}/> : ''}
       </div>
     )
   }

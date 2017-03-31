@@ -5,9 +5,9 @@ import { Modal, FormGroup, ControlLabel, FormControl, Button } from 'react-boots
 class CreateDropModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showModal: true
-    }
+    // this.state = {
+    //   showModal: true
+    // }
     this.close = this.close.bind(this)
   }
 
@@ -20,7 +20,7 @@ class CreateDropModal extends Component {
     return (
       <div>
         {console.log('testing')}
-        <Modal show={this.state.showModal} onHide={this.close}>
+        <Modal show={this.props.modalClicked} onHide={() => {this.props.toggleModal()}}>
           <Modal.Header closeButton>Add a new Drop</Modal.Header>
           <Modal.Body>
             <form>
