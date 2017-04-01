@@ -24,7 +24,6 @@ class MapContainer extends React.Component {
 
   // axios call to db for drops then store in react state
   getDropLocations() {
-    console.log('get drop locations')
     // TODO: filter by users
     axios
       .get('http://localhost:3000/deadDrops')
@@ -41,7 +40,6 @@ class MapContainer extends React.Component {
 
   //get lat and lng from markers array in state and render
   renderDropMarkers() {
-    console.log('getting inside render drop markers: this.state.markers', this.state.markers)
     this.state.markers.forEach((drop) => {
       let center = { 
         lat: drop.lat, 
@@ -51,7 +49,6 @@ class MapContainer extends React.Component {
         position: center,
         map: window.map
       })
-      console.log('markers', marker);
     })
   }
 
