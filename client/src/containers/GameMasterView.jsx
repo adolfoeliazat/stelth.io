@@ -5,12 +5,16 @@ import MapContainer from './mapContainer.jsx'
 import { connect } from 'react-redux'
 import { actions } from '../redux/Reducers.js'
 
-@connect((store) => {
-  return {
-    greeting: store.greeting,
-    name: store.name,
+const changeName = actions.changeName
+
+@connect((state) => ({
+    greeting: state.greeting,
+    name: state.name,
+  }), {
+    changeName
   }
-})
+)
+
 
 class GameMasterView extends Component {
   constructor(props) {
@@ -29,9 +33,10 @@ class GameMasterView extends Component {
     return(
       <div className="gamemaster-view">
         <MapContainer />
-        {console.log('greeting in game master', this.props.greeting)}
+        {console.log('greeting 1', this.props.greeting)}
         {console.log('greeting in game master before', this.props.name)}
-        <Button onClick={()=>actions.changeName()}> Create New Drop </Button>
+        {console.log('change name action creator', this.props.changeName)}
+        <Button onClick={ () => {this.props.changeName() } }> Create New Drop </Button>
         {this.state.modalClicked ? <CreateDropModal toggleModal={this.toggleModal} modalClicked={this.state.modalClicked}/> : ''}
       </div>
     )
