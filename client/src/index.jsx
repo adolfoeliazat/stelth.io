@@ -11,7 +11,7 @@ import stelthStore from './redux/RootReducer&Store'
 const customHistory = createBrowserHistory()
 
 render(
-  <Provider store={stelthStore}>
+  <Provider store={stelthStore()}>
     <Router history={customHistory} >
       <Route path={'/'} component={App}>
       </Route>

@@ -1,7 +1,6 @@
-import { applyMiddleware, createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { greetingReducer, nameReducer } from './Reducers'
-// import { createLogger } from 'redux-logger'
-import logger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 
 const rootReducer = combineReducers({
   greeting: greetingReducer,
@@ -12,11 +11,23 @@ const preloadedState = {
   greeting: "sup"
 }
 
-const stelthStore = createStore(
-  rootReducer, 
-  preloadedState, 
-  applyMiddleware(logger)
-)
+// const stelthStore = createStore(
+//   rootReducer, 
+//   preloadedState, 
+//   applyMiddleware(logger)
+// )
+
+
+const plugins = [createLogger()]
+const middleware = applyMiddleware(...plugins)
+
+const stelthStore = function (preloadedState) {
+  return createStore(
+    rootReducer,
+    preloadedState,
+    middleware
+  )
+}
 
 console.log('stelthstore', stelthStore)
 export default stelthStore
