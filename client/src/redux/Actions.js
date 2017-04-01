@@ -16,4 +16,7 @@ const actions = {
   goodbye: () => { return { type: 'SAY_GOODBYE' }}
 }
 
-module.exports = actions
+module.exports = {
+  types,
+  actions
+}

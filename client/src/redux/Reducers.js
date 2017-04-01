@@ -1,12 +1,5 @@
 import { combineReducers } from 'redux'
-
-// ------------------ Action Names ----------------- //
-
-const types = {
-  SAY_HELLO: 'SAY_HELLO',
-  SAY_GOODBYE: 'SAY_GOODBYE', 
-  CHANGE_NAME: 'CHANGE_NAME'
-}
+import { types } from './Actions'
 
 // ------------------- Reducers ------------------- //
 
