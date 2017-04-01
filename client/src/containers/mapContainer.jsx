@@ -2,9 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import GOOGLE_API_KEY from '../../../config.js'
 
-// const dotenv = require('dotenv');
-// dotenv.load();
-
 class MapContainer extends React.Component {
   constructor(props) {
     super(props)
@@ -25,9 +22,9 @@ class MapContainer extends React.Component {
     // this.renderDropMarkers()
   }
 
+  // axios call to db for drops then store in react state
   getDropLocations() {
     console.log('get drop locations')
-    // axios call to db for drops then store in react state
     // TODO: filter by users
     axios
       .get('http://localhost:3000/deadDrops')
@@ -42,9 +39,9 @@ class MapContainer extends React.Component {
       .catch((err) => { console.log(err) })
   }
 
+  //get lat and lng from markers array in state and render
   renderDropMarkers() {
     console.log('getting inside render drop markers: this.state.markers', this.state.markers)
-    //get lat and lng from markers array in state and render
     this.state.markers.forEach((drop) => {
       let center = { 
         lat: drop.lat, 
