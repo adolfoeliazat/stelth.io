@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/FILDI/stelth.io#readme",
   "dependencies": {
+    "auth0-lock": "^10.14.0",
     "axios": "^0.15.3",
     "babel-cli": "^6.24.0",
     "babel-core": "^6.24.0",

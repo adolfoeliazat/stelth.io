@@ -13,7 +13,7 @@ const greetingReducer = (state='', action) => {
 
 const nameReducer = (state='Regina', action) => {
   switch(action.type) {
-    case types.CHANGE_NAME: return 'Joel'
+    case types.CHANGE_NAME: return 'Alex'
   }
   return state
 }
