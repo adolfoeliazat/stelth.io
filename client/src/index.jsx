@@ -6,9 +6,7 @@ import App from './router/App.jsx';
 import GameMasterView from './containers/GameMasterView.jsx';
 import { Provider } from 'react-redux';
 
-import store from './redux/RootReducer&Store'
-
-console.log('store', store)
+import store from './redux/CreateStore'
 
 const customHistory = createBrowserHistory()
 

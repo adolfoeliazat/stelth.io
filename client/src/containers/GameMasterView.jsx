@@ -3,9 +3,7 @@ import { Button } from 'semantic-ui-react'
 import CreateDropModal from '../components/CreateDropModal.jsx'
 import MapContainer from './mapContainer.jsx'
 import { connect } from 'react-redux'
-import { actions } from '../redux/Reducers.js'
-
-const changeName = actions.changeName
+import { changeName } from '../redux/Actions.js'
 
 @connect((state) => ({
     greeting: state.greeting,
@@ -14,7 +12,6 @@ const changeName = actions.changeName
     changeName
   }
 )
-
 
 class GameMasterView extends Component {
   constructor(props) {
@@ -33,9 +30,6 @@ class GameMasterView extends Component {
     return(
       <div className="gamemaster-view">
         <MapContainer />
-        {console.log('greeting 1', this.props.greeting)}
-        {console.log('greeting in game master before', this.props.name)}
-        {console.log('change name action creator', this.props.changeName)}
         <Button onClick={ () => {this.props.changeName() } }> Create New Drop </Button>
         {this.state.modalClicked ? <CreateDropModal toggleModal={this.toggleModal} modalClicked={this.state.modalClicked}/> : ''}
       </div>
