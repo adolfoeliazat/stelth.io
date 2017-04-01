@@ -1,0 +1,14 @@
+/*.gamemaster-view {
+  height: 700px;
+  width: 100%
+}*/
+
+.map {
+  height: 675px;
+  width: 80%;
+  float: right
+}
+
+/*.create-drop {
+  position: absolute
+}*/
