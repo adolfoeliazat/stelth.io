@@ -1,15 +1,18 @@
-import Auth0Lock from 'auth0-lock'
-import { browserHistory } from 'react-router'
+import Auth0Lock from 'auth0-lock';
+import { config } from '../../../config';
+import { browserHistory } from 'react-router';
+import { connect } from 'react-redux';
 
-export default class AuthService {
+class AuthService {
   constructor(clientId, domain) {
     // Configure Auth0
-    this.lock = new Auth0Lock(clientId, domain, {
-      auth: {
-        redirectUrl: 'http://localhost:8080',
-        responseType: 'token'
-      }
-    })
+    this.lock = new Auth0Lock(clientId, domain)
+
+    //   auth: {
+    //     redirectUrl: 'http://localhost:8080',
+    //     responseType: 'token'
+    //   }
+
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', this._doAuthentication.bind(this))
     // binds login functions to keep this context
@@ -48,3 +51,6 @@ export default class AuthService {
     localStorage.removeItem('id_token');
   }
 }
+
+const auth = new AuthService(config.AUTH0_CLIENT_ID, config.AUTH0_DOMAIN);
+export default auth;
