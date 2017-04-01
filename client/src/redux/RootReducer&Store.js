@@ -1,5 +1,3 @@
-// import { combineReducers } from 'redux'
-
 import { applyMiddleware, createStore, combineReducers } from 'redux'
 import { greetingReducer, nameReducer } from './Reducers'
 import { createLogger } from 'redux-logger'
@@ -11,14 +9,9 @@ const rootReducer = combineReducers({
 
 const plugins = [createLogger()]
 const middleware = applyMiddleware(...plugins)
-const stelthStore = createStore(rootReducer, {greeting: 'wussup'}, middleware)
-console.log(stelthStore)
+
+const stelthStore = createStore(rootReducer, {
+  greeting: "HEY THUR"
+}, middleware)
 
 export default stelthStore
-
-// import reducer from './Reducer'
-
-// export default () => {
-//   const rootReducer = combineReducers({ reducer })
-//   return configureStore(rootReducer)
-// }

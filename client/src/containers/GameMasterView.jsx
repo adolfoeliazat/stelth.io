@@ -29,7 +29,7 @@ class GameMasterView extends Component {
         <MapContainer />
         {console.log('greeting in game master', this.props.greeting)}
         {console.log("this is the state changing holmes, this coo af ", this.state.modalClicked)}
-        <Button onClick={this.toggleModal} onMouseOver={this.props.greeting}> Create New Drop </Button>
+        <Button onClick={this.toggleModal}> Create New Drop </Button>
         {this.state.modalClicked ? <CreateDropModal toggleModal={this.toggleModal} modalClicked={this.state.modalClicked}/> : ''}
       </div>
     )

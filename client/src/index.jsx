@@ -6,11 +6,9 @@ import App from './router/App.jsx';
 import GameMasterView from './containers/GameMasterView.jsx';
 import { Provider } from 'react-redux';
 
-import stelthStore from './redux/RootReducer'
-console.log('redux store', stelthStore)
+import stelthStore from './redux/RootReducer&Store'
 
 const customHistory = createBrowserHistory()
-console.log("this is the customHistory ", customHistory)
 
 render(
   <Provider store={stelthStore}>
