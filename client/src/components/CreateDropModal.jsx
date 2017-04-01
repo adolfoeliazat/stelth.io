@@ -87,7 +87,6 @@ class CreateDropModal extends Component {
     )
     return (
       <div>
-        {console.log('testing')}
         <Modal show={this.props.modalClicked} onHide={() => { this.props.toggleModal() }}>
           <Modal.Header closeButton>Add a new Drop</Modal.Header>
           <Modal.Body>
