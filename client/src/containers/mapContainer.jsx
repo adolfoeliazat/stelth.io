@@ -19,7 +19,6 @@ class MapContainer extends React.Component {
       }
     })
     this.getDropLocations()
-    // this.renderDropMarkers()
   }
 
   // axios call to db for drops then store in react state
