@@ -10,10 +10,16 @@ class CreateDropModal extends Component {
     this.state = {
       step1: true,
       step2: false,
-      complete: false
+      complete: false,
+      title: '',
+      data: [],
+      receiverID: null,
+      address: ''
     }
     this.close = this.close.bind(this)
     this.goToNextStep = this.goToNextStep.bind(this)
+    this.handleInputchange = this.handleInputchange.bind(this)
+    this.handleAddressChange = this.handleAddressChange.bind(this)
   }
 
   goToNextStep() {
@@ -34,14 +40,30 @@ class CreateDropModal extends Component {
 
   onDrop(files) {
     console.log('Received files: ', files)
+    this.setState({
+      data: files
+    })
   }
 
-  handleInputchange() {
+  handleInputchange(e) {
+    const name = e.target.name;
+    const val = e.target.value;
+
+    const obj = {};
+    obj[name] = val;
+    this.setState((prevState, props) => {
+      return obj;
+    });
+  }
+
+  handleAddressChange(address) {
+    this.setState({ address })
   }
 
   close() {
     var self = this;
     self.setState({ showModal: false })
+    console.log('this.state', this.state)
   }
 
   render() {
@@ -74,7 +96,7 @@ class CreateDropModal extends Component {
                 <FormGroup>
                   <ControlLabel>Title</ControlLabel>
                   <FormControl
-                    name="formTitle"
+                    name="title"
                     onChange={this.handleInputchange}
                     componentClass="input"
                   />
@@ -84,7 +106,9 @@ class CreateDropModal extends Component {
               <form>
                 <FormGroup>
                   <ControlLabel>Upload your files here:</ControlLabel>
-                  <Dropzone onDrop={this.onDrop}>
+                  <Dropzone 
+                    onDrop={this.onDrop}
+                    name="data">
                     <div>Drop files into here</div>
                   </Dropzone>
                 </FormGroup>
@@ -94,7 +118,8 @@ class CreateDropModal extends Component {
                 <FormGroup>
                   <ControlLabel>Where would you like to place your drop?</ControlLabel>
                   <PlacesAutocomplete
-                    onChange={this.handleInputchange}
+                    value={this.state.address}
+                    onChange={this.handleAddressChange}
                     autocompleteItem={AutocompleteItem}
                     classNames={cssClasses}
                     styles={myStyles}
