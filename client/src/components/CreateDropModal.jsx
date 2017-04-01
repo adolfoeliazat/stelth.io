@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
+import Dropzone from 'react-dropzone'
+import PlacesAutocomplete from 'react-places-autocomplete';
 
 // modal for creating a deaddrop on web client
 class CreateDropModal extends Component {
@@ -30,8 +32,11 @@ class CreateDropModal extends Component {
     }
   }
 
-  handleInputchange() {
+  onDrop(files) {
+    console.log('Received files: ', files)
+  }
 
+  handleInputchange() {
   }
 
   close() {
@@ -40,6 +45,24 @@ class CreateDropModal extends Component {
   }
 
   render() {
+    const cssClasses = {
+      root: 'form-group',
+      input: 'form-control',
+      autocompleteContainer: 'my-autocomplete-container'
+    }
+    const myStyles = {
+      input: { width: '100%' },
+      autocompleteContainer: { backgroundColor: 'green' },
+      autocompleteItem: { color: 'black' },
+      autocompleteItemActive: { color: 'blue' }
+    }
+
+    const AutocompleteItem = ({ formattedSuggestion }) => (
+      <div>
+        <strong>{formattedSuggestion.mainText}</strong>{' '}
+        <small>{formattedSuggestion.secondaryText}</small>
+      </div>
+    )
     return (
       <div>
         {console.log('testing')}
@@ -61,21 +84,21 @@ class CreateDropModal extends Component {
               <form>
                 <FormGroup>
                   <ControlLabel>Upload your files here:</ControlLabel>
-                  <FormControl
-                    name="formTitle"
-                    onChange={this.handleInputchange}
-                    componentClass="input"
-                  />
+                  <Dropzone onDrop={this.onDrop}>
+                    <div>Drop files into here</div>
+                  </Dropzone>
                 </FormGroup>
               </form> : ""}
             {this.state.complete ?
               <form>
                 <FormGroup>
                   <ControlLabel>Where would you like to place your drop?</ControlLabel>
-                  <FormControl
-                    name="formTitle"
+                  <PlacesAutocomplete
                     onChange={this.handleInputchange}
-                    componentClass="input"
+                    autocompleteItem={AutocompleteItem}
+                    classNames={cssClasses}
+                    styles={myStyles}
+                    placeholder={"Search Places..."}
                   />
                 </FormGroup>
               </form> : ""}
