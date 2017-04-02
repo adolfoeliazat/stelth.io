@@ -1,22 +1,21 @@
 import React from 'react';
-import { Router, Route, Link, IndexRoute } from 'react-router';
+import { Route } from 'react-router';
 import AuthService from '../utils/AuthService';
+import AppContainer from '../containers/AppContainer.jsx'
 import GameMasterView from '../containers/GameMasterView.jsx';
 import Login from '../containers/Login.jsx';
-import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config';
 
 // const requireAuth = (nextState, replace) => {
-//   if (!auth.loggedIn()) {
-//     replace({ pathname: '/' })
+//   if (!AuthService.loggedIn()) {
+//     replace({ pathname: '/login' })
 //   }
 // }
 
-class App extends React.Component {
+class Routes extends React.Component {
   render() {
-    // const {auth} = this.props
-    return(
+    return (
       <div>
-        <Route exact path="/" component={Login} />
+        <Route exact path="/" component={AppContainer} />
         <Route path='/home' component={GameMasterView} />
         <Route path='/login' component={Login} />
       </div>
@@ -24,6 +23,6 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Routes;
 
 

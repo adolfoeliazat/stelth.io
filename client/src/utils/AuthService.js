@@ -1,6 +1,6 @@
 import Auth0Lock from 'auth0-lock';
-import { config } from '../../../config';
-import { browserHistory } from 'react-router';
+import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config';
+import { hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 
 class AuthService {
@@ -23,7 +23,7 @@ class AuthService {
     // Saves the user token
     this.setToken(authResult.idToken)
     // navigate to the home route
-    browserHistory.replace('/home')
+    hashHistory.replace('/home')
   }
 
   login() {
@@ -52,5 +52,5 @@ class AuthService {
   }
 }
 
-const auth = new AuthService(config.AUTH0_CLIENT_ID, config.AUTH0_DOMAIN);
+const auth = new AuthService(AUTH0_CLIENT_ID, AUTH0_DOMAIN);
 export default auth;

@@ -1,7 +1,7 @@
 import React, { PropTypes as T } from 'react';
 import { connect } from 'react-redux';
 import { actions } from '../redux/Actions.js';
-import {ButtonToolbar, Button} from 'react-bootstrap';
+import { ButtonToolbar, Button } from 'react-bootstrap';
 import auth from '../utils/AuthService.js';
 
 export class Login extends React.Component {
@@ -17,10 +17,9 @@ export class Login extends React.Component {
     // const { auth } = this.props
     console.log("what is this? ", auth)
     return (
-      <div className="holmes">
+      <div className="login">
         <h2>Login</h2>
-        {/*<ButtonToolbar className={styles.toolbar}>*/}
-          <ButtonToolbar>
+        <ButtonToolbar>
           <Button bsStyle="primary" onClick={() => auth.login()}>Login</Button>
         </ButtonToolbar>
       </div>
