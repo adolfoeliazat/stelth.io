@@ -5,17 +5,17 @@ import AppContainer from '../containers/AppContainer.jsx'
 import GameMasterView from '../containers/GameMasterView.jsx';
 import Login from '../containers/Login.jsx';
 
-// const requireAuth = (nextState, replace) => {
-//   if (!AuthService.loggedIn()) {
-//     replace({ pathname: '/login' })
-//   }
-// }
+const requireAuth = (nextState, replace) => {
+  if (!AuthService.loggedIn()) {
+    replace({ pathname: '/login' })
+  }
+}
 
 class Routes extends React.Component {
   render() {
     return (
       <div>
-        <Route exact path="/" component={AppContainer} />
+        <Route exact path="/" component={Login} />
         <Route path='/home' component={GameMasterView} />
         <Route path='/login' component={Login} />
       </div>

@@ -2,6 +2,8 @@ import { combineReducers } from 'redux'
 import * as types from './Actions'
 import AuthService from '../utils/AuthService'
 
+console.log('auth service in reducers is: ', AuthService)
+
 // ------------------- Reducers ------------------- //
 
 const greetingReducer = (state='', action) => {

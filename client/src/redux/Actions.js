@@ -1,8 +1,6 @@
 import AuthService from '../utils/AuthService'
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config';
 
-console.log('authservice', AuthService);
-
 // ------------------ Action Names ----------------- //
 
 export const CHANGE_NAME = 'CHANGE_NAME'
