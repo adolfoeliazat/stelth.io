@@ -1,8 +1,6 @@
 import Auth0Lock from 'auth0-lock';
 import jwtDecode from 'jwt-decode'
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config';
-// import { hashHistory } from 'react-router';
-// import { connect } from 'react-redux';
 
 class AuthService {
   constructor(clientId, domain) {
@@ -88,5 +86,4 @@ class AuthService {
   }
 }
 
-// const auth = new AuthService(AUTH0_CLIENT_ID, AUTH0_DOMAIN);
 export default AuthService;

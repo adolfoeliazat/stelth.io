@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import * as actions from '../redux/Actions.js'
 
 @connect((state) => ({
-    greeting: state.greeting,
     name: state.name,
   }), {
     changeName: actions.changeName

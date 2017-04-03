@@ -6,7 +6,7 @@ import thunk from 'redux-thunk'
 
 // ----------- Initialize Default State --------- //
 const Initial_State = {
-  greeting: 'Hey there cutie :D',
+  // greeting: "Hello earthlings"
 }
 
 // -------------- Creating the store ------------ //
