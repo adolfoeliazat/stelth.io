@@ -23,8 +23,21 @@ export function changeName() {
   }
 }
 
+export function onLoginClick() {
+  return (dispatch) => {
+    return dispatch(loginRequest())
+  }
+}
+
+export function onLogoutClick() {
+  return (dispatch) => {
+    dispatch(logoutSuccess())
+  }
+}
+
 export function checkLogin() {
   return (dispatch) => {
+    console.log('in check login')
     // Add callback for lock's `authenticated` event
     authService.lock.on('authenticated', (authResult) => {
       authService.lock.getProfile(authResult.idToken, (error, profile) => {

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import * as types from './Actions'
-import AuthService from '../utils/AuthService'
+import auth from '../utils/AuthService'
 
-console.log('auth service in reducers is: ', AuthService)
+console.log('auth service in reducers is: ', auth)
 
 // ------------------- Reducers ------------------- //
 
@@ -22,9 +22,9 @@ const nameReducer = (state='Regina', action) => {
 }
 
 const authReducer = (state = {
-  isAuthenticated: !AuthService.isTokenExpired(),
+  isAuthenticated: !auth.isTokenExpired(),
   isFetching: false,
-  profile: AuthService.getProfile(),
+  profile: auth.getProfile(),
   error: null
 }, action) => {
   switch (action.type) {
