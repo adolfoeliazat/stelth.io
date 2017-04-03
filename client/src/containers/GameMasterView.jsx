@@ -3,7 +3,7 @@ import { Button } from 'semantic-ui-react'
 import CreateDropModal from '../components/CreateDropModal.jsx'
 import MapContainer from './mapContainer.jsx'
 import { connect } from 'react-redux'
-import { actions } from '../redux/Actions.js'
+import * as actions from '../redux/Actions.js'
 
 @connect((state) => ({
     greeting: state.greeting,

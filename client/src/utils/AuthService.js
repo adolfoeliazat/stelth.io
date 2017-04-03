@@ -8,10 +8,10 @@ class AuthService {
     // Configure Auth0
     this.lock = new Auth0Lock(clientId, domain)
 
-    //   auth: {
-    //     redirectUrl: 'http://localhost:8080',
-    //     responseType: 'token'
-    //   }
+      auth: {
+        redirectUrl: 'http://localhost:8080';
+        responseType: 'token'
+      }
 
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', this._doAuthentication.bind(this))
@@ -52,5 +52,5 @@ class AuthService {
   }
 }
 
-const auth = new AuthService(AUTH0_CLIENT_ID, AUTH0_DOMAIN);
-export default auth;
+// const auth = new AuthService(AUTH0_CLIENT_ID, AUTH0_DOMAIN);
+export default AuthService;
