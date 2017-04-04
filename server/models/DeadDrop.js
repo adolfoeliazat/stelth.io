@@ -8,12 +8,13 @@ class DeadDrop extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['title', 'data', 'lat', 'lng', 'ownerID', 'receiverID'],
+      required: ['title', 'file', 'message', 'lat', 'lng', 'ownerID', 'receiverID'],
 
       properties: {
         id:         { type: 'integer' },
         title:      { type: 'string', minLength: 1, maxLength: 255 },
-        data:       { type: 'string', minLength: 1 },
+        file:       { type: 'string', minLength: 1 },
+        message:    { type: 'string', minLength: 1 },
         lat:        { type: 'number', minLength: 1 },
         lng:        { type: 'number', minLength: 1 },
         ownerID:    { type: 'integer', minLength: 1 },

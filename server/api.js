@@ -37,13 +37,15 @@ module.exports = (app) => {
   })
 
   app.post('/deadDrops', (req, res, next) => {
+    console.log("what is this? ", req.body)
     let _ownerID = parseInt(req.body.ownerID);
     let _receiverID = parseInt(req.body.receiverID);
     let _lat = parseFloat(req.body.lat);
     let _lng = parseFloat(req.body.lng);
     let formattedDrop = {
       title: req.body.title,
-      data: req.body.data,
+      file: req.body.file,
+      message: req.body.message,
       lat: _lat,
       lng: _lng,
       ownerID: _ownerID,

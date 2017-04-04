@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Modal, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
 import Dropzone from 'react-dropzone'
 import PlacesAutocomplete from 'react-places-autocomplete';
+import axios from 'axios';
+import { conenct } from 'react-redux';
 
-// modal for creating a deaddrop on web client
 class CreateDropModal extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +13,7 @@ class CreateDropModal extends Component {
       step2: false,
       complete: false,
       title: '',
-      data: [],
+      uploadState: false,
       receiverID: null,
       address: ''
     }
@@ -20,6 +21,10 @@ class CreateDropModal extends Component {
     this.goToNextStep = this.goToNextStep.bind(this)
     this.handleInputchange = this.handleInputchange.bind(this)
     this.handleAddressChange = this.handleAddressChange.bind(this)
+    this.onSave = this.onSave.bind(this)
+    this.onDrop = this.onDrop.bind(this)
+
+    var self = this;
   }
 
   goToNextStep() {
@@ -37,24 +42,23 @@ class CreateDropModal extends Component {
       })
     }
   }
-
-  onDrop(files) {
-    console.log('Received files: ', files)
-    this.setState({
-      data: files
-    })
+      
+  // file upload function
+    onDrop() {
+    console.log("what is the state? ", this.state.uploadState)
+    this.setState({uploadState: true})
   }
 
-  // 
   handleInputchange(e) {
     const name = e.target.name;
     const val = e.target.value;
 
     const obj = {};
     obj[name] = val;
-    this.setState((prevState, props) => {
+    this.setState(() => {
+      console.log('what is happening to title? ', obj)
       return obj;
-    });
+    })
   }
 
   handleAddressChange(address) {
@@ -62,9 +66,31 @@ class CreateDropModal extends Component {
   }
 
   close() {
-    var self = this;
-    self.setState({ showModal: false })
+    this.setState({ 
+      showModal: false,
+      uploadState: false 
+    })
     console.log('this.state', this.state)
+  }
+
+  // submission for drops
+  onSave() {
+    console.log("this is the state obj? ", this.state)
+    console.log("this is the title ", this.state.title)
+    console.log("this is the address ", this.state.address)
+    console.log("this is the message ", this.state.message)
+
+    axios
+      .post('/deadDrops', {
+        title: this.state.title,
+        message: this.state.message
+      })
+      .then(data => {
+        console.log("what is the data I'm posting? ", data)
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 
   render() {
@@ -94,7 +120,7 @@ class CreateDropModal extends Component {
             {this.state.step1 ?
               <form>
                 <FormGroup>
-                  <ControlLabel>Title</ControlLabel>
+                  <ControlLabel>Title of the drop</ControlLabel>
                   <FormControl
                     name="title"
                     onChange={this.handleInputchange}
@@ -119,18 +145,25 @@ class CreateDropModal extends Component {
             {this.state.complete ?
               <form>
                 <FormGroup>
-                  <ControlLabel>Upload your files here:</ControlLabel>
-                  <Dropzone 
+                  <ControlLabel>Upload what you would like to place here:</ControlLabel>
+                   <FormControl
+                    name="message"
+                    onChange={this.handleInputchange}
+                    componentClass="input"
+                  />
+                  {/*<Dropzone 
                     onDrop={this.onDrop}
-                    name="data">
-                    <div>Drop files into here</div>
-                  </Dropzone>
+                    name="uploadState">
+                    {this.state.uploadState === true ? 
+                    <div style={{ cursor: 'pointer' }} className="centerThis"> File Successfully Uploaded! </div> : 
+                    <div style={{ cursor: 'pointer' }} className="centerThis">Drop Files Here</div>}
+                  </Dropzone>*/}
                 </FormGroup>
               </form> : ""}
           </Modal.Body>
           <Modal.Footer>
             {this.state.complete ?
-              <Button className="btn btn-primary" onClick={() => { this.props.toggleModal() }}>Save</Button> :
+              <Button className="btn btn-primary" onClick={() => { this.props.toggleModal(); this.onSave() }}>Save</Button> :
               <Button className="btn btn-primary" onClick={this.goToNextStep}>Next</Button>
             }
           </Modal.Footer>
