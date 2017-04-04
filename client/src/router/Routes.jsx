@@ -15,7 +15,7 @@ class Routes extends React.Component {
   render() {
     return (
       <div>
-        <Route exact path="/" component={AppContainer} />
+        <Route exact path="/" component={GameMasterView} />
         <Route path='/home' component={GameMasterView} />
         <Route path='/login' component={Login} />
       </div>
