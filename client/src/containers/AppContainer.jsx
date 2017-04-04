@@ -20,6 +20,7 @@ class AppContainer extends Component {
     return(
       <div>
         <Login />
+        {this.props.children}
       </div>
     )
   }
