@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NavBar from './NavBar.jsx'
+import Login from './Login.jsx'
 
 class AppContainer extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class AppContainer extends Component {
   render() {
     return(
       <div>
-        <NavBar />
+        <Login />
       </div>
     )
   }

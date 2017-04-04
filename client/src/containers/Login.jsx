@@ -26,9 +26,9 @@ export class NavBar extends React.Component {
           <Navbar.Header> 
           </Navbar.Header>
           <Nav>
-            { !isAuthenticated ?
-              <Button bsStyle="primary" onClick={onLoginClick}>Login</Button> :
-              <Button bsStyle="primary" onClick={onLogoutClick}>Login</Button> }
+            { !this.props.isAuthenticated ?
+              <Button bsStyle="primary" onClick={this.props.onLoginClick}>Login</Button> :
+              <Button bsStyle="primary" onClick={this.props.onLogoutClick}>Login</Button> }
           </Nav>
         </Navbar>
       </div>
