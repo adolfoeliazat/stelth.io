@@ -45,6 +45,7 @@ class CreateDropModal extends Component {
     })
   }
 
+  // 
   handleInputchange(e) {
     const name = e.target.name;
     const val = e.target.value;
@@ -104,17 +105,6 @@ class CreateDropModal extends Component {
             {this.state.step2 ?
               <form>
                 <FormGroup>
-                  <ControlLabel>Upload your files here:</ControlLabel>
-                  <Dropzone 
-                    onDrop={this.onDrop}
-                    name="data">
-                    <div>Drop files into here</div>
-                  </Dropzone>
-                </FormGroup>
-              </form> : ""}
-            {this.state.complete ?
-              <form>
-                <FormGroup>
                   <ControlLabel>Where would you like to place your drop?</ControlLabel>
                   <PlacesAutocomplete
                     value={this.state.address}
@@ -124,6 +114,17 @@ class CreateDropModal extends Component {
                     styles={myStyles}
                     placeholder={"Search Places..."}
                   />
+                </FormGroup>
+              </form> : ""}
+            {this.state.complete ?
+              <form>
+                <FormGroup>
+                  <ControlLabel>Upload your files here:</ControlLabel>
+                  <Dropzone 
+                    onDrop={this.onDrop}
+                    name="data">
+                    <div>Drop files into here</div>
+                  </Dropzone>
                 </FormGroup>
               </form> : ""}
           </Modal.Body>
