@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Modal, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
-import Dropzone from 'react-dropzone'
-import PlacesAutocomplete from 'react-places-autocomplete';
 import axios from 'axios';
 import { conenct } from 'react-redux';
+import Dropzone from 'react-dropzone'
+import PlacesAutocomplete from 'react-places-autocomplete';
+import { Modal, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
 
 class CreateDropModal extends Component {
   constructor(props) {
@@ -80,10 +80,11 @@ class CreateDropModal extends Component {
     console.log("this is the address ", this.state.address)
     console.log("this is the message ", this.state.message)
 
+    // axios post is not working for appropriate end point... Bummer
     axios
-      .post('/deadDrops', {
-        title: this.state.title,
-        message: this.state.message
+      .post('http://localhost:3000/deadDrops', {
+        title: 'test1',
+        message: 'test2'
       })
       .then(data => {
         console.log("what is the data I'm posting? ", data)
