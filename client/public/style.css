@@ -9,6 +9,39 @@
   float: right
 }
 
-/*.create-drop {
-  position: absolute
-}*/
+.navbar {
+  margin-bottom: 0px;
+  border-style: none
+}
+
+.container > .navbar-header {
+  float: left;
+  font-size: 18px;
+  margin-top: 13px;
+}
+
+.navbar-header li > a {
+  float: left;
+}
+
+.navbar.navbar-default {
+  background-color:#FFF;
+  min-height: 55px;
+}
+
+.nav.navbar-nav {
+  float: right;
+  margin-top: 2px;
+}
+
+.navbar .nav > li {
+  display: inline-block;
+}
+
+.navbar-default .nav.navbar-nav > li > a:hover {
+  color: #e6e6e6;
+}
+
+.login {
+  margin-top: 8px
+}

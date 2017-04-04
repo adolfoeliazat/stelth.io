@@ -23,12 +23,12 @@ export class Login extends React.Component {
     return (
       <div className="navbar">
         <Navbar>
-          <Navbar.Header> 
-          </Navbar.Header>
+          {/*<Navbar.Header> 
+          </Navbar.Header>*/}
           <Nav>
             { !this.props.isAuthenticated ?
-              <Button bsStyle="primary" onClick={this.props.onLoginClick}>Login</Button> :
-              <Button bsStyle="primary" onClick={this.props.onLogoutClick}>Login</Button> }
+              <Button className="login" bsStyle="primary" onClick={this.props.onLoginClick}>Login</Button> :
+              <Button className="logout" bsStyle="primary" onClick={this.props.onLogoutClick}>Login</Button> }
           </Nav> 
         </Navbar>
       </div>
