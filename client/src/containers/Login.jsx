@@ -4,7 +4,6 @@ import * as actions from '../redux/Actions.js';
 import { Navbar, NavbarHeader, Nav, ButtonToolbar, Button } from 'react-bootstrap';
 import AuthService from '../utils/AuthService.js';
 
-
 @connect((state) => ({
     isAuthenticated: state.isAuthenticated,
     auth: state.auth
@@ -20,6 +19,7 @@ export class Login extends React.Component {
   }
 
   render() {
+    {console.log(this.props.isAuthenticated)}
     return (
       <div className="navbar">
         <Navbar>

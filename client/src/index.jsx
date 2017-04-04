@@ -12,7 +12,6 @@ import store from './redux/CreateStore'
 // const customHistory = createBrowserHistory()
 
 const createHistory = require('history').createHashHistory;
-
 const hashHistory = createHistory();
 
 render(
