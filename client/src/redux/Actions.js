@@ -1,5 +1,7 @@
 import AuthService from '../utils/AuthService'
-import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config';
+import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config'
+// import { browserHistory } from 'react-router'
+// console.log(browserHistory)
 
 // ------------------ Action Names ----------------- //
 
@@ -21,7 +23,7 @@ export function onLoginClick() {
 
 export function onLogoutClick() {
   return (dispatch) => {
-    dispatch(logoutSuccess())
+    return dispatch(logoutSuccess())
   }
 }
 
@@ -44,6 +46,7 @@ export function checkLogin() {
 }
 
 export function loginRequest() {
+  console.log('login request')
   authService.login()
   return {
     type: LOGIN_REQUEST
@@ -51,7 +54,8 @@ export function loginRequest() {
 }
 
 export function loginSuccess(profile) {
-  hashHistory.push('/home')
+  // console.log('loginsuccess')
+  // browserHistory.push('/home')
   location.reload()
   return {
     type: LOGIN_SUCCESS,

@@ -14,7 +14,7 @@ import AuthService from '../utils/AuthService.js';
   }
 )
 
-export class NavBar extends React.Component {
+export class Login extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -29,14 +29,14 @@ export class NavBar extends React.Component {
             { !this.props.isAuthenticated ?
               <Button bsStyle="primary" onClick={this.props.onLoginClick}>Login</Button> :
               <Button bsStyle="primary" onClick={this.props.onLogoutClick}>Login</Button> }
-          </Nav>
+          </Nav> 
         </Navbar>
       </div>
     )
   }
 }
 
-export default NavBar;
+export default Login;
 
 
 

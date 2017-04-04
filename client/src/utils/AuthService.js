@@ -13,17 +13,19 @@ class AuthService {
     }
 
     // Add callback for lock `authenticated` event
-    // this.lock.on('authenticated', this._doAuthentication.bind(this))
+    this.lock.on('authenticated', this._doAuthentication.bind(this))
     // binds login functions to keep this context
     this.login = this.login.bind(this)
+    this.setToken = this.setToken.bind(this)
   }
 
-  // _doAuthentication(authResult) {
-  //   // Saves the user token
-  //   this.setToken(authResult.idToken)
-  //   // navigate to the home route
-  //   hashHistory.replace('/home')
-  // }
+  _doAuthentication(authResult) {
+    // Saves the user token
+    this.setToken(authResult.idToken)
+    // navigate to the home route
+    // hashHistory.replace('/home')
+    window.location.href = '/#/home'
+  }
 
   login() {
     // Call the show method to display the widget.
@@ -40,7 +42,7 @@ class AuthService {
     return !!this.getToken()
   }
 
-  static setToken(idToken) {
+  setToken(idToken) {
     // Saves user token to local storage
     localStorage.setItem('id_token', idToken)
   }
