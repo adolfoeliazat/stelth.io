@@ -8,6 +8,17 @@ import GOOGLE_API_KEY from '../../../config.js';
 
 const qs = require('qs');
 
+// ************  TODO ************ 
+
+// PUBLIC: WILL USER SEE ALL DROPS MADE IN THE WHOLE APP?
+// PRIVATE: or will they only see drops designated by them or for them?
+
+// AUTH0 required for proper implementation
+// User identification and allow the proper ownderID make the drop post
+// User making the drop post will require someone else's receiverID to post
+// In order to unlock data/ message user will require to match IDs
+// ***MVP plus feature: S3 file upload, dropzone is properly working, but requires S3 set up
+
 class CreateDropModal extends Component {
   constructor(props) {
     super(props);
@@ -53,6 +64,7 @@ class CreateDropModal extends Component {
     this.setState({uploadState: true})
   }
 
+  // standard user input controller
   handleInputchange(e) {
     const name = e.target.name;
     const val = e.target.value;
@@ -65,6 +77,7 @@ class CreateDropModal extends Component {
     })
   }
 
+  // not required but used to test if the address is properly being saved in the state
   handleAddressChange(address) {
     this.setState({ address })
   }
@@ -79,7 +92,6 @@ class CreateDropModal extends Component {
 
   // submission for drops
   onSave() {
-    // event.preventDefault()
     const { address } = { address: this.state.address } 
 
     geocodeByAddress(address, (err, {lat, lng}) => {
@@ -99,8 +111,8 @@ class CreateDropModal extends Component {
             message: this.state.message,
             lat: lat,
             lng: lng,
-            ownerID: 1,
-            receiverID: 2
+            ownerID: 1, // requires AUTH0 service to be up and running
+            receiverID: 2 // requires AUTH0 service to be up and running
           }
           axios
             .post('http://localhost:3000/deadDrops', qs.stringify(dropInformation))
