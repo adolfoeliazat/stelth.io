@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { conenct } from 'react-redux';
-import Dropzone from 'react-dropzone'
-import PlacesAutocomplete from 'react-places-autocomplete';
-import { Modal, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
+import Dropzone from 'react-dropzone';
+import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+import { Modal, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import GOOGLE_API_KEY from '../../../config.js';
+
+const qs = require('qs');
 
 class CreateDropModal extends Component {
   constructor(props) {
@@ -13,9 +16,10 @@ class CreateDropModal extends Component {
       step2: false,
       complete: false,
       title: '',
+      address: '',
       uploadState: false,
-      receiverID: null,
-      address: ''
+      ownerID: null,
+      receiverID: null
     }
     this.close = this.close.bind(this)
     this.goToNextStep = this.goToNextStep.bind(this)
@@ -75,24 +79,45 @@ class CreateDropModal extends Component {
 
   // submission for drops
   onSave() {
-    console.log("this is the state obj? ", this.state)
-    console.log("this is the title ", this.state.title)
-    console.log("this is the address ", this.state.address)
-    console.log("this is the message ", this.state.message)
+    // event.preventDefault()
+    const { address } = { address: this.state.address } 
 
-    // axios post is not working for appropriate end point... Bummer
-    axios
-      .post('http://localhost:3000/deadDrops', {
-        title: 'test1',
-        message: 'test2'
-      })
-      .then(data => {
-        console.log("what is the data I'm posting? ", data)
-      })
-      .catch(err => {
-        console.error(err)
-      })
+    geocodeByAddress(address, (err, {lat, lng}) => {
+      if(err) { console.log('error!', err) }
+      const key = GOOGLE_API_KEY
+      let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${key}`
+
+      axios
+        .get(url)
+        .then(reponse => {
+          console.log('what is reponse? ', reponse)
+          console.log('what is the props? ', this.props)
+          console.log('current state in onSave? ', this.state)
+          let dropInformation = {
+            title: this.state.title,
+            file: 'null',
+            message: this.state.message,
+            lat: lat,
+            lng: lng,
+            ownerID: 1,
+            receiverID: 2
+          }
+          axios
+            .post('http://localhost:3000/deadDrops', qs.stringify(dropInformation))
+            .then(reponse => {
+              console.log('axios post has successfully posted to db ', reponse)
+            })
+            .catch(err => {
+              if(err) { console.log(err) }
+            })
+        })
+        .catch(err => {
+          if(err) { console.log(err) }
+        })
+    })
+    this.close();
   }
+
 
   render() {
     const cssClasses = {
