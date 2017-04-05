@@ -33,7 +33,6 @@ export function checkLogin() {
       authService.lock.getProfile(authResult.idToken, (error, profile) => {
         if (error) return dispatch(loginError(error))
         let userID = profile.user_id.split('|')[1]
-        console.log(userID)
         let newUser = {
           firstName: profile.given_name,
           lastName: profile.family_name,
@@ -41,13 +40,9 @@ export function checkLogin() {
           publicKey: '09876653',
           authID: userID,
         }
-
-        console.log('new user', newUser)
-
         axios
-          .get(`http://localhost:3000/users?id=${userID}`)
+          .get(`http://localhost:3000/users?authID=${userID}`)
           .then((response) => {
-            console.log('sucessful get', response)
             if (!response.data.length) {
               axios.post('http://localhost:3000/users', newUser)
                 .then(() => {
