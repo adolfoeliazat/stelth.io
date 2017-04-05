@@ -37,7 +37,6 @@ module.exports = (app) => {
   })
 
   app.post('/deadDrops', (req, res, next) => {
-    console.log("what is this? ", req.body)
     let _ownerID = parseInt(req.body.ownerID);
     let _receiverID = parseInt(req.body.receiverID);
     let _lat = parseFloat(req.body.lat);
@@ -51,9 +50,22 @@ module.exports = (app) => {
       ownerID: _ownerID,
       receiverID: _receiverID
     }
-    DeadDrop.query()
+    DeadDrop
+      .query()
       .insertAndFetch(formattedDrop)
       .then((deadDrops) => { res.send(deadDrops) })
       .catch(next);
   })
+
+  app.delete('/deadDrops', (req, res, next) => {
+    DeadDrop
+      .query()
+      .delete()
+      .where('id', req.body.id)
+      .then(deadDrops => {
+        console.log('this the the deadDrops in delete ', deadDrops)
+        res.send('Drop has been deleted!')
+      })
+      .catch(next);
+  })  
 }
