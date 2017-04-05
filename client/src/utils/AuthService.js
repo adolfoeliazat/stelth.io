@@ -29,6 +29,7 @@ class AuthService {
   logout() {
     // Clear user token and profile data from local storage
     localStorage.removeItem('id_token');
+    window.location.href = '/'
   }
 
   static loggedIn() {
