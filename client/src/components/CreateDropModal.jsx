@@ -9,17 +9,6 @@ import GOOGLE_API_KEY from '../../../config.js';
 
 const qs = require('qs');
 
-// ************  TODO ************ 
-
-// PUBLIC: WILL USER SEE ALL DROPS MADE IN THE WHOLE APP?
-// PRIVATE: or will they only see drops designated by them or for them?
-
-// AUTH0 required for proper implementation
-// User identification and allow the proper ownderID make the drop post
-// User making the drop post will require someone else's receiverID to post
-// In order to unlock data/ message user will require to match IDs
-// ***MVP plus feature: S3 file upload, dropzone is properly working, but requires S3 set up
-
 class CreateDropModal extends Component {
   constructor(props) {
     super(props);
@@ -35,14 +24,15 @@ class CreateDropModal extends Component {
       receiverID: null
     }
     this.close = this.close.bind(this)
-    // this.goToNextStep = this.goToNextStep.bind(this)
     this.searchUsers = this.searchUsers.bind(this)
     this.handleInputchange = this.handleInputchange.bind(this)
     this.handleAddressChange = this.handleAddressChange.bind(this)
     this.onSave = this.onSave.bind(this)
     this.onDrop = this.onDrop.bind(this)
+    this.saveUser = this.saveUser.bind(this)
 
     var self = this;
+    console.log("is this being updataed? ", this.state.receiverID)
   }
 
   // file upload function
@@ -97,6 +87,14 @@ class CreateDropModal extends Component {
   }
 
   // submission for drops
+
+  saveUser(data) {
+    console.log('what is data? ', data)
+    // this.setState({
+      // receiverID: data 
+    // })
+  }
+
   onSave() {
     const { address } = { address: this.state.address }
 
@@ -108,9 +106,6 @@ class CreateDropModal extends Component {
       axios
         .get(url)
         .then(reponse => {
-          console.log('what is reponse? ', reponse)
-          console.log('what is the props? ', this.props)
-          console.log('current state in onSave? ', this.state)
           let dropInformation = {
             title: this.state.title,
             file: 'null',
@@ -123,7 +118,6 @@ class CreateDropModal extends Component {
           axios
             .post('http://localhost:3000/deadDrops', qs.stringify(dropInformation))
             .then(reponse => {
-              console.log('axios post has successfully posted to db ', reponse)
             })
             .catch(err => {
               if (err) { console.log(err) }
@@ -196,7 +190,7 @@ class CreateDropModal extends Component {
               </FormGroup>
               {this.state.receiverResults.length ? 
                 this.state.receiverResults.map((item) => (
-                  <SingleUserView data={item}/> 
+                  <SingleUserView clickyFnc={this.saveUser} data={item}/> 
                 )) :
                 '' }
               <FormGroup>

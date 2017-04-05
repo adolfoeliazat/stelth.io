@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 const SingleUserView = ({ data }) => (
   <div>
-    <h5><img className='profilePicture' src={data.picture} /> <span className='profileName'>{data.firstName + " " + data.lastName}</span></h5>
-    {console.log(data.picture)}
+    {console.log(data)}
+    <h5 onClick={() => data.saveUser} style={{ cursor: 'pointer' }}><img className='profilePicture' src={data.picture} /> <span className='profileName'>{data.firstName + " " + data.lastName}</span></h5>
   </div>
 )
 
