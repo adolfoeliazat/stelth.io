@@ -6,9 +6,14 @@ class LandingContainer extends Component {
   }
 
   render() {
-    return(
+    return (
       <div>
-        sup
+        <div className="jumbotron jumbotron-fluid">
+          <div className="container">
+            <h1 className="display-3">STELTH.io</h1>
+            <p className="lead">Digital dead-drops made dead easy (and fun)</p>
+          </div>
+        </div>
       </div>
     )
   }

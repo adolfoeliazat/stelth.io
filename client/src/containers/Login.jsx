@@ -18,7 +18,7 @@ export class Login extends React.Component {
   constructor(props) {
     super(props);
 
-    this.props.checkLogin() // check is Auth0 lock is authenticating after login callback
+    // this.props.checkLogin() // check is Auth0 lock is authenticating after login callback
   }
 
   render() {
@@ -27,8 +27,6 @@ export class Login extends React.Component {
     return (
       <div className="navbar">
         <Navbar>
-          {/*<Navbar.Header> 
-          </Navbar.Header>*/}
           <Nav>
             { !this.props.auth.isAuthenticated ?
               <Button className="login" bsStyle="primary" onClick={this.props.onLoginClick}>Login</Button> :

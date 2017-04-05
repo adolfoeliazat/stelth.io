@@ -1,24 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, Link, IndexRoute } from 'react-router';
-// import createBrowserHistory from 'history/createBrowserHistory';
-// import createHashHistory from 'history/createHashHistory';
+import { Router, hashHistory } from 'react-router';
 import Routes from './router/Routes.jsx';
-import GameMasterView from './containers/GameMasterView.jsx';
 import { Provider } from 'react-redux';
+import { syncHistoryWithStore } from 'react-router-redux'
 
 import store from './redux/CreateStore'
 
-// const customHistory = createBrowserHistory()
-
-const createHistory = require('history').createHashHistory;
-const hashHistory = createHistory();
+const history = syncHistoryWithStore(hashHistory, store)
 
 render(
   <Provider store={store}>
-    <Router history={hashHistory} >
+    {/*<Router history={history} >*/}
       <Routes />
-    </Router>
+    {/*</Router>*/}
   </Provider>
   , document.getElementById('root')
 )

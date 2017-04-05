@@ -1,5 +1,6 @@
 import AuthService from '../utils/AuthService'
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config'
+import { hashHistory } from 'react-router'
 // import { browserHistory } from 'react-router'
 // console.log(browserHistory)
 
@@ -56,7 +57,7 @@ export function loginRequest() {
 
 export function loginSuccess(profile) {
   console.log('login success')
-  // browserHistory.push('/home')
+  hashHistory.push('/home')
   location.reload()
   return {
     type: LOGIN_SUCCESS,
@@ -73,6 +74,8 @@ export function loginError(error) {
 
 export function logoutSuccess() {
   authService.logout()
+  hashHistory.push('/')  
+  location.reload()
   return {
     type: LOGOUT_SUCCESS
   }
