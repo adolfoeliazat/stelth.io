@@ -3,13 +3,10 @@ import { Button } from 'semantic-ui-react'
 import CreateDropModal from '../components/CreateDropModal.jsx'
 import MapContainer from './mapContainer.jsx'
 import { connect } from 'react-redux'
-import { actions } from '../redux/Actions.js'
+import * as actions from '../redux/Actions.js'
 
-@connect((state) => ({
-    greeting: state.greeting,
-    name: state.name,
-  }), {
-    changeName: actions.changeName
+@connect((state) => ({}), {
+    checkLogin: actions.checkLogin
   }
 )
 
@@ -20,6 +17,7 @@ class GameMasterView extends Component {
       modalClicked: false
     }
     this.toggleModal = this.toggleModal.bind(this)
+    this.props.checkLogin() // check is Auth0 lock is authenticating after login callback
   }
 
   toggleModal() {
@@ -27,11 +25,11 @@ class GameMasterView extends Component {
   }
 
   render() {
-    return(
+    return (
       <div className="gamemaster-view">
         <MapContainer />
         <Button onClick={() => this.toggleModal()}> Create New Drop </Button>
-        {this.state.modalClicked ? <CreateDropModal toggleModal={this.toggleModal} modalClicked={this.state.modalClicked}/> : ''}
+        {this.state.modalClicked ? <CreateDropModal toggleModal={this.toggleModal} modalClicked={this.state.modalClicked} /> : ''}
       </div>
     )
   }
