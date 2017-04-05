@@ -9,26 +9,30 @@ import AuthService from '../utils/AuthService.js';
     auth: state.auth
   }), {
     onLoginClick: actions.onLoginClick,
-    onLogoutClick: actions.onLogoutClick
+    onLogoutClick: actions.onLogoutClick,
+    checkLogin: actions.checkLogin
   }
 )
 
 export class Login extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
+
+    this.props.checkLogin() // check is Auth0 lock is authenticating after login callback
   }
 
   render() {
-    {console.log(this.props.isAuthenticated)}
+    {console.log('authentication?', this.props.auth.isAuthenticated)}
+    {console.log('propropropropropr?', this.props)}    
     return (
       <div className="navbar">
         <Navbar>
           {/*<Navbar.Header> 
           </Navbar.Header>*/}
           <Nav>
-            { !this.props.isAuthenticated ?
+            { !this.props.auth.isAuthenticated ?
               <Button className="login" bsStyle="primary" onClick={this.props.onLoginClick}>Login</Button> :
-              <Button className="logout" bsStyle="primary" onClick={this.props.onLogoutClick}>Login</Button> }
+              <Button className="logout" bsStyle="primary" onClick={this.props.onLogoutClick}>Logout</Button> }
           </Nav> 
         </Navbar>
       </div>

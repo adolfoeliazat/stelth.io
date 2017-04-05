@@ -32,6 +32,7 @@ export function checkLogin() {
     console.log('in check login')
     // Add callback for lock's `authenticated` event
     authService.lock.on('authenticated', (authResult) => {
+      console.log('inside auth service lock checklogin')
       authService.lock.getProfile(authResult.idToken, (error, profile) => {
         if (error)
           return dispatch(loginError(error))
@@ -54,7 +55,7 @@ export function loginRequest() {
 }
 
 export function loginSuccess(profile) {
-  // console.log('loginsuccess')
+  console.log('login success')
   // browserHistory.push('/home')
   location.reload()
   return {
