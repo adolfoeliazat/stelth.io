@@ -34,8 +34,6 @@ export function checkLogin() {
       authService.lock.getProfile(authResult.idToken, (error, profile) => {
         if (error)
           return dispatch(loginError(error))
-        AuthService.setToken(authResult.idToken) // static method
-        AuthService.setProfile(profile) // static method
         // let authID = profile.global_client_id
         // let firstName = profile.given_name
         // let lastName = profile.last_name
@@ -48,14 +46,17 @@ export function checkLogin() {
           authID: profile.global_client_id
         }
         axios
-          .get('http://localhost:3000/users/' + TODO)
+          .get('http://localhost:3000/users/')
           .then((response) => {
             if (response.data === []) {
+              console.log('checking if user exists in DB')
               axios.post('http://localhost:3000/users', newUser)
-                .then(()=> {
+                .then(() => {
                   console.log('new user has been added')
                 })
             }
+            AuthService.setToken(authResult.idToken) // static method
+            AuthService.setProfile(profile) // static method
             return dispatch(loginSuccess(profile))
           })
       })
@@ -90,8 +91,9 @@ export function loginError(error) {
 
 export function logoutSuccess() {
   authService.logout()
-  hashHistory.push('/')  
+  hashHistory.push('/')
   location.reload()
+  checklogin()
   return {
     type: LOGOUT_SUCCESS
   }
