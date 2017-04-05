@@ -130,7 +130,6 @@ class CreateDropModal extends Component {
     this.close();
   }
 
-
   render() {
     const cssClasses = {
       root: 'form-group',
@@ -163,6 +162,8 @@ class CreateDropModal extends Component {
                     name="title"
                     onChange={this.handleInputchange}
                     componentClass="input"
+                    placeholder={"ie. Secret Mission"}
+                    onSubmit={this.goToNextStep}
                   />
                 </FormGroup>
               </form> : ""}
@@ -177,6 +178,7 @@ class CreateDropModal extends Component {
                     classNames={cssClasses}
                     styles={myStyles}
                     placeholder={"Search Places..."}
+                    onSubmit={this.goToNextStep}
                   />
                 </FormGroup>
               </form> : ""}
@@ -201,7 +203,7 @@ class CreateDropModal extends Component {
           </Modal.Body>
           <Modal.Footer>
             {this.state.complete ?
-              <Button className="btn btn-primary" onClick={() => { this.props.toggleModal(); this.onSave() }}>Save</Button> :
+              <Button className="btn btn-primary" onClick={ () => { this.props.toggleModal(); this.onSave();  location.reload() }}>Save</Button> :
               <Button className="btn btn-primary" onClick={this.goToNextStep}>Next</Button>
             }
           </Modal.Footer>
