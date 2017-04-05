@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Login from './Login.jsx'
+import NavBar from './NavBar.jsx'
 import { connect } from 'react-redux'
 import * as actions from '../redux/Actions.js'
 
@@ -17,7 +17,7 @@ class AppContainer extends Component {
   render() {
     return(
       <div>
-        <Login />
+        <NavBar />
         {this.props.children}
       </div>
     )

@@ -14,7 +14,7 @@ import AuthService from '../utils/AuthService.js';
   }
 )
 
-export class Login extends React.Component {
+export class NavBar extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -34,7 +34,5 @@ export class Login extends React.Component {
   }
 }
 
-export default Login;
-
-
+export default NavBar;
 

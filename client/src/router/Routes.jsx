@@ -6,7 +6,7 @@ import AppContainer from '../containers/AppContainer.jsx'
 import LandingContainer from '../containers/LandingContainer.jsx'
 import GameMasterView from '../containers/GameMasterView.jsx';
 import NotFoundPage from '../components/NotFoundPage.jsx'
-import Login from '../containers/Login.jsx';
+import NavBar from '../containers/NavBar.jsx';
 import { syncHistoryWithStore } from 'react-router-redux'
 
 const requireAuth = (nextState, replace) => {
