@@ -1,28 +1,36 @@
 import Auth0Lock from 'auth0-lock';
-import jwtDecode from 'jwt-decode'
-import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config';
+import jwtDecode from 'jwt-decode';
+// import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config'
 
 class AuthService {
   constructor(clientId, domain) {
     // Configure Auth0
-    this.lock = new Auth0Lock(clientId, domain)
-
-    auth: {
-      redirectUrl: 'http://localhost:8080';
-      responseType: 'token'
-    }
+    this.lock = new Auth0Lock(clientId, domain, {
+      auth: {
+        redirectUrl: 'http://localhost:8080/',
+        responseType: 'token'
+      },
+      // theme: {
+      //   logo: LogoImg,
+      //   primaryColor: "#b81b1c"
+      // },
+      languageDictionary: {
+        title: 'React Redux Auth0 Kit'
+      }
+    })
 
     // Add callback for lock `authenticated` event
     // this.lock.on('authenticated', this._doAuthentication.bind(this))
+
     // binds login functions to keep this context
     this.login = this.login.bind(this)
   }
 
   // _doAuthentication(authResult) {
+  //   console.log('do _doAuthentication')
   //   // Saves the user token
   //   this.setToken(authResult.idToken)
   //   // navigate to the home route
-  //   hashHistory.replace('/home')
   // }
 
   login() {
@@ -33,6 +41,7 @@ class AuthService {
   logout() {
     // Clear user token and profile data from local storage
     localStorage.removeItem('id_token');
+    localStorage.removeItem('profile')
   }
 
   static loggedIn() {
@@ -65,7 +74,7 @@ class AuthService {
   static getTokenExpirationDate() {
     const token = AuthService.getToken()
     const decoded = jwtDecode(token)
-    if(!decoded.exp) {
+    if (!decoded.exp) {
       return null
     }
 

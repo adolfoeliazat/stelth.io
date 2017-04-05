@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { routerReducer as routing } from 'react-router-redux'
 import * as types from './Actions'
 import auth from '../utils/AuthService'
 
@@ -27,6 +28,7 @@ const authReducer = (state = {
 // ----------------- Root Reducer ---------------- //
 
 const rootReducer = combineReducers({
+  routing: routing,
   auth: authReducer
 })
 

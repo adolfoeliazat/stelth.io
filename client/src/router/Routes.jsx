@@ -1,28 +1,26 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, IndexRoute, hashHistory } from 'react-router';
 import AuthService from '../utils/AuthService';
 import AppContainer from '../containers/AppContainer.jsx'
+import LandingContainer from '../containers/LandingContainer.jsx'
 import GameMasterView from '../containers/GameMasterView.jsx';
-import Login from '../containers/Login.jsx';
+import NotFoundPage from '../components/NotFoundPage.jsx'
+import NavBar from '../containers/NavBar.jsx';
+import { syncHistoryWithStore } from 'react-router-redux'
 
 const requireAuth = (nextState, replace) => {
   if (!AuthService.loggedIn()) {
-    replace({ pathname: '/login' })
+    alert('Please log in first!')
+    replace({ pathname: '/' })
   }
 }
 
-class Routes extends React.Component {
-  render() {
-    return (
-      <div>
-        <Route exact path="/" component={GameMasterView} />
-        <Route path='/home' component={GameMasterView} />
-        <Route path='/login' component={Login} />
-      </div>
-    )
-  }
+export default function createRoutes() {
+  return (
+    <Route path="/" component={AppContainer}>
+      <IndexRoute component={LandingContainer} />
+      <Route path='/home' component={GameMasterView} onEnter={requireAuth} />
+      <Route path='*' component={NotFoundPage} />
+    </Route>
+  )
 }
-
-export default Routes;
-
-

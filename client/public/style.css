@@ -13,3 +13,30 @@
   text-align: center;
   padding-top: 89px;
 }
+
+.navbar {
+  margin-bottom: 0px;
+  border-style: none
+}
+
+.navbar.navbar-default {
+  background-color:#FFF;
+  min-height: 55px;
+}
+
+.nav.navbar-nav {
+  float: right;
+  margin-top: 2px;
+}
+
+.login {
+  margin-top: 8px
+}
+.logout {
+  margin-top: 8px
+}
+.stelth-logo {
+  margin-top: 8px;
+  float: left
+>>>>>>> master
+}
