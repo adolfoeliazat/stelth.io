@@ -1,8 +1,6 @@
 import AuthService from '../utils/AuthService'
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config'
 import { hashHistory } from 'react-router'
-// import { browserHistory } from 'react-router'
-// console.log(browserHistory)
 
 // ------------------ Action Names ----------------- //
 
@@ -10,7 +8,6 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
-
 
 // -------------- Action Creators ------------ //
 
@@ -30,10 +27,8 @@ export function onLogoutClick() {
 
 export function checkLogin() {
   return (dispatch) => {
-    console.log('in check login')
     // Add callback for lock's `authenticated` event
     authService.lock.on('authenticated', (authResult) => {
-      console.log('inside auth service lock checklogin')
       authService.lock.getProfile(authResult.idToken, (error, profile) => {
         if (error)
           return dispatch(loginError(error))
@@ -48,7 +43,6 @@ export function checkLogin() {
 }
 
 export function loginRequest() {
-  console.log('login request')
   authService.login()
   return {
     type: LOGIN_REQUEST
@@ -56,7 +50,6 @@ export function loginRequest() {
 }
 
 export function loginSuccess(profile) {
-  console.log('login success')
   hashHistory.push('/home')
   location.reload()
   return {

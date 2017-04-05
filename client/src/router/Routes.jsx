@@ -9,11 +9,6 @@ import NotFoundPage from '../components/NotFoundPage.jsx'
 import Login from '../containers/Login.jsx';
 import { syncHistoryWithStore } from 'react-router-redux'
 
-import store from '../redux/CreateStore'
-
-const history = syncHistoryWithStore(hashHistory, store)
-
-
 const requireAuth = (nextState, replace) => {
   console.log('checking auth')
   if (!AuthService.loggedIn()) {
@@ -22,7 +17,18 @@ const requireAuth = (nextState, replace) => {
   }
 }
 
-class Routes extends React.Component {
+export default function createRoutes() {
+  return (
+    <Route path="/" component={AppContainer}>
+      <IndexRoute component={LandingContainer} />
+      <Route path='/home' component={GameMasterView} onEnter={requireAuth} />
+      <Route path='*' component={NotFoundPage} />
+    </Route>
+  )
+}
+
+
+/*class Routes extends React.Component {
   render() {
     {console.log('getting into routes')}
     return (
@@ -35,6 +41,6 @@ class Routes extends React.Component {
   }
 }
 
-export default Routes;
+export default Routes;*/
 
 

@@ -17,13 +17,9 @@ import AuthService from '../utils/AuthService.js';
 export class Login extends React.Component {
   constructor(props) {
     super(props);
-
-    // this.props.checkLogin() // check is Auth0 lock is authenticating after login callback
   }
 
   render() {
-    {console.log('authentication?', this.props.auth.isAuthenticated)}
-    {console.log('propropropropropr?', this.props)}    
     return (
       <div className="navbar">
         <Navbar>
