@@ -1,6 +1,7 @@
 import AuthService from '../utils/AuthService'
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config'
 import { hashHistory } from 'react-router'
+import axios from 'axios'
 
 // ------------------ Action Names ----------------- //
 
@@ -26,6 +27,7 @@ export function onLogoutClick() {
 }
 
 export function checkLogin() {
+  // console.log('checklogin', AuthService)
   return (dispatch) => {
     // Add callback for lock's `authenticated` event
     authService.lock.on('authenticated', (authResult) => {
@@ -34,7 +36,28 @@ export function checkLogin() {
           return dispatch(loginError(error))
         AuthService.setToken(authResult.idToken) // static method
         AuthService.setProfile(profile) // static method
-        return dispatch(loginSuccess(profile))
+        // let authID = profile.global_client_id
+        // let firstName = profile.given_name
+        // let lastName = profile.last_name
+        // let email = profile.email
+
+        let newUser = {
+          firstName: profile.given_name,
+          lastName: profile.last_name,
+          email: profile.email,
+          authID: profile.global_client_id
+        }
+        axios
+          .get('http://localhost:3000/users/' + TODO)
+          .then((response) => {
+            if (response.data === []) {
+              axios.post('http://localhost:3000/users', newUser)
+                .then(()=> {
+                  console.log('new user has been added')
+                })
+            }
+            return dispatch(loginSuccess(profile))
+          })
       })
     })
     // Add callback for lock's `authorization_error` event
