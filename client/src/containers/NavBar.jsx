@@ -5,9 +5,9 @@ import { Navbar, NavbarHeader, Nav, ButtonToolbar, Button } from 'react-bootstra
 import AuthService from '../utils/AuthService.js';
 
 @connect((state) => ({
-    isAuthenticated: state.isAuthenticated,
-    auth: state.auth
-  }), {
+  isAuthenticated: state.isAuthenticated,
+  auth: state.auth
+}), {
     onLoginClick: actions.onLoginClick,
     onLogoutClick: actions.onLogoutClick,
     checkLogin: actions.checkLogin
@@ -24,10 +24,11 @@ export class NavBar extends React.Component {
       <div className="navbar">
         <Navbar>
           <Nav>
-            { !this.props.auth.isAuthenticated ?
+            <Button className="stelth-logo" bsStyle="primary" onClick={this.props.onLoginClick}>STELTH.io</Button>
+            {!this.props.auth.isAuthenticated ?
               <Button className="login" bsStyle="primary" onClick={this.props.onLoginClick}>Login</Button> :
-              <Button className="logout" bsStyle="primary" onClick={this.props.onLogoutClick}>Logout</Button> }
-          </Nav> 
+              <Button className="logout" bsStyle="primary" onClick={this.props.onLogoutClick}>Logout</Button>}
+          </Nav>
         </Navbar>
       </div>
     )
