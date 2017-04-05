@@ -8,6 +8,8 @@ module.exports = (app) => {
       .query()
       .skipUndefined()
       .where('users.id', req.query.id)
+      .where('users.firstName', req.query.firstName)      
+      .where('users.authID', req.query.authID)      
       .then(users => {
         res.send(users)
       })
@@ -15,6 +17,9 @@ module.exports = (app) => {
   })
 
   app.post('/users', (req, res, next) => {
+    console.log('what is being posted? ', req.body)
+    console.log('what is being query? ', req.query)
+    console.log('what is being params? ', req.params)
     User
       .query()
       .insertAndFetch(req.body)

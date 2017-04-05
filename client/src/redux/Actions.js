@@ -37,16 +37,18 @@ export function checkLogin() {
         let newUser = {
           firstName: profile.given_name,
           lastName: profile.family_name,
-          authID: userID
+          email: profile.email,
+          publicKey: '09876653',
+          authID: userID,
         }
 
         console.log('new user', newUser)
 
         axios
-          .get('http://localhost:3000/users')
+          .get(`http://localhost:3000/users?id=${userID}`)
           .then((response) => {
-            console.log('sucessful get')
-            if (response.data === []) {
+            console.log('sucessful get', response)
+            if (!response.data.length) {
               axios.post('http://localhost:3000/users', newUser)
                 .then(() => {
                   console.log('new user has been added')
