@@ -4,12 +4,16 @@ const DeadDrop = require('./models/DeadDrop');
 
 module.exports = (app) => {
   app.get('/users', (req, res, next) => {
+    var firstName, lastName
+    req.query.firstName !== undefined ? firstName = '%' + req.query.firstName + '%' : firstName = undefined
+    req.query.lastName !== undefined ? lastName = '%' + req.query.lastName + '%' : lastName = undefined
     User
       .query()
       .skipUndefined()
       .where('users.id', req.query.id)
-      .where('users.firstName', req.query.firstName)      
-      .where('users.authID', req.query.authID)      
+      .where('users.firstName', 'like', firstName)
+      .where('users.lastName', 'like', lastName)
+      .where('users.authID', req.query.authID)
       .then(users => {
         res.send(users)
       })
@@ -28,6 +32,19 @@ module.exports = (app) => {
       })
       .catch(next)
   })
+
+  // app.get('/UserSearch', (req, res, next) => {
+  //   var firstName, lastName
+  //   req.query.firstName !== undefined ? firstName = '%' + req.query.firstName + '%' : firstName = undefined
+  //   req.query.lastName !== undefined ? lastName = '%' + req.query.lastName + '%' : lastName = undefined
+  //   User
+  //     .query()
+  //     .skipUndefined()
+  //     .where('firstName', 'like', firstName)
+  //     .where('lastName', 'like', lastName)
+  //     .then((users) => { res.send(users) })
+  //     .catch(next)
+  // })
 
   app.get('/deadDrops', (req, res, next) => {
     DeadDrop
@@ -72,5 +89,5 @@ module.exports = (app) => {
         res.send('Drop has been deleted!')
       })
       .catch(next);
-  })  
+  })
 }

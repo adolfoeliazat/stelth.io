@@ -39,6 +39,7 @@ export function checkLogin() {
           email: profile.email,
           publicKey: '09876653',
           authID: userID,
+          picture: profile.picture
         }
         axios
           .get(`http://localhost:3000/users?authID=${userID}`)

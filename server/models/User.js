@@ -16,7 +16,8 @@ class User extends Model {
         lastName:   { type: 'string', minLength: 1, maxLength: 255 },
         email:      { type: 'string', minLength: 1, maxLength: 255 },
         publicKey:  { type: 'string', minLength: 1, maxLength: 255 },
-        authID:     { type: 'string', minLength: 1, maxLength: 255 }
+        authID:     { type: 'string', minLength: 1, maxLength: 255 },
+        picture:     { type: 'string', minLength: 1, maxLength: 255 }        
       }
     }
   }

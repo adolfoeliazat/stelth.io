@@ -32,11 +32,20 @@
 .login {
   margin-top: 8px
 }
+
 .logout {
   margin-top: 8px
 }
+
 .stelth-logo {
   margin-top: 8px;
   float: left
->>>>>>> master
 }
+
+.profilePicture {
+  height: 50px;
+}
+ 
+ .profileName {
+  padding-left: 15px;
+ }

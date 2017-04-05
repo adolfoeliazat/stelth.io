@@ -9,6 +9,7 @@ exports.up = function (knex, Promise) {
       table.string('email');
       table.string('publicKey');
       table.string('authID');
+      table.string('picture');      
       table.timestamps(true);
     })
     .createTable('deadDrops', (table) => {
