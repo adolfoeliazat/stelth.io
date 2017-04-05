@@ -7,7 +7,7 @@ class LandingContainer extends Component {
   }
 
   gettingStarted() {
-    console.log('sup')
+    console.log('testing commits')
   }
 
   render() {
