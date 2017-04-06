@@ -25,6 +25,8 @@ export class NavBar extends React.Component {
         <Navbar>
           <Nav>
             <Button className="stelth-logo" bsStyle="primary" onClick={this.props.onLoginClick}>STELTH.io</Button>
+          </Nav>
+          <Nav pullRight>
             {!this.props.auth.isAuthenticated ?
               <Button className="login" bsStyle="primary" onClick={this.props.onLoginClick}>Login</Button> :
               <Button className="logout" bsStyle="primary" onClick={this.props.onLogoutClick}>Logout</Button>}

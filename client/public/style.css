@@ -34,22 +34,35 @@
   min-height: 55px;
 }
 
+.navbar-header li > a {
+  float: left;
+}
+
+.navbar-default .nav.navbar-nav > li > a:hover {
+  color: #e6e6e6;
+}
+
 .nav.navbar-nav {
-  float: right;
+  /*float: right;*/
   margin-top: 2px;
 }
 
 .login {
-  margin-top: 8px
+  margin-top: 8px;
+  background-color: #333
 }
 
 .logout {
-  margin-top: 8px
+  margin-top: 8px;
+  background-color: #333;
+  border-style: none 
 }
 
 .stelth-logo {
   margin-top: 8px;
-  float: left
+  float: left;
+  background-color: #333;
+  border-style: none  
 }
 
 .profilePicture {
