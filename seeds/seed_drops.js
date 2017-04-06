@@ -11,7 +11,7 @@ exports.seed = function (knex, Promise) {
               file: 'Hello World!',
               message: 'dude this stuff is awesome bruh',
               lat:  33.9759435,
-              lng: -118.3907289,
+              lng: -135.3907289,
               ownerID: 1, // regina
               receiverID: 2, // armen
             },
@@ -20,7 +20,7 @@ exports.seed = function (knex, Promise) {
               title: 'Secret Message #2',
               file: 'wussup bro',
               message: 'dude this stuff is awesome sis',
-              lat:  33.9759244,
+              lat:  29.9759244,
               lng: -118.390767,
               ownerID: 2, // armen
               receiverID: 3, // alex
@@ -30,7 +30,7 @@ exports.seed = function (knex, Promise) {
               title: 'Test mission',
               file: 'stelth',
               message: 'dude this stuff is awesome mum',
-              lat:  33.152423,
+              lat:  -33.152423,
               lng: -118.613245,
               ownerID: 3, // alex
               receiverID: 1, //regina

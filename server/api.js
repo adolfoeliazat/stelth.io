@@ -33,25 +33,13 @@ module.exports = (app) => {
       .catch(next)
   })
 
-  // app.get('/UserSearch', (req, res, next) => {
-  //   var firstName, lastName
-  //   req.query.firstName !== undefined ? firstName = '%' + req.query.firstName + '%' : firstName = undefined
-  //   req.query.lastName !== undefined ? lastName = '%' + req.query.lastName + '%' : lastName = undefined
-  //   User
-  //     .query()
-  //     .skipUndefined()
-  //     .where('firstName', 'like', firstName)
-  //     .where('lastName', 'like', lastName)
-  //     .then((users) => { res.send(users) })
-  //     .catch(next)
-  // })
-
   app.get('/deadDrops', (req, res, next) => {
     DeadDrop
       .query()
       .skipUndefined()
       .where('id', req.query.id)
       .where('ownerID', req.query.ownerID)
+      .where('authID', req.query.authID)
       .then((deadDrops) => {
         res.send(deadDrops)
       })
