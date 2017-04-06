@@ -23,7 +23,7 @@ export class NavBar extends React.Component {
     return (
       <div className="navbar">
         <Navbar>
-          <Nav>
+          <Nav pullLeft>
             <Button className="stelth-logo" bsStyle="primary" onClick={this.props.onLoginClick}>STELTH.io</Button>
           </Nav>
           <Nav pullRight>
