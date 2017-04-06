@@ -1,12 +1,20 @@
-/*.gamemaster-view {
-  height: 700px;
-  width: 100%
-}*/
+.gamemaster-view {
+  height: 100%;
+  width: 100%;
+  padding: 0px
+}
 
 .map {
-  height: 675px;
-  width: 80%;
-  float: right
+  height: 100%;
+  width: 100%;
+  position: absolute
+  /*float: right*/
+}
+
+.newdrop-button {
+  float: right;
+  z-index: 100;
+  position: absolute
 }
 
 .dropZoneField {
@@ -77,3 +85,5 @@
  .profileName {
   padding-left: 15px;
  }
+
+
