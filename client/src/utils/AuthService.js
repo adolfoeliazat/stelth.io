@@ -6,16 +6,18 @@ class AuthService {
   constructor(clientId, domain) {
     // Configure Auth0
     this.lock = new Auth0Lock(clientId, domain, {
+      options: {
       auth: {
         redirectUrl: 'http://localhost:8080/',
         responseType: 'token'
+      }
       },
       // theme: {
       //   logo: LogoImg,
       //   primaryColor: "#b81b1c"
       // },
       languageDictionary: {
-        title: 'React Redux Auth0 Kit'
+        title: 'Welcome!'
       }
     })
 

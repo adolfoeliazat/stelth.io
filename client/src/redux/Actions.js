@@ -1,6 +1,7 @@
 import AuthService from '../utils/AuthService'
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config'
 import { hashHistory } from 'react-router'
+import axios from 'axios'
 
 // ------------------ Action Names ----------------- //
 
@@ -30,11 +31,29 @@ export function checkLogin() {
     // Add callback for lock's `authenticated` event
     authService.lock.on('authenticated', (authResult) => {
       authService.lock.getProfile(authResult.idToken, (error, profile) => {
-        if (error)
-          return dispatch(loginError(error))
-        AuthService.setToken(authResult.idToken) // static method
-        AuthService.setProfile(profile) // static method
-        return dispatch(loginSuccess(profile))
+        if (error) return dispatch(loginError(error))
+        let userID = profile.user_id.split('|')[1]
+        let newUser = {
+          firstName: profile.given_name,
+          lastName: profile.family_name,
+          email: profile.email,
+          publicKey: '09876653',
+          authID: userID,
+          picture: profile.picture
+        }
+        axios
+          .get(`http://localhost:3000/users?authID=${userID}`)
+          .then((response) => {
+            if (!response.data.length) {
+              axios.post('http://localhost:3000/users', newUser)
+                .then(() => {
+                  console.log('new user has been added')
+                })
+            }
+            AuthService.setToken(authResult.idToken) // static method
+            AuthService.setProfile(profile) // static method
+            return dispatch(loginSuccess(profile))
+          })
       })
     })
     // Add callback for lock's `authorization_error` event
@@ -51,7 +70,6 @@ export function loginRequest() {
 
 export function loginSuccess(profile) {
   hashHistory.push('/home')
-  location.reload()
   return {
     type: LOGIN_SUCCESS,
     profile
@@ -68,7 +86,6 @@ export function loginError(error) {
 export function logoutSuccess() {
   authService.logout()
   hashHistory.push('/')  
-  location.reload()
   return {
     type: LOGOUT_SUCCESS
   }

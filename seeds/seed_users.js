@@ -11,6 +11,7 @@ exports.seed = function (knex, Promise) {
               lastName: 'Lee',
               email: 'regina.v.lee@gmail.com',
               publicKey: '1234567890',
+              authID: '5098435780935'
             },
             {
               id: 2,
@@ -18,6 +19,7 @@ exports.seed = function (knex, Promise) {
               lastName: 'Rostamian',
               email: 'me@rmenr.net',
               publicKey: '2345678901',
+              authID: '0000000000'
             },
             {
               id: 3,
@@ -25,6 +27,7 @@ exports.seed = function (knex, Promise) {
               lastName: 'Kim',
               email: 'xandreus@la.com',
               publicKey: '2345678901',
+              authID: '111111111111'
             },
           ]);
         })

@@ -4,10 +4,16 @@ const DeadDrop = require('./models/DeadDrop');
 
 module.exports = (app) => {
   app.get('/users', (req, res, next) => {
+    var firstName, lastName
+    req.query.firstName !== undefined ? firstName = '%' + req.query.firstName + '%' : firstName = undefined
+    req.query.lastName !== undefined ? lastName = '%' + req.query.lastName + '%' : lastName = undefined
     User
       .query()
       .skipUndefined()
       .where('users.id', req.query.id)
+      .where('users.firstName', 'like', firstName)
+      .where('users.lastName', 'like', lastName)
+      .where('users.authID', req.query.authID)
       .then(users => {
         res.send(users)
       })
@@ -15,6 +21,9 @@ module.exports = (app) => {
   })
 
   app.post('/users', (req, res, next) => {
+    console.log('what is being posted? ', req.body)
+    console.log('what is being query? ', req.query)
+    console.log('what is being params? ', req.params)
     User
       .query()
       .insertAndFetch(req.body)
@@ -23,6 +32,19 @@ module.exports = (app) => {
       })
       .catch(next)
   })
+
+  // app.get('/UserSearch', (req, res, next) => {
+  //   var firstName, lastName
+  //   req.query.firstName !== undefined ? firstName = '%' + req.query.firstName + '%' : firstName = undefined
+  //   req.query.lastName !== undefined ? lastName = '%' + req.query.lastName + '%' : lastName = undefined
+  //   User
+  //     .query()
+  //     .skipUndefined()
+  //     .where('firstName', 'like', firstName)
+  //     .where('lastName', 'like', lastName)
+  //     .then((users) => { res.send(users) })
+  //     .catch(next)
+  // })
 
   app.get('/deadDrops', (req, res, next) => {
     DeadDrop
@@ -43,15 +65,29 @@ module.exports = (app) => {
     let _lng = parseFloat(req.body.lng);
     let formattedDrop = {
       title: req.body.title,
-      data: req.body.data,
+      file: req.body.file,
+      message: req.body.message,
       lat: _lat,
       lng: _lng,
       ownerID: _ownerID,
       receiverID: _receiverID
     }
-    DeadDrop.query()
+    DeadDrop
+      .query()
       .insertAndFetch(formattedDrop)
       .then((deadDrops) => { res.send(deadDrops) })
+      .catch(next);
+  })
+
+  app.delete('/deadDrops', (req, res, next) => {
+    DeadDrop
+      .query()
+      .delete()
+      .where('id', req.body.id)
+      .then(deadDrops => {
+        console.log('this the the deadDrops in delete ', deadDrops)
+        res.send('Drop has been deleted!')
+      })
       .catch(next);
   })
 }
