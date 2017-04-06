@@ -1,6 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import GOOGLE_API_KEY from '../../../config.js'
+import { connect } from 'react-redux'
+
+@connect((state) => ({
+    auth: state.auth
+  }))
 
 class MapContainer extends React.Component {
   constructor(props) {
@@ -8,7 +13,6 @@ class MapContainer extends React.Component {
     this.state = {
       markers: []
     }
-    // this.rebound = this.rebound.bind(this)
   }
 
   componentDidMount() {
@@ -26,8 +30,11 @@ class MapContainer extends React.Component {
   // axios call to db for drops then store in react state
   getDropLocations() {
     // TODO: filter by users
+    // let authID = this.props.auth.profile.user_id.split('|')[1]
+    let authID = 1
+    console.log(authID)
     axios
-      .get('http://localhost:3000/deadDrops')
+      .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
       .then((result) => {
         this.setState({
           markers: result.data
@@ -57,10 +64,7 @@ class MapContainer extends React.Component {
       window.map.fitBounds(window.markerBounds)
     })
   }
-
-  // rebound() {
-  // }
-
+  
   render() {
     return (
       <div className="map" ref="mapCanvas"></div>
