@@ -20,6 +20,7 @@ class CreateDropModal extends Component {
     this.state = {
       complete: false,
       title: '',
+      file: 'asdfasdf',
       address: '',
       uploadState: false,
       ownerID: this.props.auth.profile.user_id.split('|')[1],
@@ -113,12 +114,12 @@ class CreateDropModal extends Component {
         .then(reponse => {
           let dropInformation = {
             title: this.state.title,
-            file: 'null',
+            file: this.state.file,
             message: this.state.message,
             lat: lat,
             lng: lng,
-            ownerID: 1, // requires AUTH0 service to be up and running
-            receiverID: 2 // requires AUTH0 service to be up and running
+            ownerID: this.state.ownerID, // requires AUTH0 service to be up and running
+            receiverID: this.state.receiverID // requires AUTH0 service to be up and running
           }
           axios
             .post('http://localhost:3000/deadDrops', qs.stringify(dropInformation))
@@ -137,7 +138,7 @@ class CreateDropModal extends Component {
 
   render() {
     console.log('am i getting the receiverID? ', this.state.receiverID)
-    
+
     const cssClasses = {
       root: 'form-group',
       input: 'form-control',
