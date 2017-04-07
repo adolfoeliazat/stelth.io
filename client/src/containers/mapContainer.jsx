@@ -34,7 +34,9 @@ class MapContainer extends React.Component {
     let authID = 1
     console.log(authID)
     axios
-      .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
+      // .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
+      .get('http://localhost:3000/deadDrops')
+
       .then((result) => {
         this.setState({
           markers: result.data

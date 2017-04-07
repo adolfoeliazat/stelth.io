@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { conenct } from 'react-redux';
+import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import { Modal, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
@@ -8,6 +8,11 @@ import SingleUserView from './SingleUserView.jsx'
 import GOOGLE_API_KEY from '../../../config.js';
 
 const qs = require('qs');
+
+@connect((state) => ({
+  auth: state.auth
+}))
+
 
 class CreateDropModal extends Component {
   constructor(props) {
@@ -17,7 +22,7 @@ class CreateDropModal extends Component {
       title: '',
       address: '',
       uploadState: false,
-      ownerID: null,
+      ownerID: this.props.auth.profile.user_id.split('|')[1],
       receiverFirstName: '',
       receiverLastName: '',  
       receiverResults: [],    
@@ -90,9 +95,9 @@ class CreateDropModal extends Component {
 
   saveUser(data) {
     console.log('what is data? ', data)
-    // this.setState({
-      // receiverID: data 
-    // })
+    this.setState({
+      receiverID: data.authID
+    })
   }
 
   onSave() {
@@ -131,6 +136,8 @@ class CreateDropModal extends Component {
   }
 
   render() {
+    console.log('am i getting the receiverID? ', this.state.receiverID)
+    
     const cssClasses = {
       root: 'form-group',
       input: 'form-control',
@@ -181,7 +188,7 @@ class CreateDropModal extends Component {
                   name="receiverFirstName"
                   onChange={this.handleInputchange}
                   componentClass="input"
-                  placeholder={"David"}
+                  placeholder={"Kan Adachi"}
                 />
                 {/*<FormControl
                   name="receiverLastName"
