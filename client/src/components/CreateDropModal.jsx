@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { conenct } from 'react-redux';
+import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import { Modal, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
@@ -9,15 +9,21 @@ import GOOGLE_API_KEY from '../../../config.js';
 
 const qs = require('qs');
 
+@connect((state) => ({
+  auth: state.auth
+}))
+
+
 class CreateDropModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       complete: false,
       title: '',
+      file: 'asdfasdf',
       address: '',
       uploadState: false,
-      ownerID: null,
+      ownerID: this.props.auth.profile.user_id.split('|')[1],
       receiverFirstName: '',
       receiverLastName: '',  
       receiverResults: [],    
@@ -90,9 +96,9 @@ class CreateDropModal extends Component {
 
   saveUser(data) {
     console.log('what is data? ', data)
-    // this.setState({
-      // receiverID: data 
-    // })
+    this.setState({
+      receiverID: data.authID
+    })
   }
 
   onSave() {
@@ -108,12 +114,12 @@ class CreateDropModal extends Component {
         .then(reponse => {
           let dropInformation = {
             title: this.state.title,
-            file: 'null',
+            file: this.state.file,
             message: this.state.message,
             lat: lat,
             lng: lng,
-            ownerID: 1, // requires AUTH0 service to be up and running
-            receiverID: 2 // requires AUTH0 service to be up and running
+            ownerID: this.state.ownerID, // requires AUTH0 service to be up and running
+            receiverID: this.state.receiverID // requires AUTH0 service to be up and running
           }
           axios
             .post('http://localhost:3000/deadDrops', qs.stringify(dropInformation))
@@ -131,6 +137,8 @@ class CreateDropModal extends Component {
   }
 
   render() {
+    console.log('am i getting the receiverID? ', this.state.receiverID)
+
     const cssClasses = {
       root: 'form-group',
       input: 'form-control',
@@ -181,7 +189,7 @@ class CreateDropModal extends Component {
                   name="receiverFirstName"
                   onChange={this.handleInputchange}
                   componentClass="input"
-                  placeholder={"David"}
+                  placeholder={"Kan Adachi"}
                 />
                 {/*<FormControl
                   name="receiverLastName"

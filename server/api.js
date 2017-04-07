@@ -47,6 +47,7 @@ module.exports = (app) => {
   })
 
   app.post('/deadDrops', (req, res, next) => {
+    console.log(req.body)
     let _ownerID = parseInt(req.body.ownerID);
     let _receiverID = parseInt(req.body.receiverID);
     let _lat = parseFloat(req.body.lat);
