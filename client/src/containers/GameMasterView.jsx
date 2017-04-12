@@ -33,13 +33,16 @@ class GameMasterView extends Component {
   getDropLocations() {
     // TODO: filter by users
     // let authID = this.props.auth.profile.user_id.split('|')[1]
-    axios
-      // .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
-      .get('http://localhost:3000/deadDrops')
-      .then((result) => {
-        this.props.action.storeMarkers(result)
-      })
-      .catch((err) => { console.log(err) })
+    return function (dispatch) {
+      return 
+        axios
+          // .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
+          .get('http://localhost:3000/deadDrops')
+          .then((result) => {
+            dispatch(this.props.action.storeMarkers(result))
+          })
+          .catch((err) => { console.log(err) })
+    }
   }
 
   render() {

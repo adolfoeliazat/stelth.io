@@ -19,7 +19,7 @@ class MapContainer extends React.Component {
     this.state = {
       markers: []
     }
-    console.log('props', this.props)
+    console.log('props in map container', this.props)
   }
 
   componentDidMount() {
@@ -35,32 +35,10 @@ class MapContainer extends React.Component {
     this.renderDropMarkers()
   }
 
-  // // axios call to db for drops then store in react state
-  // getDropLocations() {
-  //   // TODO: filter by users
-  //   // let authID = this.props.auth.profile.user_id.split('|')[1]
-  //   let authID = 1
-  //   console.log(authID)
-  //   axios
-  //     // .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
-  //     .get('http://localhost:3000/deadDrops')
-  //     .then((result) => {
-  //       // this.setState({
-  //       //   markers: result.data
-  //       // })
-  //       this.props.action.storeMarkers(result)
-  //     })
-  //     .then(() => {
-  //       console.log('props2', this.props)
-  //       this.renderDropMarkers()
-  //     })
-  //     .catch((err) => { console.log(err) })
-  // }
-
   //get lat and lng from markers array in state and render
   renderDropMarkers() {
+    console.log('render drop markers')
     this.props.markers.forEach((drop) => {
-    // this.state.markers.forEach((drop) => {
       let center = {
         lat: drop.lat,
         lng: drop.lng

@@ -93,7 +93,9 @@ export function logoutSuccess() {
 }
 
 export function storeMarkers(markers) {
-  console.log('data in actions', markers)
+  // return function (dispatch) {
+  //   return 
+  // }
   return {
     type: STORE_MARKERS,
     markers

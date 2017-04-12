@@ -26,8 +26,6 @@ const authReducer = (state = {
 }
 
 const markerReducer = (state={}, action) => {
-  // console.log('action in reducer', action)
-  // console.log('???', action.markers)
   switch(action.type) {
     case types.STORE_MARKERS:
       return {...state, markers: action.markers.data}
