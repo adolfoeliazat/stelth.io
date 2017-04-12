@@ -9,6 +9,7 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+export const STORE_MARKERS = 'STORE_MARKERS'
 
 // -------------- Action Creators ------------ //
 
@@ -88,5 +89,13 @@ export function logoutSuccess() {
   hashHistory.push('/')  
   return {
     type: LOGOUT_SUCCESS
+  }
+}
+
+export function storeMarkers(markers) {
+  console.log('data in actions', markers)
+  return {
+    type: STORE_MARKERS,
+    markers
   }
 }

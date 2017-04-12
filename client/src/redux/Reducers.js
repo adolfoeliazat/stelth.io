@@ -25,11 +25,23 @@ const authReducer = (state = {
   }
 }
 
+const markerReducer = (state={}, action) => {
+  // console.log('action in reducer', action)
+  // console.log('???', action.markers)
+  switch(action.type) {
+    case types.STORE_MARKERS:
+      return {...state, markers: action.markers.data}
+    default:
+      return state
+  }
+}
+
 // ----------------- Root Reducer ---------------- //
 
 const rootReducer = combineReducers({
   routing: routing,
-  auth: authReducer
+  auth: authReducer,
+  markers: markerReducer
 })
 
 export default rootReducer
