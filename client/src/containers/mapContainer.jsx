@@ -19,7 +19,6 @@ class MapContainer extends React.Component {
     this.state = {
       markers: []
     }
-    console.log('props in map container', this.props)
   }
 
   componentDidMount() {
@@ -31,14 +30,15 @@ class MapContainer extends React.Component {
       }
     })
     window.markerBounds = new google.maps.LatLngBounds();
-    // this.getDropLocations()
-    this.renderDropMarkers()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.renderDropMarkers(nextProps.markers.markers)
   }
 
   //get lat and lng from markers array in state and render
-  renderDropMarkers() {
-    console.log('render drop markers')
-    this.props.markers.forEach((drop) => {
+  renderDropMarkers(data) {
+    data.forEach((drop) => {
       let center = {
         lat: drop.lat,
         lng: drop.lng

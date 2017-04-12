@@ -13,6 +13,7 @@ class DropList extends Component {
   }
 
   render() {
+    {console.log('droplist render')}
     return(
       <div className="drop-list-component">
         <Card>

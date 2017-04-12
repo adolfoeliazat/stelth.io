@@ -28,7 +28,7 @@ const authReducer = (state = {
 const markerReducer = (state={}, action) => {
   switch(action.type) {
     case types.STORE_MARKERS:
-      return {...state, markers: action.markers.data}
+      return {...state, markers: action.markers}
     default:
       return state
   }
