@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
-import { Modal, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { Modal, FormGroup, ControlLabel, FormControl, Button, Alert } from 'react-bootstrap';
 import SingleUserView from '../components/SingleUserView.jsx'
 import GOOGLE_API_KEY from '../../../config.js';
 
@@ -12,7 +12,6 @@ const qs = require('qs');
 @connect((state) => ({
   auth: state.auth
 }))
-
 
 class CreateDropModal extends Component {
   constructor(props) {
@@ -27,7 +26,8 @@ class CreateDropModal extends Component {
       receiverFirstName: '',
       receiverLastName: '',  
       receiverResults: [],    
-      receiverID: null
+      receiverID: null,
+      selectUser: false
     }
     this.close = this.close.bind(this)
     this.searchUsers = this.searchUsers.bind(this)
@@ -97,7 +97,10 @@ class CreateDropModal extends Component {
   saveUser(data) {
     console.log('what is data? ', data)
     this.setState({
-      receiverID: data.authID
+      receiverID: data.authID,
+      receiverFirstName: data.firstName,
+      receiverLastName: data.lastName,
+      selectUser: true
     })
   }
 
@@ -124,6 +127,7 @@ class CreateDropModal extends Component {
           axios
             .post('http://localhost:3000/deadDrops', qs.stringify(dropInformation))
             .then(response => {
+              console.log('drop successfully posted to db!')
             })
             .catch(err => {
               if (err) { console.log(err) }
@@ -191,17 +195,17 @@ class CreateDropModal extends Component {
                   componentClass="input"
                   placeholder={"Kan Adachi"}
                 />
-                {/*<FormControl
-                  name="receiverLastName"
-                  onChange={this.handleInputchange}
-                  componentClass="input"
-                />*/}
               </FormGroup>
-              {this.state.receiverResults.length ? 
-                this.state.receiverResults.map((item) => (
-                  <SingleUserView clickyFnc={this.saveUser} data={item}/> 
-                )) :
-                '' }
+              {this.state.selectUser ?
+                <div>
+                  <Alert>Receiver: {this.state.receiverFirstName + " " + this.state.receiverLastName + " "}selected!</Alert> 
+                  <Button onClick={ ()=> {this.setState({ selectUser: false })}}>Re-search Users</Button> 
+                </div> :
+                this.state.receiverResults.length ? 
+                  this.state.receiverResults.map((item) => (
+                    <SingleUserView clickyFnc={this.saveUser} data={item} /> 
+                  )) : '' 
+              }
               <FormGroup>
                 <ControlLabel>File Upload:</ControlLabel>
                 <Dropzone 

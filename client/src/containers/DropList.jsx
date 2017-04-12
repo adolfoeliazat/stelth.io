@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Card } from 'semantic-ui-react'
 import { connect } from 'react-redux'
+import { Card } from 'semantic-ui-react'
 
 @connect((state) => ({
     markers: state.markers
