@@ -8,7 +8,9 @@ import * as actions from '../redux/Actions.js'
 import axios from 'axios'
 import { bindActionCreators } from 'redux'
 
-@connect((state) => ({}), (dispatch) => ({
+@connect((state) => ({
+    auth: state.auth
+  }), (dispatch) => ({
     action: bindActionCreators(actions, dispatch)
   })
 )
@@ -31,12 +33,20 @@ class GameMasterView extends Component {
   // axios call to db for drops then store in react state
   getDropLocations() {
     // TODO: filter by users
-    // let authID = this.props.auth.profile.user_id.split('|')[1]
+    let authID = this.props.auth.profile.user_id.split('|')[1]
     axios
-      // .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
-      .get('http://localhost:3000/deadDrops')
+      .get(`http://localhost:3000/users?authID=${authID}`)
       .then((result) => {
-        this.props.action.storeMarkers(result.data)
+        console.log(result)
+        console.log(result.data)
+        let ownerID = result.data[0].id
+        console.log('owner id', ownerID)
+        axios
+          .get(`http://localhost:3000/deadDrops?ownerID=${ownerID}`)
+          .then((result) => {
+            this.props.action.storeMarkers(result.data)
+          })
+          .catch((err) => { console.log(err) })
       })
       .catch((err) => { console.log(err) })
   }

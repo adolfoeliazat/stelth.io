@@ -12,8 +12,11 @@ class DropList extends Component {
     // console.log(this.props.markers)
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
+  }
+
   render() {
-    {console.log('droplist render')}
     return(
       <div className="drop-list-component">
         <Card>
