@@ -15,7 +15,7 @@ const knex = Knex(knexfile.development);
 Model.knex(knex);
 
 // Port application is running on
-const PORT = 3000;
+const port = process.env.PORT || 3000;
 
 console.log(path.join(__dirname, '/../client/build'))
 
