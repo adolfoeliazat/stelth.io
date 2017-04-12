@@ -4,21 +4,23 @@ exports.up = function (knex, Promise) {
     // It builds the requisite core tables
     .createTable('users', (table) => {
       table.increments('id').primary();
-      table.string('firstName', 20);
-      table.string('lastName', 20);
-      table.string('email', 25);
-      table.string('publicKey', 25);
-      // table.string('authID');
+      table.string('firstName');
+      table.string('lastName');
+      table.string('email');
+      table.string('publicKey');
+      table.string('authID');
+      table.string('picture');      
       table.timestamps(true);
     })
     .createTable('deadDrops', (table) => {
       table.increments('id').primary();
-      table.string('title', 50);
-      table.string('data', 20);
+      table.string('title');
+      table.string('file');
+      table.string('message');
       table.decimal('lat', 24, 12);
       table.decimal('lng', 24, 12);
-      table.string('ownerID', 20);
-      table.string('receiverID', 20);      
+      table.string('ownerID');
+      table.string('receiverID');      
       table.timestamps(true);
     })
 };

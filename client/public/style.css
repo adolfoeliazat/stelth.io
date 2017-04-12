@@ -1,0 +1,94 @@
+.gamemaster-view {
+  height: 100%;
+  width: 100%;
+  padding: 0px
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+  position: absolute
+  /*float: right*/
+}
+
+.newdrop-button {
+  width: 100%;  
+  position: absolute;
+}
+
+.ui.button {
+  float: right;
+  z-index: 100;
+  margin-top: 20px;
+  margin-right: 20px;
+  background-color: #333;
+  color: white;
+  height: 40px;
+  font-size: 13px
+}
+
+.dropZoneField {
+  cursor: pointer;
+  height: 150px;
+  width: 150px;
+}
+
+.dropZoneText {
+  cursor: pointer;
+  border: dashed;
+  text-align: center;
+  padding-top: 60px;
+  height: 150px;
+  width: 150px;
+}
+
+.navbar {
+  margin-bottom: 0px;
+  border-style: none
+}
+
+.navbar.navbar-default {
+  background-color:#333;
+  min-height: 55px;
+}
+
+.navbar-default .nav.navbar-nav > li > a:hover {
+  color: #e6e6e6;
+}
+
+.nav.navbar-nav {
+  /*float: right;*/
+  margin-top: 2px;
+}
+
+.login {
+  margin-top: 8px;
+  background-color: #333
+}
+
+.logout {
+  margin-top: 8px;
+  background-color: #333;
+  border-style: none 
+}
+
+.stelth-logo {
+  margin-top: 8px;
+  background-color: #333;
+  border-style: none  
+}
+
+.profilePicture {
+  height: 50px;
+  border-radius: 50%;
+}
+ 
+ .singleUser {
+  padding: 10px;
+ }
+
+ .profileName {
+  padding-left: 15px;
+ }
+
+

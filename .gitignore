@@ -1,2 +1,5 @@
 node_modules
 .env
+client/build/*
+client/public/bundle.js
+config.js
