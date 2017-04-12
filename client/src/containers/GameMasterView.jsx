@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react'
-import CreateDropModal from '../components/CreateDropModal.jsx'
+import CreateDropModal from './CreateDropModal.jsx'
 import MapContainer from './mapContainer.jsx'
 import DropList from './DropList.jsx'
 import { connect } from 'react-redux'
@@ -32,15 +32,11 @@ class GameMasterView extends Component {
 
   // axios call to db for drops then store in react state
   getDropLocations() {
-    // TODO: filter by users
     let authID = this.props.auth.profile.user_id.split('|')[1]
     axios
       .get(`http://localhost:3000/users?authID=${authID}`)
       .then((result) => {
-        console.log(result)
-        console.log(result.data)
         let ownerID = result.data[0].id
-        console.log('owner id', ownerID)
         axios
           .get(`http://localhost:3000/deadDrops?ownerID=${ownerID}`)
           .then((result) => {

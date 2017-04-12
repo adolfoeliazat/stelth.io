@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, IndexRoute, hashHistory } from 'react-router';
 import AuthService from '../utils/AuthService';
 import AppContainer from '../containers/AppContainer.jsx'
-import LandingContainer from '../containers/LandingContainer.jsx'
+import LandingContainer from '../components/LandingContainer.jsx'
 import GameMasterView from '../containers/GameMasterView.jsx';
 import NotFoundPage from '../components/NotFoundPage.jsx'
 import NavBar from '../containers/NavBar.jsx';

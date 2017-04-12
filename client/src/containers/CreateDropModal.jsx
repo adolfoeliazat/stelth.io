@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import { Modal, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import SingleUserView from './SingleUserView.jsx'
+import SingleUserView from '../components/SingleUserView.jsx'
 import GOOGLE_API_KEY from '../../../config.js';
 
 const qs = require('qs');
