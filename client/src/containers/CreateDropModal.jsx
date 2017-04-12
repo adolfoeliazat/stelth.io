@@ -5,7 +5,7 @@ import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import { Modal, FormGroup, ControlLabel, FormControl, Button, Alert } from 'react-bootstrap';
 import SingleUserView from '../components/SingleUserView.jsx'
-import GOOGLE_API_KEY from '../../../config.js';
+import { GOOGLE_API_KEY, bucketName, AWSConfigRegion } from '../../../config.js';
 
 const qs = require('qs');
 
@@ -36,14 +36,27 @@ class CreateDropModal extends Component {
     this.onSave = this.onSave.bind(this)
     this.onDrop = this.onDrop.bind(this)
     this.saveUser = this.saveUser.bind(this)
-
-    var self = this;
-    console.log("is this being updataed? ", this.state.receiverID)
   }
 
   // file upload function
-  onDrop() {
-    console.log("what is the state? ", this.state.uploadState)
+  onDrop(files) {
+    let file = files[0]
+    console.log('file', file)
+    console.log("what is the state? ", bucketName, AWSConfigRegion)
+    // let bucket = new AWS.S3({
+    //   params: {
+    //     Bucket: bucketName
+    //   }
+    // })
+    console.log(bucket)
+
+    axios.get('http://localhost:3000/s3', {
+        filename: file.name,
+        filetype: file.type
+      })
+      .then((result) => {
+        let 
+      })
     this.setState({ uploadState: true })
   }
 
@@ -199,7 +212,7 @@ class CreateDropModal extends Component {
               {this.state.selectUser ?
                 <div>
                   <Alert>Receiver: {this.state.receiverFirstName + " " + this.state.receiverLastName + " "}selected!</Alert> 
-                  <Button onClick={ ()=> {this.setState({ selectUser: false })}}>Re-search Users</Button> 
+                  <Button onClick={ ()=> {this.setState({ selectUser: false })}}>Search Again</Button> 
                 </div> :
                 this.state.receiverResults.length ? 
                   this.state.receiverResults.map((item) => (
