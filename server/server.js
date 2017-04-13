@@ -14,7 +14,7 @@ const knex = Knex(knexfile.development);
 Model.knex(knex);
 
 //AWS stuff
-import { bucketName, AWSConfigRegion } from '../config'
+// import { bucketName, AWSConfigRegion } from '../config'
 
 // Port application is running on
 const PORT = 3000;
@@ -34,13 +34,13 @@ const app = express()
 // Pull server into API context
 registerApi(app);
 
-app.use('/s3', require('react-s3-uploader/s3router')({
-    bucket: bucketName,
-    region: AWSConfigRegion, //optional
-    // headers: {'Access-Control-Allow-Origin': '*'}, // optional
-    ACL: 'private', // this is default
-    uniquePrefix = true // (4.0.2 and above) default is true, setting the attribute to false preserves the original filename in S3
-}));
+// app.use('/s3', require('react-s3-uploader/s3router')({
+//     bucket: bucketName,
+//     region: AWSConfigRegion, //optional
+//     // headers: {'Access-Control-Allow-Origin': '*'}, // optional
+//     ACL: 'private', // this is default
+//     uniquePrefix: true // (4.0.2 and above) default is true, setting the attribute to false preserves the original filename in S3
+// }));
 
 // Error handler
 app.use((err, req, res, next) => {

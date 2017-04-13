@@ -17,8 +17,8 @@ class DeadDrop extends Model {
         message:    { type: 'string', minLength: 1 },
         lat:        { type: 'number', minLength: 1 },
         lng:        { type: 'number', minLength: 1 },
-        ownerID:    { type: 'integer', minLength: 1 },
-        receiverID: { type: 'integer', minLength: 1 }
+        ownerID:    { type: 'string', minLength: 1 },
+        receiverID: { type: 'string', minLength: 1 }
       }
     };
   }

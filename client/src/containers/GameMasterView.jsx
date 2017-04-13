@@ -23,7 +23,7 @@ class GameMasterView extends Component {
     }
     this.toggleModal = this.toggleModal.bind(this)
     this.props.action.checkLogin() // check is Auth0 lock is authenticating after login callback
-    this.getDropLocations()
+    // this.getDropLocations()
   }
 
   toggleModal() {
@@ -37,6 +37,7 @@ class GameMasterView extends Component {
     axios
       .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
       .then((result) => {
+        console.log('result in get drop locations', result)
         this.props.action.storeMarkers(result.data)
       })
       .catch((err) => { console.log(err) })

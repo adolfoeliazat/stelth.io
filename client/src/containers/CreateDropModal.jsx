@@ -55,7 +55,7 @@ class CreateDropModal extends Component {
         filetype: file.type
       })
       .then((result) => {
-        let 
+
       })
     this.setState({ uploadState: true })
   }
@@ -127,7 +127,7 @@ class CreateDropModal extends Component {
 
       axios
         .get(url)
-        .then(reponse => {
+        .then(response => {
           let dropInformation = {
             title: this.state.title,
             file: this.state.file,
@@ -136,6 +136,7 @@ class CreateDropModal extends Component {
             lng: lng,
             ownerID: this.state.ownerID, // requires AUTH0 service to be up and running
             receiverID: this.state.receiverID // requires AUTH0 service to be up and running
+            // receiverID: 2
           }
           axios
             .post('http://localhost:3000/deadDrops', qs.stringify(dropInformation))

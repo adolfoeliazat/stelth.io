@@ -11,7 +11,7 @@ exports.seed = function (knex, Promise) {
               lastName: 'Lee',
               email: 'regina.v.lee@gmail.com',
               publicKey: '1234567890',
-              authID: '5098435780935'
+              authID: '110986321791592984628'
             },
             {
               id: 2,
