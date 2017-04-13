@@ -36,6 +36,14 @@ class MapContainer extends React.Component {
     this.renderDropMarkers(nextProps.markers.markers)
   }
 
+  // componentDidMount(prevProps, prevState){
+  //   console.log('prevprops', prevProps)
+  //   console.log('prev state', prevState)
+  //   // if (prevProps !== this.props.marker) {
+
+  //   // }
+  // }
+
   //get lat and lng from markers array in state and render
   renderDropMarkers(data) {
     console.log('data', data)

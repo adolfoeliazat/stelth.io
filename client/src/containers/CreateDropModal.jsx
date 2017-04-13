@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 import { Modal, FormGroup, ControlLabel, FormControl, Button, Alert } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import Dropzone from 'react-dropzone';
+import axios from 'axios';
+import * as actions from '../redux/Actions.js'
 import SingleUserView from '../components/SingleUserView.jsx'
 import { GOOGLE_API_KEY, bucketName, AWSConfigRegion } from '../../../config.js';
 
 const qs = require('qs');
 
 @connect((state) => ({
-  auth: state.auth
-}))
+    markers: state.markers,
+    auth: state.auth
+  }), (dispatch) => ({
+    action: bindActionCreators(actions, dispatch)
+  }))
 
 class CreateDropModal extends Component {
   constructor(props) {
@@ -36,6 +41,7 @@ class CreateDropModal extends Component {
     this.onSave = this.onSave.bind(this)
     this.onDrop = this.onDrop.bind(this)
     this.saveUser = this.saveUser.bind(this)
+    // console.log('lalalala', this.props.action.addMarker)
   }
 
   // file upload function
@@ -62,8 +68,6 @@ class CreateDropModal extends Component {
 
   // standard user input controller
   handleInputchange(e) {
-    console.log('event', e)
-    console.log('value', e.target.value)    
     const name = e.target.name;
     const val = e.target.value;
 
@@ -79,14 +83,11 @@ class CreateDropModal extends Component {
   }
 
   searchUsers() {
-    console.log('search users')
     let firstName = this.state.receiverFirstName
     let lastName = this.state.receiverLastName
     axios
       .get(`http://localhost:3000/users?firstName=${firstName}&lastName=${lastName}`)
       .then((response) => {
-        console.log('response in search users ', response)
-        console.log('response.data in search users', response.data)
         this.setState({
           receiverResults: response.data
         })
@@ -108,7 +109,6 @@ class CreateDropModal extends Component {
   // submission for drops
 
   saveUser(data) {
-    console.log('what is data? ', data)
     this.setState({
       receiverID: data.authID,
       receiverFirstName: data.firstName,
@@ -138,11 +138,11 @@ class CreateDropModal extends Component {
             receiverID: this.state.receiverID
             // receiverID: 2
           }
-          console.log('dropinformation', dropInformation)
           axios
             .post('http://localhost:3000/deadDrops', dropInformation)
             .then(response => {
-              console.log('drop successfully posted to db!', dropInformation)
+              // console.log('this.props.actions.addmarker ', this.props.action.addMarker)
+              this.props.action.addMarker(response)
             })
             .catch(err => {
               if (err) { console.log(err) }
@@ -156,8 +156,6 @@ class CreateDropModal extends Component {
   }
 
   render() {
-    console.log('am i getting the receiverID? ', this.state.receiverID)
-
     const cssClasses = {
       root: 'form-group',
       input: 'form-control',
