@@ -101,7 +101,6 @@ export function storeMarkers(markers) {
 }
 
 export function addMarker(marker) {
-  console.log('getting into addMarker')
   return {
     type: ADD_MARKER,
     marker

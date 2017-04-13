@@ -138,7 +138,6 @@ class CreateDropModal extends Component {
             receiverID: this.state.receiverID
             // receiverID: 2
           }
-          console.log('drop information', dropInformation)
           axios
             .post('http://localhost:3000/deadDrops', dropInformation)
             .then(response => {

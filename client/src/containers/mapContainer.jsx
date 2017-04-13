@@ -29,27 +29,26 @@ class MapContainer extends React.Component {
         lng: -118.3907
       }
     })
+    window.map.addListener('click', (e) => {
+      this.placeMarkerAndPanTo(e.latLng, window.map)
+    })
     window.markerBounds = new google.maps.LatLngBounds();
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('next props', nextProps)
-    // this.setState({ markers: nextProps.markers.markers })
     this.renderDropMarkers(nextProps.markers.markers)
   }
 
-  // componentDidUpdate(prevProps, prevState){
-  //   // console.log('prevprops', prevProps)
-  //   console.log('prev state', prevState)
-  //   console.log('props marker', this.state.markers)
-  //   if (prevState !== this.state) {
-  //     this.renderDropMarkers(this.state.markers)
-  //   }
-  // }
+  placeMarkerAndPanTo(latLng, map) {
+    let marker = new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
+    map.panTo(latLng);
+  }
 
   //get lat and lng from markers array in state and render
   renderDropMarkers(data) {
-    console.log('data', data)
     data.forEach((drop) => {
       let center = {
         lat: drop.lat,

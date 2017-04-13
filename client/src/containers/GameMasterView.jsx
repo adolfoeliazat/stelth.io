@@ -33,27 +33,12 @@ class GameMasterView extends Component {
   // axios call to db for drops then store in react state
   getDropLocations() {
     let authID = this.props.auth.profile.user_id.split('|')[1]
-    console.log('authID', authID)
     axios
       .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
       .then((result) => {
-        console.log('result in get drop locations', result)
         this.props.action.storeMarkers(result.data)
       })
       .catch((err) => { console.log(err) })
-    // axios
-    //   .get(`http://localhost:3000/users?authID=${authID}`)
-    //   .then((result) => {
-    //     let ownerID = result.data[0].id
-    //     console.log('ownerID', ownerID)
-    //     axios
-    //       .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
-    //       .then((result) => {
-    //         this.props.action.storeMarkers(result.data)
-    //       })
-    //       .catch((err) => { console.log(err) })
-    //   })
-    //   .catch((err) => { console.log(err) })
   }
 
   render() {
