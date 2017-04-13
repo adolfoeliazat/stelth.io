@@ -25,7 +25,13 @@ const authReducer = (state = {
   }
 }
 
-const markerReducer = (state={}, action) => {
+const markerReducer = (state={
+  isAuthenticated: !auth.isTokenExpired(),
+  isFetching: false,
+  profile: auth.getProfile(),
+  error: null,
+  markers: []
+}, action) => {
   switch(action.type) {
     case types.STORE_MARKERS:
       return {...state, markers: action.markers}
