@@ -30,8 +30,9 @@ const markerReducer = (state={}, action) => {
     case types.STORE_MARKERS:
       return {...state, markers: action.markers}
     case types.ADD_MARKER:
-      console.log("Action.MARKER!", action.marker)
-      return {...state, markers: [state.markers, action.marker]}
+      let markerArr = state.markers.map(item => (item))
+      markerArr.push(action.marker)
+      return {...state, markers: markerArr}
     default:
       return state
   }

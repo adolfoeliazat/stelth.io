@@ -138,6 +138,7 @@ class CreateDropModal extends Component {
             receiverID: this.state.receiverID
             // receiverID: 2
           }
+          console.log('drop information', dropInformation)
           axios
             .post('http://localhost:3000/deadDrops', dropInformation)
             .then(response => {
@@ -214,8 +215,8 @@ class CreateDropModal extends Component {
                   <Button onClick={ ()=> {this.setState({ selectUser: false })}}>Search Again</Button> 
                 </div> :
                 this.state.receiverResults.length ? 
-                  this.state.receiverResults.map((item) => (
-                    <SingleUserView clickyFnc={this.saveUser} data={item} /> 
+                  this.state.receiverResults.map((item, i) => (
+                    <SingleUserView clickyFnc={this.saveUser} data={item} key={i}/> 
                   )) : '' 
               }
               <FormGroup>

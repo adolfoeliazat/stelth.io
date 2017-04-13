@@ -52,6 +52,7 @@ module.exports = (app) => {
     // let _receiverID = parseInt(req.body.receiverID);
     let _lat = parseFloat(req.body.lat);
     let _lng = parseFloat(req.body.lng);
+    console.log('lat and long in api', _lat, _lng)
     let formattedDrop = {
       title: req.body.title,
       file: req.body.file,
