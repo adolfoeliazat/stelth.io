@@ -40,23 +40,23 @@ class CreateDropModal extends Component {
 
   // file upload function
   onDrop(files) {
-    let file = files[0]
-    console.log('file', file)
-    console.log("what is the state? ", bucketName, AWSConfigRegion)
-    // let bucket = new AWS.S3({
-    //   params: {
-    //     Bucket: bucketName
-    //   }
-    // })
-    console.log(bucket)
+    // let file = files[0]
+    // console.log('file', file)
+    // console.log("what is the state? ", bucketName, AWSConfigRegion)
+    // // let bucket = new AWS.S3({
+    // //   params: {
+    // //     Bucket: bucketName
+    // //   }
+    // // })
+    // console.log(bucket)
 
-    axios.get('http://localhost:3000/s3', {
-        filename: file.name,
-        filetype: file.type
-      })
-      .then((result) => {
+    // axios.get('http://localhost:3000/s3', {
+    //     filename: file.name,
+    //     filetype: file.type
+    //   })
+    //   .then((result) => {
 
-      })
+    //   })
     this.setState({ uploadState: true })
   }
 
@@ -134,14 +134,15 @@ class CreateDropModal extends Component {
             message: this.state.message,
             lat: lat,
             lng: lng,
-            ownerID: this.state.ownerID, // requires AUTH0 service to be up and running
-            receiverID: this.state.receiverID // requires AUTH0 service to be up and running
+            ownerID: this.state.ownerID, 
+            receiverID: this.state.receiverID
             // receiverID: 2
           }
+          console.log('dropinformation', dropInformation)
           axios
-            .post('http://localhost:3000/deadDrops', qs.stringify(dropInformation))
+            .post('http://localhost:3000/deadDrops', dropInformation)
             .then(response => {
-              console.log('drop successfully posted to db!')
+              console.log('drop successfully posted to db!', dropInformation)
             })
             .catch(err => {
               if (err) { console.log(err) }

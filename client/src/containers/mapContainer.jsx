@@ -38,6 +38,7 @@ class MapContainer extends React.Component {
 
   //get lat and lng from markers array in state and render
   renderDropMarkers(data) {
+    console.log('data', data)
     data.forEach((drop) => {
       let center = {
         lat: drop.lat,
