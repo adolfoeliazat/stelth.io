@@ -46,11 +46,6 @@ class MapContainer extends React.Component {
   }
 
   placeMarkerAndPanTo(latLng, map) {
-    // globally available fx to clear marker
-    window.clearMarker = (m, mId) => {
-      m.setMap(null);
-      delete m[mId]
-    }
 
     //create unique id for marker to put in marker object in state
     let markerId = latLng.lat() + '_' + latLng.lng()
@@ -60,6 +55,13 @@ class MapContainer extends React.Component {
       map: map
     });
 
+    // globally available fx to clear marker
+    window.clearMarker = () => {
+      console.log('getting into clear markers')
+      marker.setMap(null);
+      delete this.state.markers[markerId]
+    }
+
     let contentString = 
       '<div id="infowindow">' +
         '<div id="content">' +
@@ -67,7 +69,7 @@ class MapContainer extends React.Component {
             `<h5 id="firstHeading" class="firstHeading">Would you like to place a drop here?</h5>` +
           '<div id="bodyContent">' +
           `<Button>Yes</Button>` +
-          `<Button onclick="clearMarker(${marker}, ${markerId})">No</Button>` +
+          `<Button onclick="clearMarker()">No</Button>` +
         '</div>' +
       '</div>';
     let infowindow = new google.maps.InfoWindow({
