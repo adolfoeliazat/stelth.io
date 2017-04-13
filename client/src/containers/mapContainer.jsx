@@ -39,9 +39,9 @@ class MapContainer extends React.Component {
 
   componentDidUpdate(prevProps, prevState){
     // console.log('prevprops', prevProps)
-    // console.log('prev state', prevState)
-    // console.log('props marker', this.state.markers)
-    if (prevProps.markers.length !== this.state.markers.length) {
+    console.log('prev state', prevState)
+    console.log('props marker', this.state.markers)
+    if (prevState !== this.state) {
       this.renderDropMarkers(this.state.markers)
     }
   }

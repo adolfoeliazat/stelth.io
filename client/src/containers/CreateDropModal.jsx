@@ -141,8 +141,7 @@ class CreateDropModal extends Component {
           axios
             .post('http://localhost:3000/deadDrops', dropInformation)
             .then(response => {
-              // console.log('this.props.actions.addmarker ', this.props.action.addMarker)
-              this.props.action.addMarker(response)
+              this.props.action.addMarker(response.data)
             })
             .catch(err => {
               if (err) { console.log(err) }
