@@ -12,11 +12,11 @@ import { GOOGLE_API_KEY, bucketName, AWSConfigRegion } from '../../../config.js'
 const qs = require('qs');
 
 @connect((state) => ({
-    markers: state.markers,
-    auth: state.auth
-  }), (dispatch) => ({
-    action: bindActionCreators(actions, dispatch)
-  }))
+  markers: state.markers,
+  auth: state.auth
+}), (dispatch) => ({
+  action: bindActionCreators(actions, dispatch)
+}))
 
 class CreateDropModal extends Component {
   constructor(props) {
@@ -29,11 +29,12 @@ class CreateDropModal extends Component {
       uploadState: false,
       ownerID: this.props.auth.profile.user_id.split('|')[1],
       receiverFirstName: '',
-      receiverLastName: '',  
-      receiverResults: [],    
+      receiverLastName: '',
+      receiverResults: [],
       receiverID: null,
       selectUser: false,
-      showModal: false
+      showModal: false,
+      formattedAddress: ''
     }
     this.close = this.close.bind(this)
     this.searchUsers = this.searchUsers.bind(this)
@@ -42,6 +43,12 @@ class CreateDropModal extends Component {
     this.onSave = this.onSave.bind(this)
     this.onDrop = this.onDrop.bind(this)
     this.saveUser = this.saveUser.bind(this)
+  }
+
+  componentDidMount() {
+    if (this.props.address) {
+      this.setState({ formattedAddress: this.props.address })
+    }
   }
 
   // file upload function
@@ -128,16 +135,29 @@ class CreateDropModal extends Component {
       axios
         .get(url)
         .then(response => {
-          let dropInformation = {
-            title: this.state.title,
-            file: this.state.file,
-            message: this.state.message,
-            lat: lat,
-            lng: lng,
-            ownerID: this.state.ownerID, 
-            receiverID: this.state.receiverID
-            // receiverID: 2
+          let dropInformation;
+          if (this.props.position.lat) {
+            dropInformation = {
+              title: this.state.title,
+              file: this.state.file,
+              message: this.state.message,
+              lat: this.props.position.lat,
+              lng: this.props.position.lng,
+              ownerID: this.state.ownerID,
+              receiverID: this.state.receiverID
+            }
+          } else {
+            dropInformation = {
+              title: this.state.title,
+              file: this.state.file,
+              message: this.state.message,
+              lat: lat,
+              lng: lng,
+              ownerID: this.state.ownerID,
+              receiverID: this.state.receiverID
+            }
           }
+          console.log('drop information', dropInformation)
           axios
             .post('http://localhost:3000/deadDrops', dropInformation)
             .then(response => {
@@ -189,15 +209,23 @@ class CreateDropModal extends Component {
                 />
               </FormGroup>
               <FormGroup>
-                <ControlLabel>Where would you like to place your drop?</ControlLabel>
-                <PlacesAutocomplete
-                  value={this.state.address}
-                  onChange={this.handleAddressChange}
-                  autocompleteItem={AutocompleteItem}
-                  classNames={cssClasses}
-                  styles={myStyles}
-                  placeholder={"Search Places..."}
-                />
+              {console.log('this is state', this.state)}
+                {this.state.formattedAddress.length ?
+                  <div>
+                    <ControlLabel> Location </ControlLabel>
+                    <FormGroup>{this.props.address}</FormGroup> 
+                  </div> :
+                  <div>
+                    <ControlLabel>Where would you like to place your drop?</ControlLabel>
+                    <PlacesAutocomplete
+                      value={this.state.address}
+                      onChange={this.handleAddressChange}
+                      autocompleteItem={AutocompleteItem}
+                      classNames={cssClasses}
+                      styles={myStyles}
+                      placeholder={"Search Places..."}
+                    />
+                  </div>}
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Who would you like to send this to?</ControlLabel>
@@ -210,17 +238,17 @@ class CreateDropModal extends Component {
               </FormGroup>
               {this.state.selectUser ?
                 <div>
-                  <Alert>Receiver: {this.state.receiverFirstName + " " + this.state.receiverLastName + " "}selected!</Alert> 
-                  <Button onClick={ ()=> {this.setState({ selectUser: false })}}>Search Again</Button> 
+                  <Alert>Receiver: {this.state.receiverFirstName + " " + this.state.receiverLastName + " "}selected!</Alert>
+                  <Button onClick={() => { this.setState({ selectUser: false }) }}>Search Again</Button>
                 </div> :
-                this.state.receiverResults.length ? 
+                this.state.receiverResults.length ?
                   this.state.receiverResults.map((item, i) => (
-                    <SingleUserView clickyFnc={this.saveUser} data={item} key={i}/> 
-                  )) : '' 
+                    <SingleUserView clickyFnc={this.saveUser} data={item} key={i} />
+                  )) : ''
               }
               <FormGroup>
                 <ControlLabel>File Upload:</ControlLabel>
-                <Dropzone 
+                <Dropzone
                   className="dropZoneField"
                   onDrop={this.onDrop}
                   name="uploadState">
@@ -241,7 +269,7 @@ class CreateDropModal extends Component {
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button className="btn btn-primary" onClick={() => { this.props.toggleModal(); this.onSave() }}>Save</Button> :
+            <Button className="btn btn-primary" onClick={() => { this.props.toggleModal(); this.onSave() }}>Save</Button>
           </Modal.Footer>
         </Modal>
       </div>
