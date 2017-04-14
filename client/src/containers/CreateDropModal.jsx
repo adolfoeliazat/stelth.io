@@ -134,7 +134,7 @@ class CreateDropModal extends Component {
         .get(url)
         .then(response => {
           let dropInformation;
-          if (this.props.position.lat) {
+          if (this.props.position) {
             dropInformation = {
               title: this.state.title,
               file: this.state.file,

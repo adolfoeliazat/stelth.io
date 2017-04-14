@@ -11,6 +11,7 @@ export const LOGIN_ERROR = 'LOGIN_ERROR'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 export const STORE_MARKERS = 'STORE_MARKERS'
 export const ADD_MARKER = 'ADD_MARKER'
+export const DELETE_MARKER = 'DELETE_MARKER'
 
 // -------------- Action Creators ------------ //
 
@@ -104,5 +105,14 @@ export function addMarker(marker) {
   return {
     type: ADD_MARKER,
     marker
+  }
+}
+
+export function deleteMarkerFromRedux(marker, i) {
+  console.log('inside of delete marker action', marker, i)
+  return {
+    type: DELETE_MARKER,
+    marker,
+    i
   }
 }

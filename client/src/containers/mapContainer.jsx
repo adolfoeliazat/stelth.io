@@ -105,7 +105,7 @@ class MapContainer extends React.Component {
 
   //get lat and lng from markers array in state and render
   renderDropMarkers(data) {
-    data.forEach((drop) => {
+    data.forEach((drop, i) => {
       let center = {
         lat: drop.lat,
         lng: drop.lng
@@ -113,6 +113,33 @@ class MapContainer extends React.Component {
       let marker = new google.maps.Marker({
         position: center,
         map: window.map
+      })
+      let contentString= '<div id="content">' +
+        '<div id="siteNotice">' +
+        '</div>' +
+        `<h5 id="firstHeading" class="firstHeading">${drop.title}</h5>` +
+        '<div id="bodyContent">' +
+        `<p>${drop.message}</p>` +
+        `<p>Right Click to Delete!</p>` +
+        '</div>' +
+        '</div>';
+      let infowindow = new google.maps.InfoWindow({
+        content: contentString
+      })
+
+      marker.addListener('click', () => {
+        infowindow.open(window.map, marker)
+      })
+      marker.addListener('rightclick', () => {
+        axios
+          .delete('http://localhost:3000/deadDrops', {
+            data: {
+              'id': drop.id
+            }
+          })
+          .then(()=> {
+            this.props.action.deleteMarkerFromRedux(drop, i)
+          })
       })
       window.markerBounds.extend(center)
       window.map.fitBounds(window.markerBounds)

@@ -45,9 +45,9 @@ class GameMasterView extends Component {
     return (
       <div className="gamemaster-view">
         <MapContainer />
-        <div className="drop-list">
+        {/*<div className="drop-list">
           <DropList />
-        </div>
+        </div>*/}
         <div className='newdrop-button'>
           <Button onClick={() => this.toggleModal()}> Create New Drop </Button>
         </div>

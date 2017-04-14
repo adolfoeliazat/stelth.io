@@ -39,6 +39,10 @@ const markerReducer = (state={
       let markerArr = state.markers.map(item => (item))
       markerArr.push(action.marker)
       return {...state, markers: markerArr}
+    case types.DELETE_MARKER:
+      let arr = state.markers.map(item => (item))
+      arr.splice(action.i, 1)      
+      return {...state, markers: arr}
     default:
       return state
   }
