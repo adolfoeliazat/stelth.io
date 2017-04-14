@@ -113,4 +113,18 @@
   padding-left: 15px;
  }
 
+.drop-popover {
+  margin: auto
+}
 
+.modal-header {
+  text-align: center
+}
+
+.modal-body {
+  text-align: center
+}
+
+.modal-footer {
+  text-align: center
+}

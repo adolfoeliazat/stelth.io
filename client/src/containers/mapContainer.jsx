@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import GOOGLE_API_KEY from '../../../config.js'
+import { GOOGLE_API_KEY } from '../../../config.js'
 import { connect } from 'react-redux'
-import { Button, Popover } from 'react-bootstrap'
+import { Button, Modal } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
 import * as actions from '../redux/Actions.js'
 import ReactDOMServer from 'react-dom/server'
+import { geocodeByAddress } from 'react-places-autocomplete';
 
 @connect((state) => ({
   markers: state.markers,
@@ -20,13 +21,14 @@ class MapContainer extends React.Component {
     super(props)
     this.state = {
       markers: {},
-      popOver: false
+      showModal: false,
+      address: ''
     }
-    // this.clearMarker = this.clearMarker.bind(this)
-    this.idx;
     this.props.action.checkLogin() // check is Auth0 lock is authenticating after login callback
     this.deleteMarker = this.deleteMarker.bind(this)
-    // this.triggerClick = this.triggerClick.bind(this)
+    this.toggleModal = this.toggleModal.bind(this)
+
+    console.log('google api key', GOOGLE_API_KEY)
   }
 
   componentDidMount() {
@@ -38,8 +40,25 @@ class MapContainer extends React.Component {
       }
     })
     window.map.addListener('click', (e) => {
-      this.placeMarkerAndPanTo(e.latLng, window.map)
-      window.map.setZoom(13)
+      let _lat = e.latLng.lat()
+      let _lng = e.latLng.lng()      
+      let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${_lat},${_lng}&key=${GOOGLE_API_KEY}`
+      axios
+        .get(url)
+        .then((response) => {
+          console.log('res', response)
+          let data = {
+            position: e.latLng,
+            address: response.data.results[0].formatted_address
+          }
+          this.setState({ address: data.address })
+          return data
+        })
+        .then((x) => {
+          console.log('x', x)
+          this.placeMarkerAndPanTo(x, window.map)
+          window.map.setZoom(13)
+        })
     })
     window.markerBounds = new google.maps.LatLngBounds();
   }
@@ -48,29 +67,29 @@ class MapContainer extends React.Component {
     this.renderDropMarkers(nextProps.markers.markers)
   }
 
-  placeMarkerAndPanTo(latLng, map) {
-    let _lat = latLng.lat()
-    let _lng = latLng.lng()
-    let markerId = _lat + "_" + _lng
+  placeMarkerAndPanTo(values, map) {
+    console.log('values', values)
+    let _lat = values.position.lat()
+    let _lng = values.position.lng()
+    let markerPosition = { lat: _lat, lng: _lng }
     let marker = new google.maps.Marker({
-      position: latLng,
+      position: markerPosition,
       map: map
     });
+    map.panTo(markerPosition);
+    this.toggleModal()
+  }
 
-    map.panTo(latLng);
-    marker.addListener('click', (e) => {
-      // infowindow.setContent(this.renderInfoWindow(_lat, _lng));
-      // infowindow.open(map, marker);
-      this.setState({ popOver: true })
-    })
-    this.setState({ markers: this.state.markers[markerId] = marker })
+  toggleModal() {
+    console.log('in toggle modal')
+    this.setState({ showModal: !this.state.showModal })
   }
 
   deleteMarker() {
     console.log('we in here yo')
     console.log('getting into clear markers')
-    marker.setMap(null);
-    delete this.state.markers[markerId]
+    // marker.setMap(null);
+    // delete this.state.markers[markerId]
     window.map.fitBounds(window.markerBounds)
   }
 
@@ -94,23 +113,36 @@ class MapContainer extends React.Component {
     })
   }
 
+  close() {
+    this.setState({showModal: false}, () => {
+      this.props.resetFlag();
+    });
+  }
+
   render() {
     return (
       <div>
         <div className="map" ref="mapCanvas"></div>
-        <div>
-          {this.state.popOver ? 
-            <Popover
-              id="popover-basic"
-              placement="top"
-              positionLeft={200}
-              positionTop={200}
-              title="Would you like to place a drop here?"
-            >
-              <Button className="no-button" onClick={this.deleteMarker}>No</Button>
-              <Button className="no-button" onClick={this.addMarker}>Yes</Button>
-            </Popover> : "" }
-        </div>
+        {console.log('state', this.state)}
+        {this.state.showModal ?
+          <div className="static-modal">
+            <Modal.Dialog >
+              <Modal.Header className="modal-header">
+                <Modal.Title>Would you like to place a drop here?</Modal.Title>
+              </Modal.Header>
+
+              <Modal.Body className="modal-body">
+                {this.state.address}
+              </Modal.Body>
+
+              <Modal.Footer className="modal-footer">
+                <Button onClick={this.deleteMarker}>Close</Button>
+                <Button onClick={this.addMarker}>Save changes</Button>
+              </Modal.Footer>
+
+            </Modal.Dialog>
+          </div>
+          : ""}
       </div>
     )
   }
