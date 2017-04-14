@@ -75,7 +75,6 @@ module.exports = (app) => {
       .delete()
       .where('id', req.body.id)
       .then(deadDrops => {
-        console.log('this the the deadDrops in delete ', deadDrops)
         res.send('Drop has been deleted!')
       })
       .catch(next);
