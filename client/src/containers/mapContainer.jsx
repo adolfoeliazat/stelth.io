@@ -31,6 +31,7 @@ class MapContainer extends React.Component {
     this.deleteMarker = this.deleteMarker.bind(this)
     this.addMarker = this.addMarker.bind(this)
     this.toggleNewDropModal = this.toggleNewDropModal.bind(this)
+    this.toggleModal = this.toggleModal.bind(this)
   }
 
   componentDidMount() {
@@ -123,7 +124,7 @@ class MapContainer extends React.Component {
   }
 
   toggleModal() {
-    this.setState({ showModal: !this.state.showModal })
+    this.setState({ modalClicked: !this.state.modalClicked })
   }
 
 
