@@ -114,7 +114,6 @@ class CreateDropModal extends Component {
   }
 
   // submission for drops
-
   saveUser(data) {
     this.setState({
       receiverID: data.authID,
@@ -126,7 +125,6 @@ class CreateDropModal extends Component {
 
   onSave() {
     const { address } = { address: this.state.address }
-
     geocodeByAddress(address, (err, { lat, lng }) => {
       if (err) { console.log('error!', err) }
       const key = GOOGLE_API_KEY
@@ -157,7 +155,6 @@ class CreateDropModal extends Component {
               receiverID: this.state.receiverID
             }
           }
-          console.log('drop information', dropInformation)
           axios
             .post('http://localhost:3000/deadDrops', dropInformation)
             .then(response => {
@@ -195,7 +192,7 @@ class CreateDropModal extends Component {
     )
     return (
       <div>
-        <Modal show={this.props.modalClicked} onHide={() => { this.props.toggleModal() }}>
+        <Modal show={this.props.modalClicked} onHide={() => { this.props.toggleModal(); }}>
           <Modal.Header closeButton>Add a new Drop</Modal.Header>
           <Modal.Body>
             <form>
@@ -209,7 +206,6 @@ class CreateDropModal extends Component {
                 />
               </FormGroup>
               <FormGroup>
-              {console.log('this is state', this.state)}
                 {this.state.formattedAddress.length ?
                   <div>
                     <ControlLabel> Location </ControlLabel>

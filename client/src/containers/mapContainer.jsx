@@ -71,7 +71,6 @@ class MapContainer extends React.Component {
   placeMarkerAndPanTo(values, map) {
     let _lat = values.position.lat()
     let _lng = values.position.lng()
-    // let mId = _lat + "_" + _lng
     let markerPosition = { lat: _lat, lng: _lng }
 
     let marker = new google.maps.Marker({
@@ -89,15 +88,12 @@ class MapContainer extends React.Component {
   }
 
   toggleNewDropModal() {
-    console.log('in toggle modal', this.state)
     this.setState({ showModal: !this.state.showModal })
-    console.log('what?')
   }
 
   deleteMarker() {
     this.state.currentMarker.setMap(null);
     window.map.fitBounds(window.markerBounds)
-    window.markerBounds = new google.maps.LatLngBounds();    
   }
 
   addMarker() {
@@ -105,7 +101,6 @@ class MapContainer extends React.Component {
       showModal: !this.state.showModal,
       modalClicked: !this.state.modalClicked
     })
-    window.markerBounds = new google.maps.LatLngBounds();          
   }
 
   //get lat and lng from markers array in state and render
@@ -126,6 +121,7 @@ class MapContainer extends React.Component {
 
   toggleModal() {
     this.setState({ modalClicked: !this.state.modalClicked })
+    this.deleteMarker()    
   }
 
 
@@ -138,7 +134,6 @@ class MapContainer extends React.Component {
     return (
       <div>
         <div className="map" ref="mapCanvas"></div>
-        {console.log('this.state.showmodal', this.state.showModal)}
         {this.state.showModal ? 
           <Modal show={this.state.showModal}>
             <Modal.Header className="modal-header">
@@ -160,6 +155,7 @@ class MapContainer extends React.Component {
             toggleModal={this.toggleModal}
             address={this.state.address}
             position={this.state.markerId}
+            // toggleNewDropModal={this.toggleNewDropModal}
           /> 
           : ''}
       </div>
