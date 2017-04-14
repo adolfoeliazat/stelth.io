@@ -2,6 +2,7 @@ import AuthService from '../utils/AuthService'
 import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config'
 import { hashHistory } from 'react-router'
 import axios from 'axios'
+import thunk from 'redux-thunk'
 
 // ------------------ Action Names ----------------- //
 
@@ -19,6 +20,7 @@ const authService = new AuthService(AUTH0_CLIENT_ID, AUTH0_DOMAIN)
 
 export function onLoginClick() {
   return (dispatch) => {
+    console.log('1: Dispatching login request')
     return dispatch(loginRequest())
   }
 }
@@ -29,13 +31,17 @@ export function onLogoutClick() {
   }
 }
 
+
 export function checkLogin() {
   return (dispatch) => {
+    console.log("CHECKING LOGIN")
     // Add callback for lock's `authenticated` event
     authService.lock.on('authenticated', (authResult) => {
+      console.log('auth result?!?!??!?!', authResult)
       authService.lock.getProfile(authResult.idToken, (error, profile) => {
+        console.log("HERE IS YOUR RESPONSE!", profile)
         if (error) return dispatch(loginError(error))
-        let userID = profile.user_id.split('|')[1]
+        let userID = profile.identities.user_id
         let newUser = {
           firstName: profile.given_name,
           lastName: profile.family_name,
@@ -53,8 +59,10 @@ export function checkLogin() {
                   console.log('new user has been added')
                 })
             }
-            AuthService.setToken(authResult.idToken) // static method
+          })
+          .then(() => {
             AuthService.setProfile(profile) // static method
+            AuthService.setToken(authResult.idToken) // static method
             return dispatch(loginSuccess(profile))
           })
       })
@@ -65,6 +73,7 @@ export function checkLogin() {
 }
 
 export function loginRequest() {
+  console.log('2: LOGIN IS BEING REQUESTED')
   authService.login()
   return {
     type: LOGIN_REQUEST
@@ -72,6 +81,7 @@ export function loginRequest() {
 }
 
 export function loginSuccess(profile) {
+  console.log('3: LOGIN SUCCESS')
   hashHistory.push('/home')
   return {
     type: LOGIN_SUCCESS,
@@ -88,7 +98,7 @@ export function loginError(error) {
 
 export function logoutSuccess() {
   authService.logout()
-  hashHistory.push('/')  
+  hashHistory.push('/')
   return {
     type: LOGOUT_SUCCESS
   }

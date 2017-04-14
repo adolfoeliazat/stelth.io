@@ -11,8 +11,12 @@ import * as actions from '../redux/Actions.js'
 class AppContainer extends Component {
   constructor(props) {
     super(props)
-    this.props.checkLogin() // check is Auth0 lock is authenticating after login callback
+     // check is Auth0 lock is authenticating after login callback
   }
+
+componentDidMount() {
+  this.props.checkLogin()
+}
 
   render() {
     return(

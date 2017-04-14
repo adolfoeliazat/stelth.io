@@ -27,7 +27,6 @@ class MapContainer extends React.Component {
       markerId: null,
       currentMarker: null,
     }
-    this.props.action.checkLogin() // check is Auth0 lock is authenticating after login callback
     this.deleteMarker = this.deleteMarker.bind(this)
     this.addMarker = this.addMarker.bind(this)
     this.toggleNewDropModal = this.toggleNewDropModal.bind(this)
