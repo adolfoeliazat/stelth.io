@@ -32,7 +32,8 @@ class CreateDropModal extends Component {
       receiverLastName: '',  
       receiverResults: [],    
       receiverID: null,
-      selectUser: false
+      selectUser: false,
+      showModal: false
     }
     this.close = this.close.bind(this)
     this.searchUsers = this.searchUsers.bind(this)
@@ -41,7 +42,6 @@ class CreateDropModal extends Component {
     this.onSave = this.onSave.bind(this)
     this.onDrop = this.onDrop.bind(this)
     this.saveUser = this.saveUser.bind(this)
-    // console.log('lalalala', this.props.action.addMarker)
   }
 
   // file upload function

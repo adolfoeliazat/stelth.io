@@ -24,7 +24,6 @@ class GameMasterView extends Component {
     this.toggleModal = this.toggleModal.bind(this)
     this.props.action.checkLogin() // check is Auth0 lock is authenticating after login callback
     this.getDropLocations()
-    console.log('this.props', this.props)
   }
 
   toggleModal() {

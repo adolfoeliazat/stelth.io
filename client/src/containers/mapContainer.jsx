@@ -21,18 +21,16 @@ class MapContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      markers: {},
       showModal: false,
-      showCreateModal: false,
+      modalClicked: false,
       address: '',
+      markerId: null,
       currentMarker: null
     }
-    this.markerId
     this.props.action.checkLogin() // check is Auth0 lock is authenticating after login callback
     this.deleteMarker = this.deleteMarker.bind(this)
     this.addMarker = this.addMarker.bind(this)
-    this.toggleModal = this.toggleModal.bind(this)
-    console.log('google api key', GOOGLE_API_KEY)
+    this.toggleNewDropModal = this.toggleNewDropModal.bind(this)
   }
 
   componentDidMount() {
@@ -50,7 +48,6 @@ class MapContainer extends React.Component {
       axios
         .get(url)
         .then((response) => {
-          console.log('res', response)
           let data = {
             position: e.latLng,
             address: response.data.results[0].formatted_address
@@ -59,7 +56,6 @@ class MapContainer extends React.Component {
           return data
         })
         .then((x) => {
-          console.log('x', x)
           this.placeMarkerAndPanTo(x, window.map)
           window.map.setZoom(13)
         })
@@ -72,26 +68,29 @@ class MapContainer extends React.Component {
   }
 
   placeMarkerAndPanTo(values, map) {
-    console.log('values', values)
     let _lat = values.position.lat()
     let _lng = values.position.lng()
-    this.markerId = _lat + "_" + _lng
+    let mId = _lat + "_" + _lng
     let markerPosition = { lat: _lat, lng: _lng }
+
     let marker = new google.maps.Marker({
       position: markerPosition,
       map: map
     });
-    map.panTo(markerPosition);
+
     this.setState({
-      markers: this.state.markers[this.markerId] = marker,
+      markerId: mId,
       currentMarker: marker
     })
-    this.toggleModal()
+
+    map.panTo(markerPosition);
+    this.toggleNewDropModal()
   }
 
-  toggleModal() {
-    console.log('in toggle modal')
+  toggleNewDropModal() {
+    console.log('in toggle modal', this.state)
     this.setState({ showModal: !this.state.showModal })
+    console.log('what?')
   }
 
   deleteMarker() {
@@ -102,8 +101,8 @@ class MapContainer extends React.Component {
 
   addMarker() {
     this.setState({
-      showModal: false,
-      showCreateModal: true
+      showModal: !this.state.showModal,
+      modalClicked: !this.state.modalClicked
     })
   }
 
@@ -123,8 +122,13 @@ class MapContainer extends React.Component {
     })
   }
 
+  toggleModal() {
+    this.setState({ showModal: !this.state.showModal })
+  }
+
+
   close() {
-    this.setState({ showModal: false });
+    this.setState({ showModal: !this.state.showModal });
     this.deleteMarker()
   }
 
@@ -132,21 +136,23 @@ class MapContainer extends React.Component {
     return (
       <div>
         <div className="map" ref="mapCanvas"></div>
-        <Modal show={this.state.showModal} onHide={this.close}>
-          <Modal.Header className="modal-header">
-            <Modal.Title>Would you like to place a drop here?</Modal.Title>
-          </Modal.Header>
+        {console.log('this.state.showmodal', this.state.showModal)}
+        {this.state.showModal ? 
+          <Modal show={this.state.showModal}>
+            <Modal.Header className="modal-header">
+              <Modal.Title>Would you like to place a drop here?</Modal.Title>
+            </Modal.Header>
 
-          <Modal.Body className="modal-body">
-            {this.state.address}
-          </Modal.Body>
+            <Modal.Body className="modal-body">
+              {this.state.address}
+            </Modal.Body>
 
-          <Modal.Footer className="modal-footer">
-            <Button onClick={() => { this.addMarker() }}>Yes</Button>
-            <Button onClick={() => { this.close() }}>No</Button>
-          </Modal.Footer>
-        </Modal>
-        {this.state.showCreateModal ? <CreateDropModal /> : ''}
+            <Modal.Footer className="modal-footer">
+              <Button onClick={() => { this.addMarker() }}>Yes</Button>
+              <Button onClick={() => { this.close() }}>No</Button>
+            </Modal.Footer>
+          </Modal> : "" }
+        {this.state.modalClicked ? <CreateDropModal modalClicked={this.state.modalClicked} toggleModal={this.toggleModal}/> : ''}
       </div>
     )
   }
