@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import GOOGLE_API_KEY from '../../../config.js'
 import { connect } from 'react-redux'
-import { Button } from 'react-bootstrap'
+import { Button, Popover } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
 import * as actions from '../redux/Actions.js'
 import ReactDOMServer from 'react-dom/server'
@@ -19,7 +19,8 @@ class MapContainer extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      markers: {}
+      markers: {},
+      popOver: false
     }
     // this.clearMarker = this.clearMarker.bind(this)
     this.idx;
@@ -47,10 +48,6 @@ class MapContainer extends React.Component {
     this.renderDropMarkers(nextProps.markers.markers)
   }
 
-  // triggerClick() {
-  //   this.deleteMarker();
-  // }
-
   placeMarkerAndPanTo(latLng, map) {
     let _lat = latLng.lat()
     let _lng = latLng.lng()
@@ -60,26 +57,13 @@ class MapContainer extends React.Component {
       map: map
     });
 
-    let infowindow = new google.maps.InfoWindow({
-      content: ""
-    })
-
     map.panTo(latLng);
     marker.addListener('click', (e) => {
-      infowindow.setContent(this.renderInfoWindow(_lat, _lng));
-      infowindow.open(map, marker);
+      // infowindow.setContent(this.renderInfoWindow(_lat, _lng));
+      // infowindow.open(map, marker);
+      this.setState({ popOver: true })
     })
     this.setState({ markers: this.state.markers[markerId] = marker })
-  }
-
-  renderInfoWindow(lat, lng) {
-    return ReactDOMServer.renderToStaticMarkup(
-      <div>
-        <h4>{lat}</h4>
-        <p>{lng}</p>
-        <Button className="btn" onClick={() => {console.log('sup')}}>I want to go here !! </Button>
-      </div>
-    )
   }
 
   deleteMarker() {
@@ -91,7 +75,7 @@ class MapContainer extends React.Component {
   }
 
   addMarker() {
-
+    console.log('yes')
   }
 
   //get lat and lng from markers array in state and render
@@ -112,7 +96,22 @@ class MapContainer extends React.Component {
 
   render() {
     return (
-      <div className="map" ref="mapCanvas"></div>
+      <div>
+        <div className="map" ref="mapCanvas"></div>
+        <div>
+          {this.state.popOver ? 
+            <Popover
+              id="popover-basic"
+              placement="top"
+              positionLeft={200}
+              positionTop={200}
+              title="Would you like to place a drop here?"
+            >
+              <Button className="no-button" onClick={this.deleteMarker}>No</Button>
+              <Button className="no-button" onClick={this.addMarker}>Yes</Button>
+            </Popover> : "" }
+        </div>
+      </div>
     )
   }
 }
