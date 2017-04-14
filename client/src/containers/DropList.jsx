@@ -9,13 +9,8 @@ import { Card } from 'semantic-ui-react'
 class DropList extends Component {
   constructor(props) {
     super(props)
-    // console.log(this.props.markers)
   }
-
-  componentWillReceiveProps(nextProps) {
-    // console.log(nextProps)
-  }
-
+  
   render() {
     return(
       <div className="drop-list-component">

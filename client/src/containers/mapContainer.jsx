@@ -64,14 +64,7 @@ class MapContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('we getting here?')
     this.renderDropMarkers(nextProps.markers.markers)
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log('jajajajjajajaj', prevProps)
-    console.log(';lkajdf', prevState)
-    // this.renderDropMarkers(nextProps.markers.markers)
   }
 
   placeMarkerAndPanTo(values, map) {
@@ -111,7 +104,6 @@ class MapContainer extends React.Component {
 
   //get lat and lng from markers array in state and render
   renderDropMarkers(data) {
-    console.log('re rendering markers?')
     data.forEach((drop, i) => {
       let center = {
         lat: drop.lat,
@@ -166,7 +158,6 @@ class MapContainer extends React.Component {
   }
 
   render() {
-    console.log('heh?')
     return (
       <div>
         <div className="map" ref="mapCanvas"></div>

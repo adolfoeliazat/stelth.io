@@ -20,7 +20,6 @@ const authService = new AuthService(AUTH0_CLIENT_ID, AUTH0_DOMAIN)
 
 export function onLoginClick() {
   return (dispatch) => {
-    console.log('1: Dispatching login request')
     return dispatch(loginRequest())
   }
 }
@@ -34,12 +33,9 @@ export function onLogoutClick() {
 
 export function checkLogin() {
   return (dispatch) => {
-    console.log("CHECKING LOGIN")
     // Add callback for lock's `authenticated` event
     authService.lock.on('authenticated', (authResult) => {
-      console.log('auth result?!?!??!?!', authResult)
       authService.lock.getProfile(authResult.idToken, (error, profile) => {
-        console.log("HERE IS YOUR RESPONSE!", profile)
         if (error) return dispatch(loginError(error))
         let userID = profile.identities.user_id
         let newUser = {
@@ -73,7 +69,6 @@ export function checkLogin() {
 }
 
 export function loginRequest() {
-  console.log('2: LOGIN IS BEING REQUESTED')
   authService.login()
   return {
     type: LOGIN_REQUEST
@@ -81,7 +76,6 @@ export function loginRequest() {
 }
 
 export function loginSuccess(profile) {
-  console.log('3: LOGIN SUCCESS')
   hashHistory.push('/home')
   return {
     type: LOGIN_SUCCESS,
@@ -119,7 +113,6 @@ export function addMarker(marker) {
 }
 
 export function deleteMarkerFromRedux(marker, i) {
-  console.log('inside of delete marker action', marker, i)
   return {
     type: DELETE_MARKER,
     marker,

@@ -22,12 +22,10 @@ class GameMasterView extends Component {
       modalClicked: false
     }
     this.toggleModal = this.toggleModal.bind(this)
-    // this.getDropLocations()
   }
 
   // axios call to db for drops then store in react state
   getDropLocations() {
-    console.log('props in get drop locations', this.props)
     let authID = this.props.auth.profile.user_id.split('|')[1]
     axios
       .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
@@ -42,15 +40,9 @@ class GameMasterView extends Component {
     this.setState({ modalClicked: !this.state.modalClicked })
   }
 
-  componentDidMount() {
-    // this.getDropLocations()
-  }
-
   componentDidUpdate() {
     this.getDropLocations()
   }
-
-
 
   render() {
     return (
