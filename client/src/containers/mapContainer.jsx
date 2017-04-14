@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
 import * as actions from '../redux/Actions.js'
+import ReactDOMServer from 'react-dom/server'
 
 @connect((state) => ({
   markers: state.markers,
@@ -23,7 +24,8 @@ class MapContainer extends React.Component {
     // this.clearMarker = this.clearMarker.bind(this)
     this.idx;
     this.props.action.checkLogin() // check is Auth0 lock is authenticating after login callback
-
+    this.deleteMarker = this.deleteMarker.bind(this)
+    // this.triggerClick = this.triggerClick.bind(this)
   }
 
   componentDidMount() {
@@ -45,45 +47,51 @@ class MapContainer extends React.Component {
     this.renderDropMarkers(nextProps.markers.markers)
   }
 
+  // triggerClick() {
+  //   this.deleteMarker();
+  // }
+
   placeMarkerAndPanTo(latLng, map) {
-
-    //create unique id for marker to put in marker object in state
-    let markerId = latLng.lat() + '_' + latLng.lng()
-
+    let _lat = latLng.lat()
+    let _lng = latLng.lng()
+    let markerId = _lat + "_" + _lng
     let marker = new google.maps.Marker({
       position: latLng,
       map: map
     });
 
-    // globally available fx to clear marker
-    window.clearMarker = () => {
-      console.log('getting into clear markers')
-      marker.setMap(null);
-      delete this.state.markers[markerId]
-    }
-
-    let contentString = 
-      '<div id="infowindow">' +
-        '<div id="content">' +
-          '</div>' +
-            `<h5 id="firstHeading" class="firstHeading">Would you like to place a drop here?</h5>` +
-          '<div id="bodyContent">' +
-          `<Button>Yes</Button>` +
-          `<Button onclick="clearMarker()">No</Button>` +
-        '</div>' +
-      '</div>';
     let infowindow = new google.maps.InfoWindow({
-      content: contentString
+      content: ""
     })
 
     map.panTo(latLng);
     marker.addListener('click', (e) => {
-      infowindow.open(map, marker)
+      infowindow.setContent(this.renderInfoWindow(_lat, _lng));
+      infowindow.open(map, marker);
     })
-
-    console.log('markers array?', this.state.markers)
-    console.log('marker', marker)
     this.setState({ markers: this.state.markers[markerId] = marker })
+  }
+
+  renderInfoWindow(lat, lng) {
+    return ReactDOMServer.renderToStaticMarkup(
+      <div>
+        <h4>{lat}</h4>
+        <p>{lng}</p>
+        <Button className="btn" onClick={() => {console.log('sup')}}>I want to go here !! </Button>
+      </div>
+    )
+  }
+
+  deleteMarker() {
+    console.log('we in here yo')
+    console.log('getting into clear markers')
+    marker.setMap(null);
+    delete this.state.markers[markerId]
+    window.map.fitBounds(window.markerBounds)
+  }
+
+  addMarker() {
+
   }
 
   //get lat and lng from markers array in state and render
