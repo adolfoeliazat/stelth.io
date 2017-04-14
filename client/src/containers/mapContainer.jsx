@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux'
 import * as actions from '../redux/Actions.js'
 import ReactDOMServer from 'react-dom/server'
 import { geocodeByAddress } from 'react-places-autocomplete';
+import CreateDropModal from './CreateDropModal.jsx'
 
 @connect((state) => ({
   markers: state.markers,
@@ -22,12 +23,15 @@ class MapContainer extends React.Component {
     this.state = {
       markers: {},
       showModal: false,
-      address: ''
+      showCreateModal: false,
+      address: '',
+      currentMarker: null
     }
+    this.markerId
     this.props.action.checkLogin() // check is Auth0 lock is authenticating after login callback
     this.deleteMarker = this.deleteMarker.bind(this)
+    this.addMarker = this.addMarker.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
-
     console.log('google api key', GOOGLE_API_KEY)
   }
 
@@ -41,7 +45,7 @@ class MapContainer extends React.Component {
     })
     window.map.addListener('click', (e) => {
       let _lat = e.latLng.lat()
-      let _lng = e.latLng.lng()      
+      let _lng = e.latLng.lng()
       let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${_lat},${_lng}&key=${GOOGLE_API_KEY}`
       axios
         .get(url)
@@ -71,12 +75,17 @@ class MapContainer extends React.Component {
     console.log('values', values)
     let _lat = values.position.lat()
     let _lng = values.position.lng()
+    this.markerId = _lat + "_" + _lng
     let markerPosition = { lat: _lat, lng: _lng }
     let marker = new google.maps.Marker({
       position: markerPosition,
       map: map
     });
     map.panTo(markerPosition);
+    this.setState({
+      markers: this.state.markers[this.markerId] = marker,
+      currentMarker: marker
+    })
     this.toggleModal()
   }
 
@@ -86,15 +95,16 @@ class MapContainer extends React.Component {
   }
 
   deleteMarker() {
-    console.log('we in here yo')
-    console.log('getting into clear markers')
-    // marker.setMap(null);
-    // delete this.state.markers[markerId]
+    this.state.currentMarker.setMap(null);
+    delete this.state.markers[this.markerId]
     window.map.fitBounds(window.markerBounds)
   }
 
   addMarker() {
-    console.log('yes')
+    this.setState({
+      showModal: false,
+      showCreateModal: true
+    })
   }
 
   //get lat and lng from markers array in state and render
@@ -114,35 +124,29 @@ class MapContainer extends React.Component {
   }
 
   close() {
-    this.setState({showModal: false}, () => {
-      this.props.resetFlag();
-    });
+    this.setState({ showModal: false });
+    this.deleteMarker()
   }
 
   render() {
     return (
       <div>
         <div className="map" ref="mapCanvas"></div>
-        {console.log('state', this.state)}
-        {this.state.showModal ?
-          <div className="static-modal">
-            <Modal.Dialog >
-              <Modal.Header className="modal-header">
-                <Modal.Title>Would you like to place a drop here?</Modal.Title>
-              </Modal.Header>
+        <Modal show={this.state.showModal} onHide={this.close}>
+          <Modal.Header className="modal-header">
+            <Modal.Title>Would you like to place a drop here?</Modal.Title>
+          </Modal.Header>
 
-              <Modal.Body className="modal-body">
-                {this.state.address}
-              </Modal.Body>
+          <Modal.Body className="modal-body">
+            {this.state.address}
+          </Modal.Body>
 
-              <Modal.Footer className="modal-footer">
-                <Button onClick={this.deleteMarker}>Close</Button>
-                <Button onClick={this.addMarker}>Save changes</Button>
-              </Modal.Footer>
-
-            </Modal.Dialog>
-          </div>
-          : ""}
+          <Modal.Footer className="modal-footer">
+            <Button onClick={() => { this.addMarker() }}>Yes</Button>
+            <Button onClick={() => { this.close() }}>No</Button>
+          </Modal.Footer>
+        </Modal>
+        {this.state.showCreateModal ? <CreateDropModal /> : ''}
       </div>
     )
   }
