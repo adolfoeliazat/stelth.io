@@ -15,6 +15,7 @@ const authReducer = (state = {
     case types.LOGIN_REQUEST:
       return {...state, isFetching: true, error: null}
     case types.LOGIN_SUCCESS:
+      console.log('sup')
       return {...state, isFetching: false, isAuthenticated: true, profile: action.profile}
     case types.LOGIN_ERROR:
       return {...state, isFetching: false, isAuthenticated: false, profile: {}, error: action.error}
@@ -26,10 +27,6 @@ const authReducer = (state = {
 }
 
 const markerReducer = (state={
-  isAuthenticated: !auth.isTokenExpired(),
-  isFetching: false,
-  profile: auth.getProfile(),
-  error: null,
   markers: []
 }, action) => {
   switch(action.type) {

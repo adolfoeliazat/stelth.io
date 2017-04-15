@@ -11,11 +11,12 @@ import * as actions from '../redux/Actions.js'
 class AppContainer extends Component {
   constructor(props) {
     super(props)
-  }
-
-  componentDidMount() {
     this.props.checkLogin()
   }
+
+  // componentWillMount() {
+  //   this.props.checkLogin()
+  // }
 
   render() {
     return(
