@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import Dropzone from 'react-dropzone';
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
-import { Modal, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
-import SingleUserView from './SingleUserView.jsx'
-import GOOGLE_API_KEY from '../../../config.js';
+import { Modal, FormGroup, ControlLabel, FormControl, Button, Alert } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import Dropzone from 'react-dropzone';
+import axios from 'axios';
+import * as actions from '../redux/Actions.js'
+import SingleUserView from '../components/SingleUserView.jsx'
+import { GOOGLE_API_KEY, bucketName, AWSConfigRegion } from '../../../config.js';
 
 const qs = require('qs');
 
 @connect((state) => ({
+  markers: state.markers,
   auth: state.auth
+}), (dispatch) => ({
+  action: bindActionCreators(actions, dispatch)
 }))
-
 
 class CreateDropModal extends Component {
   constructor(props) {
@@ -25,9 +29,12 @@ class CreateDropModal extends Component {
       uploadState: false,
       ownerID: this.props.auth.profile.user_id.split('|')[1],
       receiverFirstName: '',
-      receiverLastName: '',  
-      receiverResults: [],    
-      receiverID: null
+      receiverLastName: '',
+      receiverResults: [],
+      receiverID: null,
+      selectUser: false,
+      showModal: false,
+      formattedAddress: ''
     }
     this.close = this.close.bind(this)
     this.searchUsers = this.searchUsers.bind(this)
@@ -36,21 +43,38 @@ class CreateDropModal extends Component {
     this.onSave = this.onSave.bind(this)
     this.onDrop = this.onDrop.bind(this)
     this.saveUser = this.saveUser.bind(this)
+  }
 
-    var self = this;
-    console.log("is this being updataed? ", this.state.receiverID)
+  componentDidMount() {
+    if (this.props.address) {
+      this.setState({ formattedAddress: this.props.address })
+    }
   }
 
   // file upload function
-  onDrop() {
-    console.log("what is the state? ", this.state.uploadState)
+  onDrop(files) {
+    // let file = files[0]
+    // console.log('file', file)
+    // console.log("what is the state? ", bucketName, AWSConfigRegion)
+    // // let bucket = new AWS.S3({
+    // //   params: {
+    // //     Bucket: bucketName
+    // //   }
+    // // })
+    // console.log(bucket)
+
+    // axios.get('http://localhost:3000/s3', {
+    //     filename: file.name,
+    //     filetype: file.type
+    //   })
+    //   .then((result) => {
+
+    //   })
     this.setState({ uploadState: true })
   }
 
   // standard user input controller
   handleInputchange(e) {
-    console.log('event', e)
-    console.log('value', e.target.value)    
     const name = e.target.name;
     const val = e.target.value;
 
@@ -66,14 +90,11 @@ class CreateDropModal extends Component {
   }
 
   searchUsers() {
-    console.log('search users')
     let firstName = this.state.receiverFirstName
     let lastName = this.state.receiverLastName
     axios
       .get(`http://localhost:3000/users?firstName=${firstName}&lastName=${lastName}`)
       .then((response) => {
-        console.log('response in search users ', response)
-        console.log('response.data in search users', response.data)
         this.setState({
           receiverResults: response.data
         })
@@ -93,17 +114,17 @@ class CreateDropModal extends Component {
   }
 
   // submission for drops
-
   saveUser(data) {
-    console.log('what is data? ', data)
     this.setState({
-      receiverID: data.authID
+      receiverID: data.authID,
+      receiverFirstName: data.firstName,
+      receiverLastName: data.lastName,
+      selectUser: true
     })
   }
 
   onSave() {
     const { address } = { address: this.state.address }
-
     geocodeByAddress(address, (err, { lat, lng }) => {
       if (err) { console.log('error!', err) }
       const key = GOOGLE_API_KEY
@@ -111,19 +132,33 @@ class CreateDropModal extends Component {
 
       axios
         .get(url)
-        .then(reponse => {
-          let dropInformation = {
-            title: this.state.title,
-            file: this.state.file,
-            message: this.state.message,
-            lat: lat,
-            lng: lng,
-            ownerID: this.state.ownerID, // requires AUTH0 service to be up and running
-            receiverID: this.state.receiverID // requires AUTH0 service to be up and running
+        .then(response => {
+          let dropInformation;
+          if (this.props.position) {
+            dropInformation = {
+              title: this.state.title,
+              file: this.state.file,
+              message: this.state.message,
+              lat: this.props.position.lat,
+              lng: this.props.position.lng,
+              ownerID: this.state.ownerID,
+              receiverID: this.state.receiverID
+            }
+          } else {
+            dropInformation = {
+              title: this.state.title,
+              file: this.state.file,
+              message: this.state.message,
+              lat: lat,
+              lng: lng,
+              ownerID: this.state.ownerID,
+              receiverID: this.state.receiverID
+            }
           }
           axios
-            .post('http://localhost:3000/deadDrops', qs.stringify(dropInformation))
+            .post('http://localhost:3000/deadDrops', dropInformation)
             .then(response => {
+              this.props.action.addMarker(response.data)
             })
             .catch(err => {
               if (err) { console.log(err) }
@@ -137,8 +172,6 @@ class CreateDropModal extends Component {
   }
 
   render() {
-    console.log('am i getting the receiverID? ', this.state.receiverID)
-
     const cssClasses = {
       root: 'form-group',
       input: 'form-control',
@@ -159,7 +192,7 @@ class CreateDropModal extends Component {
     )
     return (
       <div>
-        <Modal show={this.props.modalClicked} onHide={() => { this.props.toggleModal() }}>
+        <Modal show={this.props.modalClicked} onHide={() => { this.props.toggleModal(); }}>
           <Modal.Header closeButton>Add a new Drop</Modal.Header>
           <Modal.Body>
             <form>
@@ -173,15 +206,22 @@ class CreateDropModal extends Component {
                 />
               </FormGroup>
               <FormGroup>
-                <ControlLabel>Where would you like to place your drop?</ControlLabel>
-                <PlacesAutocomplete
-                  value={this.state.address}
-                  onChange={this.handleAddressChange}
-                  autocompleteItem={AutocompleteItem}
-                  classNames={cssClasses}
-                  styles={myStyles}
-                  placeholder={"Search Places..."}
-                />
+                {this.state.formattedAddress.length ?
+                  <div>
+                    <ControlLabel> Location </ControlLabel>
+                    <FormGroup>{this.props.address}</FormGroup> 
+                  </div> :
+                  <div>
+                    <ControlLabel>Where would you like to place your drop?</ControlLabel>
+                    <PlacesAutocomplete
+                      value={this.state.address}
+                      onChange={this.handleAddressChange}
+                      autocompleteItem={AutocompleteItem}
+                      classNames={cssClasses}
+                      styles={myStyles}
+                      placeholder={"Search Places..."}
+                    />
+                  </div>}
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Who would you like to send this to?</ControlLabel>
@@ -191,20 +231,20 @@ class CreateDropModal extends Component {
                   componentClass="input"
                   placeholder={"Kan Adachi"}
                 />
-                {/*<FormControl
-                  name="receiverLastName"
-                  onChange={this.handleInputchange}
-                  componentClass="input"
-                />*/}
               </FormGroup>
-              {this.state.receiverResults.length ? 
-                this.state.receiverResults.map((item) => (
-                  <SingleUserView clickyFnc={this.saveUser} data={item}/> 
-                )) :
-                '' }
+              {this.state.selectUser ?
+                <div>
+                  <Alert>Receiver: {this.state.receiverFirstName + " " + this.state.receiverLastName + " "}selected!</Alert>
+                  <Button onClick={() => { this.setState({ selectUser: false }) }}>Search Again</Button>
+                </div> :
+                this.state.receiverResults.length ?
+                  this.state.receiverResults.map((item, i) => (
+                    <SingleUserView clickyFnc={this.saveUser} data={item} key={i} />
+                  )) : ''
+              }
               <FormGroup>
                 <ControlLabel>File Upload:</ControlLabel>
-                <Dropzone 
+                <Dropzone
                   className="dropZoneField"
                   onDrop={this.onDrop}
                   name="uploadState">
@@ -225,7 +265,7 @@ class CreateDropModal extends Component {
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button className="btn btn-primary" onClick={() => { this.props.toggleModal(); this.onSave() }}>Save</Button> :
+            <Button className="btn btn-primary" onClick={() => { this.props.toggleModal(); this.onSave() }}>Save</Button>
           </Modal.Footer>
         </Modal>
       </div>

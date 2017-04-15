@@ -11,8 +11,8 @@ exports.seed = function (knex, Promise) {
               file: 'Hello World!',
               message: 'dude this stuff is awesome bruh',
               lat:  33.9759435,
-              lng: -135.3907289,
-              ownerID: 1, // regina
+              lng: -118.3907289,
+              ownerID: '110986321791592984628', // regina
               receiverID: 2, // armen
             },
             {

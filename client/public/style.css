@@ -16,6 +16,11 @@
   position: absolute;
 }
 
+.drop-list {
+  width: 100%;  
+  position: absolute;
+}
+
 .ui.button {
   float: right;
   z-index: 100;
@@ -23,6 +28,15 @@
   margin-right: 20px;
   background-color: #333;
   color: white;
+  height: 40px;
+  font-size: 13px
+}
+
+.drop-list-component {
+  float: left;
+  z-index: 100;
+  margin-top: 50px;
+  margin-left: 11px;
   height: 40px;
   font-size: 13px
 }
@@ -52,9 +66,9 @@
   min-height: 55px;
 }
 
-.navbar-default .nav.navbar-nav > li > a:hover {
+/*.navbar-default .nav.navbar-nav > li > a:hover {
   color: #e6e6e6;
-}
+}*/
 
 .nav.navbar-nav {
   /*float: right;*/
@@ -63,7 +77,15 @@
 
 .login {
   margin-top: 8px;
-  background-color: #333
+  background-color: #333;
+  border-style: none   
+}
+.login:hover {
+  background-color: #333;
+}
+.login:active:focus {
+  background-color: #333;
+  border-color: #333
 }
 
 .logout {
@@ -91,4 +113,18 @@
   padding-left: 15px;
  }
 
+.drop-popover {
+  margin: auto
+}
 
+.modal-header {
+  text-align: center
+}
+
+.modal-body {
+  text-align: center
+}
+
+.modal-footer {
+  text-align: center
+}

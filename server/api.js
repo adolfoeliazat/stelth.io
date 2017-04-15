@@ -48,18 +48,19 @@ module.exports = (app) => {
 
   app.post('/deadDrops', (req, res, next) => {
     console.log(req.body)
-    let _ownerID = parseInt(req.body.ownerID);
-    let _receiverID = parseInt(req.body.receiverID);
+    // let _ownerID = parseInt(req.body.ownerID);
+    // let _receiverID = parseInt(req.body.receiverID);
     let _lat = parseFloat(req.body.lat);
     let _lng = parseFloat(req.body.lng);
+    console.log('lat and long in api', _lat, _lng)
     let formattedDrop = {
       title: req.body.title,
       file: req.body.file,
       message: req.body.message,
       lat: _lat,
       lng: _lng,
-      ownerID: _ownerID,
-      receiverID: _receiverID
+      ownerID: req.body.ownerID,
+      receiverID: req.body.receiverID
     }
     DeadDrop
       .query()
@@ -74,7 +75,6 @@ module.exports = (app) => {
       .delete()
       .where('id', req.body.id)
       .then(deadDrops => {
-        console.log('this the the deadDrops in delete ', deadDrops)
         res.send('Drop has been deleted!')
       })
       .catch(next);

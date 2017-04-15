@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react'
-import CreateDropModal from '../components/CreateDropModal.jsx'
-import MapContainer from './mapContainer.jsx'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import axios from 'axios'
+import { Button } from 'semantic-ui-react'
 import * as actions from '../redux/Actions.js'
+import CreateDropModal from './CreateDropModal.jsx'
+import MapContainer from './mapContainer.jsx'
+import DropList from './DropList.jsx'
 
-@connect((state) => ({}), {
-    checkLogin: actions.checkLogin
-  }
+@connect((state) => ({
+    auth: state.auth
+  }), (dispatch) => ({
+    action: bindActionCreators(actions, dispatch)
+  })
 )
 
 class GameMasterView extends Component {
@@ -17,17 +22,35 @@ class GameMasterView extends Component {
       modalClicked: false
     }
     this.toggleModal = this.toggleModal.bind(this)
-    this.props.checkLogin() // check is Auth0 lock is authenticating after login callback
   }
+
+  // axios call to db for drops then store in react state
+  getDropLocations() {
+    let authID = this.props.auth.profile.user_id.split('|')[1]
+    axios
+      .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
+      .then((result) => {
+        this.props.action.storeMarkers(result.data)
+      })
+      .catch((err) => { console.log(err) })
+  }
+
 
   toggleModal() {
     this.setState({ modalClicked: !this.state.modalClicked })
+  }
+
+  componentDidUpdate() {
+    this.getDropLocations()
   }
 
   render() {
     return (
       <div className="gamemaster-view">
         <MapContainer />
+        {/*<div className="drop-list">
+          <DropList />
+        </div>*/}
         <div className='newdrop-button'>
           <Button onClick={() => this.toggleModal()}> Create New Drop </Button>
         </div>

@@ -25,11 +25,35 @@ const authReducer = (state = {
   }
 }
 
+const markerReducer = (state={
+  isAuthenticated: !auth.isTokenExpired(),
+  isFetching: false,
+  profile: auth.getProfile(),
+  error: null,
+  markers: []
+}, action) => {
+  switch(action.type) {
+    case types.STORE_MARKERS:
+      return {...state, markers: action.markers}
+    case types.ADD_MARKER:
+      let markerArr = state.markers.map(item => (item))
+      markerArr.push(action.marker)
+      return {...state, markers: markerArr}
+    case types.DELETE_MARKER:
+      let arr = state.markers.map(item => (item))
+      arr.splice(action.i, 1)      
+      return {...state, markers: arr}
+    default:
+      return state
+  }
+}
+
 // ----------------- Root Reducer ---------------- //
 
 const rootReducer = combineReducers({
   routing: routing,
-  auth: authReducer
+  auth: authReducer,
+  markers: markerReducer
 })
 
 export default rootReducer
