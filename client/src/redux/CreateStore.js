@@ -8,13 +8,15 @@ import thunk from 'redux-thunk'
 const Initial_State = {
   // greeting: "Hello earthlings"
 }
-
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // -------------- Creating the store ------------ //
 
 const store = createStore(
   rootReducer, 
   Initial_State,
-  applyMiddleware(thunk, logger)
+  composeEnhancers(
+    applyMiddleware(thunk, logger)
+  ),
 )
 
 export default store
