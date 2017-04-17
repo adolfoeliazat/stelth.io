@@ -9,7 +9,8 @@ import MapContainer from './mapContainer.jsx'
 import DropList from './DropList.jsx'
 
 @connect((state) => ({
-    auth: state.auth
+    auth: state.auth,
+    markers: state.markers
   }), (dispatch) => ({
     action: bindActionCreators(actions, dispatch)
   })
@@ -22,30 +23,19 @@ class GameMasterView extends Component {
       modalClicked: false
     }
     this.toggleModal = this.toggleModal.bind(this)
-    this.getDropLocations = this.getDropLocations.bind(this)
-  }
-
-  // axios call to db for drops then store in react state
-  getDropLocations() {
-    let authID = this.props.auth.profile.user_id.split('|')[1]
-    axios
-      .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
-      .then((result) => {
-        this.props.action.storeMarkers(result.data)
-      })
-      .catch((err) => { console.log(err) })
   }
 
 componentDidMount() {
-  console.log(this.props)
   let authID = this.props.auth.profile.user_id.split('|')[1]
-  console.log("Firing off FETCHER")
-  this.props.action.fetchData2(authID)
-  console.log("FUCKIN FETCHER DONE!")
+  this.props.action.fetchData(authID)
 }
 
   toggleModal() {
     this.setState({ modalClicked: !this.state.modalClicked })
+  }
+
+    componentDidUpdate() {
+    console.log("THE SHIT IS THE SHIT IS FUCKING THE SHIT!")
   }
 
   render() {
