@@ -61,14 +61,14 @@ class MapContainer extends React.Component {
         })
     })
     window.markerBounds = new google.maps.LatLngBounds();
-    let retrievedObj = localStorage.getItem('markers')
-    let markers = JSON.parse(retrievedObj)
-    console.log('marker', markers)
-    this.renderDropMarkers(markers)   
+    // let retrievedObj = localStorage.getItem('markers')
+    // let markers = JSON.parse(retrievedObj)
+    // console.log('marker', markers)
+    // this.renderDropMarkers(markers)   
   }
 
   componentWillReceiveProps(nextProps) {
-    // this.renderDropMarkers(nextProps.markers.markers)
+    this.renderDropMarkers(nextProps.markers.markers)
   }
 
   // componentDidMount() {

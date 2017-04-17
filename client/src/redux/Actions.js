@@ -75,7 +75,7 @@ export function fetchData(profile) {
     axios
       .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
       .then((result) => {
-        localStorage.setItem('markers', JSON.stringify(result.data))
+        // localStorage.setItem('markers', JSON.stringify(result.data))
         dispatch(storeMarkers(result.data, profile))
       })
       .catch((err) => { console.log(err) })
