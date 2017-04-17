@@ -32,6 +32,20 @@ export function onLogoutClick() {
   }
 }
 
+export function fetchData2(authID) {
+  return (dispatch) => {
+    //let authID = this.state.auth.profile.user_id.split('|')[1]
+    axios
+      .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
+      .then((result) => {
+        console.log("DISPATCHING FETCHDATA2 STORE DATA")
+        dispatch(storeMarkers(result.data))
+      })
+      .catch((err) => { console.log(err) })
+  }
+}
+
+
 export function checkLogin() {
   return (dispatch) => {
     // Add callback for lock's `authenticated` event
@@ -96,7 +110,6 @@ export function loginRequest() {
 }
 
 export function loginSuccess(profile) {
-  hashHistory.push('/home')
   return {
     type: LOGIN_SUCCESS,
     profile
@@ -126,6 +139,7 @@ export function storeMarkers(markers, profile) {
     
     promise.then(() => {
       dispatch(loginSuccess(profile))
+      hashHistory.push('/home')
     })
   }
 }
