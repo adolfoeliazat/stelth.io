@@ -42,22 +42,6 @@ class GameMasterView extends Component {
     this.setState({ modalClicked: !this.state.modalClicked })
   }
 
-  // componentDidUpdate() {
-  //   this.getDropLocations()
-  // }
-  
-  // // shouldComponentUpdate() {
-  // //   this.getDropLocations()
-  // // }
-
-  // componentDidMount() {
-  //   this.getDropLocations()    
-  // }
-
-  // componentWillReceiveProps() {
-  //   this.getDropLocations()    
-  // }
-
   render() {
     return (
       <div className="gamemaster-view">

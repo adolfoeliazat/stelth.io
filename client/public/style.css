@@ -66,6 +66,11 @@
   min-height: 55px;
 }
 
+.stelth-logo-icon {
+  height: 30px;
+  margin-top: 6px;
+}
+
 /*.navbar-default .nav.navbar-nav > li > a:hover {
   color: #e6e6e6;
 }*/
@@ -75,8 +80,14 @@
   margin-top: 2px;
 }
 
+.nav-auth {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  letter-spacing: 2px;
+  font-weight: 300;
+}
+
 .login {
-  margin-top: 8px;
+  margin-top: 11px;
   background-color: #333;
   border-style: none   
 }
@@ -89,7 +100,7 @@
 }
 
 .logout {
-  margin-top: 8px;
+  margin-top: 11px;
   background-color: #333;
   border-style: none 
 }
@@ -127,4 +138,19 @@
 
 .modal-footer {
   text-align: center
+}
+
+.parallax-bg-image1 {
+  height: 800px;
+  width: 100%
+}
+
+.landing-page {
+  height: 100%;
+  width: 100%
+}
+
+.react-parallax {
+  height: 100%;
+  width: 100%  
 }

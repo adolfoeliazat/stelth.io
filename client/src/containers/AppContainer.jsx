@@ -14,10 +14,6 @@ class AppContainer extends Component {
     this.props.checkLogin()
   }
 
-  // componentWillMount() {
-  //   this.props.checkLogin()
-  // }
-
   render() {
     return(
       <div>
