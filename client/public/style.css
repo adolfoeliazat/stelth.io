@@ -158,11 +158,21 @@
 }
 
 .parallax-2 {
-  height: 800px;
+  height: 500px;
   width: 100%;
-  background-color: black;
+  background: none;
+  /*background: -webkit-linear-gradient(transparent, black);*/
+  /*background-color: black;*/
+  margin-top: 100px;
+}
+
+.parallax-3 {
+  height: 500px;
+  width: 100%;
+  background: none;
+  /*background: -webkit-linear-gradient(transparent, black);*/
+  /*background-color: black;*/
   /*margin-top: 50px;*/
-  background-blend-mode: color-dodge;
 }
 
 .parallax-1-img {
@@ -171,7 +181,7 @@
 
 .landing-page {
   margin: -55px;
-  background-color: black
+  /*background-color: black*/
 }
 
 .parallax-1-container {
@@ -180,7 +190,7 @@
   /*font-weight: 100;*/
   font-size: 40px;
   color: white;
-  margin-top: 225px;  
+  margin-top: 200px;  
   padding: 10px;
   text-align: center
 }
@@ -188,21 +198,65 @@
 .parallax-grid {
   font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   color: white;  
+  margin-top: 120px
+}
+
+.pGrid {
+  height: 200px;
+  /*border: 1px white solid;*/
+  /*background-color: black;*/
+  /*opacity: 0.6;*/
+  padding: 10px;
+}
+
+.pGrid-text {
+  text-align: justify;
+  vertical-align: middle
 }
 
 .pGrid-1 {
-  /*animation-delay: 1s*/
-  -webkit-animation-duration: 5s;
+  -webkit-animation-duration: 3s;
   -webkit-animation-delay: 1s
 }
 .pGrid-2 {
-  /*animation-delay: 2s;  */
-  -webkit-animation-duration: 5s;
+  -webkit-animation-duration: 3s;
   -webkit-animation-delay: 2s
 }
 .pGrid-3 {
-  /*animation-delay: 3s;*/
-  -webkit-animation-duration: 5s;
+  -webkit-animation-duration: 3s;
   -webkit-animation-delay: 3s
+}
+
+.device-container {
+  /*vertical-align: bottom;*/
+  position: relative
+}
+
+.ipad-image {
+  height: 400px;
+  width: 600px;
+  margin-left: 47%;
+  margin-top: -122px;
+  /*vertical-align: bottom;  */
+  /*padding: 0px*/
+}
+
+.iphone-image {
+  width: 440px;
+  height: 470px;
+  position: absolute;
+  z-index: 10;
+  margin-left: 35%;
+  margin-top: 0px;
+  /*vertical-align: bottom;    */
+  padding: 0px
+}
+
+.parallax-2-container {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  letter-spacing: 1px;
+  float: left;
+  width: 50%;
+  margin-top: 100px
 }
 

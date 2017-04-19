@@ -15,7 +15,7 @@ class AuthService {
       },
       theme: {
         logo: logo,
-        primaryColor: '#31324F',
+        primaryColor: '#333',
       },
       languageDictionary: {
         title: 'Welcome!'
