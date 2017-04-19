@@ -12,10 +12,10 @@ class AuthService {
         responseType: 'token'
       }
       },
-      // theme: {
-      //   logo: LogoImg,
-      //   primaryColor: "#b81b1c"
-      // },
+      theme: {
+        logo: '../../public/images/stelthLogoBlack.png',
+        primaryColor: '#31324F',
+      },
       languageDictionary: {
         title: 'Welcome!'
       }

@@ -8,22 +8,20 @@ class LandingContainer extends Component {
     super(props)
   }
 
-  gettingStarted() {
-    // console.log('sup')
-  }
-
   render() {
     return (
       <div className="landing-page">
-        <Parallax bgImage="./images/landing1.jpg" strength={600}>
-          <div className="parallax-bg-image1">
-            <Image style={{ margin: 'auto', height: 190, width: 680 }} src='./images/stelthLogoWhite.png' />
-          </div>
+        <Parallax className="parallax-1" bgImage="./images/stelthnight.png" strength={600}>
+          <div className="parallax-1-container">Dead Drops made dead easy. And Fun.</div>
+        </Parallax>
+        <Parallax className="parallax-2" strength={600}>
+          <div className="parallax-2-container">lalalalala</div>
         </Parallax>
       </div>
-
     )
   }
 }
 
 export default LandingContainer;
+
+            // <Image className="parallax-1-img" src='./images/stelthLogoWhite.png' />
