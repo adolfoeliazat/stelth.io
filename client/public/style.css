@@ -153,13 +153,16 @@
 .parallax-1 {
   height: 800px;
   width: 100%;
-  margin: auto
+  margin: auto;
+  z-index: 50
 }
 
 .parallax-2 {
   height: 800px;
   width: 100%;
-  background-color: black
+  background-color: black;
+  /*margin-top: 50px;*/
+  background-blend-mode: color-dodge;
 }
 
 .parallax-1-img {
@@ -181,3 +184,25 @@
   padding: 10px;
   text-align: center
 }
+
+.parallax-grid {
+  font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  color: white;  
+}
+
+.pGrid-1 {
+  /*animation-delay: 1s*/
+  -webkit-animation-duration: 5s;
+  -webkit-animation-delay: 1s
+}
+.pGrid-2 {
+  /*animation-delay: 2s;  */
+  -webkit-animation-duration: 5s;
+  -webkit-animation-delay: 2s
+}
+.pGrid-3 {
+  /*animation-delay: 3s;*/
+  -webkit-animation-duration: 5s;
+  -webkit-animation-delay: 3s
+}
+
