@@ -26,7 +26,7 @@
   z-index: 100;
   margin-top: 20px;
   margin-right: 20px;
-  background-color: #333;
+  background: none;
   color: white;
   height: 40px;
   font-size: 13px
@@ -86,26 +86,31 @@
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   letter-spacing: 2px;
   font-weight: 300;
+  background: none;
 }
 
 .login {
   margin-top: 11px;
-  background-color: #333;
+  /*background-color: #333;*/
+  background: none;
   border-style: none   
 }
 
 .login:hover {
-  background-color: #333;
+  /*background-color: #333;*/
+  background: none
 }
 
 .login:active:focus {
-  background-color: #333;
-  border-color: #333
+  /*background-color: #333;
+  border-color: #333*/
+  background:none;
 }
 
 .logout {
   margin-top: 11px;
-  background-color: #333;
+  /*background-color: #333;*/
+  background: none;
   border-style: none 
 }
 
@@ -153,7 +158,8 @@
 
 .parallax-2 {
   height: 800px;
-  width: 100%
+  width: 100%;
+  background-color: black
 }
 
 .parallax-1-img {
@@ -161,7 +167,8 @@
 }
 
 .landing-page {
-  margin: -55px
+  margin: -55px;
+  background-color: black
 }
 
 .parallax-1-container {
@@ -170,7 +177,7 @@
   /*font-weight: 100;*/
   font-size: 40px;
   color: white;
-  margin-top: 200px;  
+  margin-top: 225px;  
   padding: 10px;
   text-align: center
 }

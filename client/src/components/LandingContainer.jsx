@@ -11,7 +11,7 @@ class LandingContainer extends Component {
   render() {
     return (
       <div className="landing-page">
-        <Parallax className="parallax-1" bgImage="./images/stelthnight.png" strength={600}>
+        <Parallax className="parallax-1" bgImage="./images/stelthnight.png" strength={400}>
           <div className="parallax-1-container">Dead Drops made dead easy. And Fun.</div>
         </Parallax>
         <Parallax className="parallax-2" strength={600}>
