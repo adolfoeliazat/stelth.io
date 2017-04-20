@@ -20,7 +20,7 @@ class LandingContainer extends Component {
               </div>
             }, 3000)}
           </div>
-          <div className="parallax-1-container">Dead Drops made dead easy. And Fun.</div>
+          <div className="parallax-1-container">Digital dead drops made dead easy. (And fun)</div>
           <Grid className="parallax-grid">
             <Row>
               <Col xs={6} md={4}>
