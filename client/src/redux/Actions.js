@@ -72,8 +72,8 @@ export function checkLogin() {
             }
             AuthService.setProfile(profile) // static method
             AuthService.setToken(authResult.idToken) // static method
-            // return dispatch(loginSuccess(profile))
-            return dispatch(fetchData(profile))
+            dispatch(loginSuccess(profile))
+            hashHistory.push('/home')
           })
       })
     })
@@ -82,15 +82,14 @@ export function checkLogin() {
   }
 }
 
-export function fetchData(profile) {
+export function fetchData(authID) {
   return (dispatch) => {
-    dispatch(fetchDataRequest())
-    let authID = profile.user_id.split('|')[1]
+    //dispatch(fetchDataRequest())
     axios
       .get(`http://localhost:3000/deadDrops?ownerID=${authID}`)
       .then((result) => {
         // localStorage.setItem('markers', JSON.stringify(result.data))
-        dispatch(storeMarkers(result.data, profile))
+        dispatch(storeMarkers(result.data))
       })
       .catch((err) => { console.log(err) })
   }
@@ -131,20 +130,20 @@ export function logoutSuccess() {
   }
 }
 
-export function storeMarkers(markers, profile) {
-  return (dispatch) => {
-    let promise = new Promise((resolve, reject) => {
-      resolve(dispatch(storeMarkerSuccess(markers)))
-    })
+// export function storeMarkers(markers, profile) {
+//   return (dispatch) => {
+//     let promise = new Promise((resolve, reject) => {
+//       resolve(dispatch(storeMarkerSuccess(markers)))
+//     })
     
-    promise.then(() => {
-      dispatch(loginSuccess(profile))
-      hashHistory.push('/home')
-    })
-  }
-}
+//     promise.then(() => {
+//       dispatch(loginSuccess(profile))
+//       hashHistory.push('/home')
+//     })
+//   }
+// }
 
-export function storeMarkerSuccess(markers) {
+export function storeMarkers(markers) {
   return {
     type: STORE_MARKERS,
     markers

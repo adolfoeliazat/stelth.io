@@ -1,5 +1,5 @@
-import { createStore } from 'redux'
-import { applyMiddleware } from 'redux'
+import {compose, applyMiddleware, createStore} from 'redux'
+import {persistStore, autoRehydrate} from 'redux-persist'
 import rootReducer from './Reducers'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
@@ -15,8 +15,10 @@ const store = createStore(
   rootReducer, 
   Initial_State,
   composeEnhancers(
-    applyMiddleware(thunk, logger)
+    applyMiddleware(thunk, logger),
+    autoRehydrate()
   ),
 )
+persistStore(store)
 
 export default store

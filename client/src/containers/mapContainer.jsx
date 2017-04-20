@@ -111,6 +111,7 @@ class MapContainer extends React.Component {
 
   //get lat and lng from markers array in state and render
   renderDropMarkers(data) {
+    console.log('rendering drops with ', data)
     data.forEach((drop, i) => {
       let center = {
         lat: drop.lat,
@@ -144,7 +145,6 @@ class MapContainer extends React.Component {
             }
           })
           .then(()=> {
-            //TODO: thunkify
             this.props.action.deleteMarkerFromRedux(drop, i)
           })
       })
@@ -163,6 +163,24 @@ class MapContainer extends React.Component {
     this.setState({ showModal: !this.state.showModal });
     this.deleteMarker()
   }
+
+  //     componentDidUpdate() {
+  //   console.log("THE SHIT IS THE SHIT IS FUCKING THE SHIT! PART DEUX!")
+  //   let data = this.state.markers
+  //   this.renderDropMarkers(data)
+  // }
+
+
+componentDidUpdate(prevProps, prevState) {
+  // only update chart if the data has changed
+  console.log("PREV MARKERS", prevProps.markers)
+  console.log("THIS MARKERS", this.props.markers)
+  if (prevProps.markers.markers !== this.props.markers.markers) {
+    console.log("HARO")
+    this.renderDropMarkers(this.props.markers.markers)
+  }
+}
+
 
   render() {
     return (
