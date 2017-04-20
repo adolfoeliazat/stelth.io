@@ -40,6 +40,7 @@ module.exports = (app) => {
       .where('id', req.query.id)
       .where('ownerID', req.query.ownerID)
       .where('authID', req.query.authID)
+      .where('receiverID', req.query.receiverID)      
       .then((deadDrops) => {
         res.send(deadDrops)
       })
