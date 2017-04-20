@@ -240,16 +240,28 @@
 
 .device-container {
   /*vertical-align: bottom;*/
-  position: relative
+  position: relative;
+  height: 384px
 }
 
 .ipad-image {
   border: solid #333 17px;
   border-radius: 22px;
   float: right;
-  /*max-height: 550px;*/
   width: 500px;
-  margin-left: 20px
+  margin-left: 20px;
+}
+
+.iphone-image {
+  height: 300px;
+  width: 200px;
+  border: solid #333 10px;
+  border-radius: 5px;
+  float: right;
+  z-index: 10;
+  position: absolute;
+  right: -20px;
+  bottom: 0px
 }
 
 .parallax-2-container {
