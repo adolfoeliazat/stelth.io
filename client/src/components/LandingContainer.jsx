@@ -70,7 +70,7 @@ class LandingContainer extends Component {
               </Col>
               <Col>
                 <div className="device-container">
-                  <div className="iphone-image"></div>
+                  <img className="iphone-image" src='./images/iphoneNav.png'></img>
                   <img className="ipad-image" src='./images/ipadFiller.gif'></img>
                 </div>
               </Col>

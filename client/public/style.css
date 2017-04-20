@@ -254,13 +254,13 @@
 
 .iphone-image {
   height: 300px;
-  width: 200px;
+  width: 180px;
   border: solid #333 10px;
   border-radius: 5px;
   float: right;
   z-index: 10;
   position: absolute;
-  right: -20px;
+  right: -30px;
   bottom: 0px
 }
 
