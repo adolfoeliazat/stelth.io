@@ -18,13 +18,12 @@
 
 .newdrop-button > .ui.button {
   color: black;
-  border: black solid;
+  border: black solid 2px;
   background-color: white;
   font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: 1000
+  font-weight: 1000px
   /*font-size: 20px;*/
   /*letter-spacing: 2px;*/
-  
 }
 
 .ui.button {
@@ -70,12 +69,7 @@
   margin-top: 6px;
 }
 
-/*.navbar-default .nav.navbar-nav > li > a:hover {
-  color: #e6e6e6;
-}*/
-
 .nav.navbar-nav {
-  /*float: right;*/
   margin-top: 2px;
 }
 
@@ -88,27 +82,30 @@
 
 .login {
   margin-top: 11px;
-  /*background-color: #333;*/
   background: none;
   border-style: none   
 }
 
 .login:hover {
-  /*background-color: #333;*/
   background: none
 }
 
 .login:active:focus {
-  /*background-color: #333;
-  border-color: #333*/
   background:none;
 }
 
 .logout {
   margin-top: 11px;
-  /*background-color: #333;*/
   background: none;
   border-style: none 
+}
+
+.logout:hover {
+  background: none
+}
+
+.logout:active:focus {
+  background:none;
 }
 
 .stelth-logo {
@@ -183,6 +180,9 @@
 
 .parallax-1-container {
   font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  /*font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; */
+  /*width: 800px;*/
+  /*word-wrap: break-word;*/
   /*letter-spacing: 2px;*/
   /*font-weight: 100;*/
   font-size: 40px;
@@ -195,7 +195,7 @@
 .parallax-grid {
   font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   color: white;  
-  margin-top: 120px
+  margin-top: 150px
 }
 
 .pGrid {
@@ -206,9 +206,27 @@
   padding: 10px;
 }
 
+.pGrid-icon {
+  width: 25px;
+  margin-top: -4px
+}
+
+.pGrid-header {
+  /*color: #fbfd00;*/
+  text-align: left;
+  /*font-family: Gotham SSm A,Gotham SSm B,HelveticaNeue,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;*/
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 100px;
+}
+
 .pGrid-text {
+  /*font-family: Gotham SSm A,Gotham SSm B,HelveticaNeue,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;  */
+  font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 100;
   text-align: justify;
-  vertical-align: middle
+  vertical-align: middle;
+  letter-spacing: 1px
 }
 
 .pGrid-1 {

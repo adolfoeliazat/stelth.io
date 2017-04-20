@@ -9,35 +9,44 @@ class LandingContainer extends Component {
     super(props)
   }
 
+            // {setInterval(() => {
+            //   <div className="location-drop animated fadeOutDown infinite">
+            //     <Image source="../../public/images/locationMarkerOutline.png" style={{ height: 20, left: Math.random() * 1000 }}></Image>
+            //   </div>
+            // }, 3000)}
   render() {
     return (
       <div className="landing-page">
         <Parallax className="parallax-1" bgImage="./images/stelthnight.png" strength={100}>
           <div>
-            {setInterval(() => {
-              <div className="location-drop animated fadeOutDown infinite">
-                <Image source="../../public/images/locationMarkerOutline.png" style={{ height: 20, left: Math.random() * 1000 }}></Image>
-              </div>
-            }, 3000)}
           </div>
-          <div className="parallax-1-container">Digital dead drops made dead easy. (And fun)</div>
+          <div className="parallax-1-container">Digital dead drops made dead easy.</div>
           <Grid className="parallax-grid">
             <Row>
               <Col xs={6} md={4}>
                 <div className="animated fadeInDown pGrid pGrid-1" style={{ textAlign: 'center' }}>
-                  <h3> Create Dead Drops</h3>
+                  <h3 className="pGrid-header"> 
+                    <img style={{ width: 35 }} src="./images/desktop.png" />
+                    {'    Create Dead Drops'}
+                  </h3>
                   <h5 className="pGrid-text">Use our secure web client to send messages for people all over the world. With the added location parameter, you can ensure ony the right people get your message.</h5>
                 </div>
               </Col>
               <Col xs={6} md={4}>
                 <div className="animated fadeInDown pGrid pGrid-2" style={{ textAlign: 'center' }}>
-                  <h3> Pick Up Drops</h3>
+                  <h3 className="pGrid-header"> 
+                    <img className="pGrid-icon" src="./images/pickup.png"/>
+                    {'           Pick Up Drops'}
+                  </h3>
                   <h5 className="pGrid-text">If someone has created a drop for you, download our mobile client and find out where they've placed hidden trasures for you.</h5>
                 </div>
               </Col>
               <Col xsHidden md={4}>
                 <div className="animated fadeInDown pGrid pGrid-3" style={{ textAlign: 'center' }}>
-                  <h3> Use your imagination</h3>
+                  <h3 className="pGrid-header"> 
+                    <img className="pGrid-icon" src="./images/lightbulb.png" />
+                      {'    Use your imagination'}
+                  </h3>
                   <h5 className="pGrid-text">From sending secure information, creating a scavenger hunt, or bringing people together at a specific location, the possibilities are endless!</h5>
                 </div>
               </Col>
