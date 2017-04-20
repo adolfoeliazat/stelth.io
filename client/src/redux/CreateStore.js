@@ -1,5 +1,5 @@
-import { createStore } from 'redux'
-import { applyMiddleware } from 'redux'
+import {compose, applyMiddleware, createStore} from 'redux'
+import {persistStore, autoRehydrate} from 'redux-persist'
 import rootReducer from './Reducers'
 import logger from 'redux-logger'
 import thunk from 'redux-thunk'
@@ -8,13 +8,17 @@ import thunk from 'redux-thunk'
 const Initial_State = {
   // greeting: "Hello earthlings"
 }
-
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // -------------- Creating the store ------------ //
 
 const store = createStore(
   rootReducer, 
   Initial_State,
-  applyMiddleware(thunk, logger)
+  composeEnhancers(
+    applyMiddleware(thunk, logger),
+    autoRehydrate()
+  ),
 )
+persistStore(store)
 
 export default store

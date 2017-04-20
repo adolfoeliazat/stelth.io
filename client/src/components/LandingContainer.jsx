@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Button } from 'react-bootstrap'
+import { Parallax, Background } from 'react-parallax';
+import { Button, Col, Grid, Row, Image } from 'react-bootstrap';
+
 
 class LandingContainer extends Component {
   constructor(props) {
@@ -12,15 +14,14 @@ class LandingContainer extends Component {
 
   render() {
     return (
-      <div>
-        <div className="jumbotron jumbotron-fluid">
-          <div className="container">
-            <h1 className="display-3">STELTH.io</h1>
-            <p className="lead">Digital dead-drops made dead easy (and fun)</p>
-            <Button className="btn btn-primary" onClick={this.gettingStarted}>Get Started</Button>
+      <div className="landing-page">
+        <Parallax bgImage="./images/landing1.jpg" strength={600}>
+          <div className="parallax-bg-image1">
+            <Image style={{ margin: 'auto', height: 190, width: 680 }} src='./images/stelthLogoWhite.png' />
           </div>
-        </div>
+        </Parallax>
       </div>
+
     )
   }
 }
