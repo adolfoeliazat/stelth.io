@@ -1,24 +1,30 @@
 import React, { Component } from 'react'
 import { Parallax, Background } from 'react-parallax';
 import { Button, Col, Grid, Row, Image } from 'react-bootstrap';
-import ipadImg from '../../public/images/ipad.png'
-
 
 class LandingContainer extends Component {
   constructor(props) {
     super(props)
   }
 
-            // {setInterval(() => {
-            //   <div className="location-drop animated fadeOutDown infinite">
-            //     <Image source="../../public/images/locationMarkerOutline.png" style={{ height: 20, left: Math.random() * 1000 }}></Image>
-            //   </div>
-            // }, 3000)}
+  // componentDidMount() {
+  //   createFallingDrops()
+  // }
+
+  // randomRange(min, max) {
+  //   return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
+  // }
+
+  // createFallingDrops() {
+  //   let dropLeft = this.randRange(0,1600);
+  //   let dropTop = this.randRange(-1000,1400);
+  // }
+
   render() {
     return (
       <div className="landing-page">
         <Parallax className="parallax-1" bgImage="./images/stelthnight.png" strength={100}>
-          <div>
+          <div className="falling-drop">
           </div>
           <div className="parallax-1-container">Digital dead drops made dead easy.</div>
           <Grid className="parallax-grid">
@@ -56,7 +62,7 @@ class LandingContainer extends Component {
         <Parallax className="parallax-2" strength={400}>
           <Grid>
             <Row>
-              <Col xs={6} md={6}>
+              <Col xs={4} md={4}>
                 <div className="parallax-2-container">
                   <h3> Use your imagination</h3>
                   <h5 className="parallax-2-text">From sending secure information, creating a scavenger hunt, or bringing people together at a specific location, the possibilities are endless!</h5>
@@ -64,16 +70,16 @@ class LandingContainer extends Component {
               </Col>
               <Col>
                 <div className="device-container">
-                  <img className="iphone-image" src='./images/iphone.png'></img>
-                  <img className="ipad-image" src='./images/ipad.png'></img>
+                  <img className="ipad-image" src='./images/ipadFiller.gif'></img>
                 </div>
               </Col>
             </Row>
           </Grid>
         </Parallax>
         <Parallax className="parallax-3" strength={400}>
-          <div>
-            HAi
+          <div className="parallax-3-container">
+            <h3>Download our free app in the App Store</h3>
+            <img src="./images/downloadFromAppStore.png" className="app-store"/>
           </div>
         </Parallax>
       </div >
@@ -82,3 +88,5 @@ class LandingContainer extends Component {
 }
 
 export default LandingContainer;
+
+                  // <img className="iphone-image" src='./images/iphone.png'></img>
