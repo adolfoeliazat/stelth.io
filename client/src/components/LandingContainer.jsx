@@ -25,10 +25,10 @@ class LandingContainer extends Component {
       <div className="landing-page">
         <Parallax className="parallax-1" bgImage="./images/stelthnight.png" strength={100}>
           <div className="falling-drop1">
-            <img src="./images/location-blue.png" style={{ height: 20 }} className="fd1"/>
+            <img src="./images/location-purple.png" style={{ height: 20 }} className="fd1"/>
           </div>
           <div className="falling-drop2">
-            <img src="./images/location-purple.png" style={{ height: 20 }} className="fd2"/>
+            <img src="./images/locationMarkerOutline.png" style={{ height: 20 }} className="fd2"/>
           </div>
           <div className="falling-drop3">
             <img src="./images/location-purple2.png" style={{ height: 20 }} className="fd3"/>
