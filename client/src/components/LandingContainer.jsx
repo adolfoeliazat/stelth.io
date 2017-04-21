@@ -24,8 +24,7 @@ class LandingContainer extends Component {
     return (
       <div className="landing-page">
         <Parallax className="parallax-1" bgImage="./images/stelthnight.png" strength={100}>
-          <div className="falling-drop">
-          </div>
+          <div className="falling-drop"></div>
           <div className="parallax-1-container">Digital dead drops made dead easy.</div>
           <Grid className="parallax-grid">
             <Row>

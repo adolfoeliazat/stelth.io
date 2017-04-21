@@ -324,3 +324,30 @@
   margin-top: 30px
 }
 
+.falling-drop {
+    width: 100px;
+    height: 100px;
+    background: url('./images/locationMarkerOutline.png');
+    position: relative;
+    /* Safari 4.0 - 8.0 */
+    /*-webkit-animation-name: falling;
+    -webkit-animation-duration: 5s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-delay: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: linear;*/
+    /* Standard syntax */
+    animation-name: example;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+}
+
+@keyframes example {
+    0%   {left:50px; top:50px;}
+    75%  {left:50px; top:200px;}
+}
+
+
