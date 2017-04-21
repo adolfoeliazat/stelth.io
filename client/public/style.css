@@ -323,12 +323,29 @@
   height: 400px;
   color: white;
   text-align: center;
-  margin-top: 70px
+  margin-top: 70px;
+  margin-bottom: 30px
+}
+
+.info {
+  margin-bottom: 100px
+}
+
+.info-col {
+  border-right: white solid
+}
+
+.github {
+  margin-left: 5px;
+  height: 15px;
+  margin-top: -3px
 }
 
 .app-store {
   height: 80px;
-  margin-top: 30px
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
 .falling-drop1 {

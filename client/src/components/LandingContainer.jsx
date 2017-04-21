@@ -97,6 +97,29 @@ class LandingContainer extends Component {
           <div className="parallax-3-container">
             <h3>Download our free app in the App Store</h3>
             <img src="./images/downloadFromAppStore.png" className="app-store"/>
+            <div className="info"> 
+              <Grid>
+                <Row>
+                  <Col xs={4} md={3} className="info-col">&copy; STELTH 2017</Col>
+                  <Col xs={4} md={3} className="info-col"> 
+                    Alexandre Kim
+                    <a href="https://www.github.com/jinhwanee93">
+                      <img src="./images/github.png" className="github" />                  
+                    </a>
+                  </Col>
+                  <Col xs={4} md={3} className="info-col"> Regina Lee
+                    <a href="https://www.github.com/reginavlee">
+                      <img src="./images/github.png" className="github" />                  
+                    </a>
+                  </Col>
+                  <Col xsHidden md={3}> Armen Rostamian
+                    <a href="https://www.github.com/armenr">
+                      <img src="./images/github.png" className="github" />                  
+                    </a>             
+                  </Col>
+                </Row>
+              </Grid>
+            </div>
           </div>
         </Parallax>
       </div >
