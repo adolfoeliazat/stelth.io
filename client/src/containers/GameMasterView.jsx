@@ -46,7 +46,7 @@ componentDidMount() {
           <DropList />
         </div>*/}
         <div className='newdrop-button'>
-          <Button onClick={() => this.toggleModal()}> Create New Drop </Button>
+          <Button onClick={() => this.toggleModal()}> CREATE NEW DROP </Button>
         </div>
         {this.state.modalClicked ? <CreateDropModal toggleModal={this.toggleModal} modalClicked={this.state.modalClicked} /> : ''}
       </div>

@@ -1,6 +1,7 @@
 import Auth0Lock from 'auth0-lock';
 import jwtDecode from 'jwt-decode';
 // import { AUTH0_CLIENT_ID, AUTH0_DOMAIN } from '../../../config'
+import logo from '../../public/images/stelthLogoBlack.png'
 
 class AuthService {
   constructor(clientId, domain) {
@@ -12,10 +13,10 @@ class AuthService {
         responseType: 'token'
       }
       },
-      // theme: {
-      //   logo: LogoImg,
-      //   primaryColor: "#b81b1c"
-      // },
+      theme: {
+        logo: logo,
+        primaryColor: '#333',
+      },
       languageDictionary: {
         title: 'Welcome!'
       }
