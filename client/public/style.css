@@ -324,30 +324,117 @@
   margin-top: 30px
 }
 
-.falling-drop {
-    width: 100px;
-    height: 100px;
-    background: url('./images/locationMarkerOutline.png');
+.falling-drop1 {
+    width: 10px;
+    height: 10px;
     position: relative;
-    /* Safari 4.0 - 8.0 */
-    /*-webkit-animation-name: falling;
-    -webkit-animation-duration: 5s;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-delay: 2s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-direction: linear;*/
-    /* Standard syntax */
-    animation-name: example;
+    opacity: 0.5;
+    animation-name: fall1;
     animation-duration: 5s;
     animation-timing-function: linear;
-    animation-delay: 2s;
+    animation-delay: 5s;
     animation-iteration-count: infinite;
     animation-direction: linear;
 }
 
-@keyframes example {
-    0%   {left:50px; top:50px;}
-    75%  {left:50px; top:200px;}
+@keyframes fall1 {
+  0%   {left:700px; top:50px; opacity: 0}
+  75%  {left:700px; top:800px;}
+  100% {opacity: 1}
 }
 
+.falling-drop2 {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    opacity: 0.5;
+    animation-name: fall2;
+    animation-duration: 8s;
+    animation-timing-function: linear;
+    animation-delay: 6s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+}
+
+@keyframes fall2 {
+  0%   {left:100px; top:50px; opacity: 0}
+  75%  {left:100px; top:800px;}
+  100% {opacity: 1}
+}
+
+.falling-drop3 {
+    width: 15px;
+    height: 16px;
+    position: relative;
+    opacity: 0.5;
+    animation-name: fall3;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-delay: 7s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+}
+
+@keyframes fall3 {
+  0%   {left:400px; top:50px; opacity: 0}
+  75%  {left:400px; top:800px;}
+  100% {opacity: 1}
+}
+
+.falling-drop4 {
+    width: 25px;
+    height: 25px;
+    position: relative;
+    opacity: 0.5;
+    animation-name: fall4;
+    animation-duration: 8s;
+    animation-timing-function: linear;
+    animation-delay: 8s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+}
+
+@keyframes fall4 {
+  0%   {left:1000px; top:50px; opacity: 0}
+  75%  {left:1000px; top:800px;}
+  100% {opacity: 1}
+}
+
+.falling-drop5 {
+    width: 10px;
+    height: 10px;
+    position: relative;
+    opacity: 0.5;
+    animation-name: fall5;
+    animation-duration: 7s;
+    animation-timing-function: linear;
+    animation-delay: 9s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+}
+
+@keyframes fall5 {
+  0%   {left:300px; top:50px; opacity: 0}
+  75%  {left:400px; top:800px;}
+  100% {opacity: 1}
+}
+
+.falling-drop6 {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    opacity: 0.5;
+    animation-name: fall6;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-delay: 10s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+}
+
+@keyframes fall6 {
+  0%   {left:900px; top:50px; opacity: 0}
+  75%  {left:900px; top:800px;}
+  100% {opacity: 1}
+}
 

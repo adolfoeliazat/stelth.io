@@ -24,7 +24,24 @@ class LandingContainer extends Component {
     return (
       <div className="landing-page">
         <Parallax className="parallax-1" bgImage="./images/stelthnight.png" strength={100}>
-          <div className="falling-drop"></div>
+          <div className="falling-drop1">
+            <img src="./images/location-blue.png" style={{ height: 20 }} className="fd1"/>
+          </div>
+          <div className="falling-drop2">
+            <img src="./images/location-purple.png" style={{ height: 20 }} className="fd2"/>
+          </div>
+          <div className="falling-drop3">
+            <img src="./images/location-purple2.png" style={{ height: 20 }} className="fd3"/>
+          </div>
+          <div className="falling-drop4">
+            <img src="./images/location-red.png" style={{ height: 20 }} className="fd4"/>
+          </div>
+          <div className="falling-drop5">
+            <img src="./images/location-red2.png" style={{ height: 20 }} className="fd5"/>
+          </div>
+          <div className="falling-drop6">
+            <img src="./images/locationMarkerOutline.png" style={{ height: 20 }} className="fd6"/>
+          </div>
           <div className="parallax-1-container">Digital dead drops made dead easy.</div>
           <Grid className="parallax-grid">
             <Row>
