@@ -88,6 +88,8 @@
   font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   background: none;
   color: white;
+  font-size: 15px;
+  margin-right: 10px
 }
 
 .about-page {
@@ -111,6 +113,10 @@
 
 .about:active:focus {
   background:none;
+}
+
+.login {
+  outline: thin solid;  
 }
 
 .login:hover {
