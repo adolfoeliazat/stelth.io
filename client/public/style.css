@@ -17,13 +17,13 @@
 }
 
 .newdrop-button > .ui.button {
-  color: black;
-  border: black solid 2px;
-  background-color: white;
+  color: white;
+  /*border: black solid 2px;*/
+  background-color: #333;
   font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: 1000px
+  font-weight: 400;
   /*font-size: 20px;*/
-  /*letter-spacing: 2px;*/
+  letter-spacing: 2px;
 }
 
 .ui.button {
@@ -39,8 +39,9 @@
 
 .dropZoneField {
   cursor: pointer;
-  height: 150px;
-  width: 150px;
+  height: 140px;
+  width: 80%;
+  margin: auto
 }
 
 .dropZoneText {
@@ -48,8 +49,7 @@
   border: dashed;
   text-align: center;
   padding-top: 60px;
-  height: 150px;
-  width: 150px;
+  height: 140px
 }
 
 .navbar {
@@ -127,12 +127,13 @@
   background-color: transparent;
   outline: thin solid;
 }
-/*
+
 .logout {
-  margin-top: 11px;
+  outline: thin solid; 
+  /*margin-top: 11px;
   background: none;
-  border-style: none 
-}*/
+  border-style: none */
+}
 
 .logout:hover {
   background: none
@@ -217,7 +218,7 @@
   font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 40px;
   color: white;
-  margin-top: 200px;  
+  margin-top: 140px;  
   padding: 10px;
   text-align: center
 }
@@ -462,3 +463,14 @@
   100% {left: 90%; top: 500px; opacity: 0}
 }
 
+.profile-image {
+  height: 200px;
+  width: 200px;
+  margin: auto;
+  border-radius: 100px;
+  border: white 2px solid
+}
+
+.team-grid {
+  margin-top: 40px
+}
