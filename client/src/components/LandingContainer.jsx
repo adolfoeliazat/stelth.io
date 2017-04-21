@@ -42,7 +42,7 @@ class LandingContainer extends Component {
           <div className="falling-drop6">
             <img src="./images/locationMarkerOutline.png" style={{ height: 20 }} className="fd6"/>
           </div>
-          <div className="parallax-1-container">Digital dead drops made dead easy.</div>
+          <div className="parallax-1-container">Digital dead drops...made dead easy.</div>
           <Grid className="parallax-grid">
             <Row>
               <Col xs={6} md={4}>
@@ -51,7 +51,7 @@ class LandingContainer extends Component {
                     <img style={{ width: 35 }} src="./images/desktop.png" />
                     {'    Create Dead Drops'}
                   </h3>
-                  <h5 className="pGrid-text">Use our secure web client to send messages for people all over the world. With the added location parameter, you can ensure ony the right people get your message.</h5>
+                  <h5 className="pGrid-text">Use our secure web client to drop messages for people to retrieve all over the world. With the added recipient parameter, you can ensure only the right people ever get to see your message.</h5>
                 </div>
               </Col>
               <Col xs={6} md={4}>
@@ -60,16 +60,16 @@ class LandingContainer extends Component {
                     <img className="pGrid-icon" src="./images/pickup.png"/>
                     {'           Pick Up Drops'}
                   </h3>
-                  <h5 className="pGrid-text">If someone has created a drop for you, download our mobile client and find out where they've placed hidden trasures for you.</h5>
+                  <h5 className="pGrid-text">If someone's stashed a drop for you, download our mobile client to find where to pick it up.</h5>
                 </div>
               </Col>
               <Col xsHidden md={4}>
                 <div className="animated fadeInDown pGrid pGrid-3" style={{ textAlign: 'center' }}>
                   <h3 className="pGrid-header"> 
                     <img className="pGrid-icon" src="./images/lightbulb.png" />
-                      {'    Use your imagination'}
+                      {'    Use Your Imagination'}
                   </h3>
-                  <h5 className="pGrid-text">From sending secure information, creating a scavenger hunt, or bringing people together at a specific location, the possibilities are endless!</h5>
+                  <h5 className="pGrid-text">Leave secure information for people at specific locations. Create a treasure hunt that spans the globe. Leave yourself location-based notes. Drop random messages of kindness with public drops for strangers to find. The possibilities are endless.</h5>
                 </div>
               </Col>
             </Row>
@@ -80,8 +80,8 @@ class LandingContainer extends Component {
             <Row>
               <Col xs={4} md={4}>
                 <div className="parallax-2-container">
-                  <h3> Use your imagination</h3>
-                  <h5 className="parallax-2-text">From sending secure information, creating a scavenger hunt, or bringing people together at a specific location, the possibilities are endless!</h5>
+                  <h3>It's Easy To Get Started</h3>
+                  <h5 className="parallax-2-text">The map view acts as your general guide. The mobile client serves are your spy glass when you're within distance of a stashed drop. Retreive digital data in physical space through your camera. Just spot it and click it.</h5>
                 </div>
               </Col>
               <Col>

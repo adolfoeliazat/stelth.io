@@ -6,7 +6,7 @@ const AboutPage = () => (
     <div className="about-page-content">
       <h2>About.</h2>
       <p>Stelth is an application that digitizes the Dead Drop culture and allows users to securely transfer sensitive data across the globe.</p>
-      <p>Stelth is powered by a team of three software engineers with a passion for innovative, cutting edge technology.</p>
+      <p>Stelth is powered by a passionate team of three software engineers who like to get together and build cool things.</p>
       <div className='team-grid'>
         <h3>Meet our team:</h3>
         <Grid >
