@@ -78,12 +78,39 @@
   letter-spacing: 2px;
   font-weight: 300;
   background: none;
+    margin-top: 11px;
+  background: none;
+  border-style: none;
+  color: white
 }
 
-.login {
-  margin-top: 11px;
+.about {
+  font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   background: none;
-  border-style: none   
+  color: white;
+}
+
+.about-page {
+  background: url('./images/stelthnight.png') no-repeat;
+  background-size: 100%;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  color: white;
+  margin-top: -55px
+}
+
+.about-page-content {
+  margin: 100px
+}
+
+.about:hover {
+  background: none
+}
+
+.about:active:focus {
+  background:none;
 }
 
 .login:hover {
@@ -93,12 +120,12 @@
 .login:active:focus {
   background:none;
 }
-
+/*
 .logout {
   margin-top: 11px;
   background: none;
   border-style: none 
-}
+}*/
 
 .logout:hover {
   background: none

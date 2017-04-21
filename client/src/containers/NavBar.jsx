@@ -30,6 +30,9 @@ export class NavBar extends React.Component {
             </Link>
           </Nav>
           <Nav pullRight>
+            <Link to="/about">
+              <Button className="about nav-auth">About</Button>
+            </Link>
             { !this.props.auth.isAuthenticated ?
               <Button className="login nav-auth" bsStyle="primary" onClick={this.props.onLoginClick}>LOGIN</Button> :
               <Button className="logout nav-auth" bsStyle="primary" onClick={this.props.onLogoutClick}>LOGOUT</Button>}
