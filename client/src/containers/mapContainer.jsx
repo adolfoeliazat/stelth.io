@@ -31,6 +31,8 @@ class MapContainer extends React.Component {
     this.addMarker = this.addMarker.bind(this)
     this.toggleNewDropModal = this.toggleNewDropModal.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
+    this.getUserPosition = this.getUserPosition.bind(this)
+
   }
 
   componentDidMount() {
@@ -74,6 +76,16 @@ class MapContainer extends React.Component {
   //   this.renderDropMarkers(markers)    
   // }
 
+  getUserPosition() {
+    navigator.geolocation.getCurrentPosition( position => {
+      let pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      window.map.setCenter(pos);
+    })
+  }
+
   placeMarkerAndPanTo(values, map) {
     let _lat = values.position.lat()
     let _lng = values.position.lng()
@@ -99,7 +111,11 @@ class MapContainer extends React.Component {
 
   deleteMarker() {
     this.state.currentMarker.setMap(null);
-    window.map.fitBounds(window.markerBounds)
+    if(!this.props.markers.markers.length) {
+      this.getUserPosition()
+    } else {
+      window.map.fitBounds(window.markerBounds)
+    }
   }
 
   addMarker() {

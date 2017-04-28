@@ -17,13 +17,12 @@
 }
 
 .newdrop-button > .ui.button {
-  color: black;
-  border: black solid 2px;
-  background-color: white;
+  color: white;
+  border: #333 2px;
+  background-color: #333;
   font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: 1000px
-  /*font-size: 20px;*/
-  /*letter-spacing: 2px;*/
+  font-weight: 300;
+  letter-spacing: 2px;
 }
 
 .ui.button {
