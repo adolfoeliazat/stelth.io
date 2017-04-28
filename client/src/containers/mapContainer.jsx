@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios';
-import { GOOGLE_API_KEY } from '../../../config.js'
+import * as actions from '../redux/Actions.js'
+import ReactDOMServer from 'react-dom/server'
+import CreateDropModal from './CreateDropModal.jsx'
 import { connect } from 'react-redux'
 import { Button, Modal } from 'react-bootstrap'
 import { bindActionCreators } from 'redux'
-import * as actions from '../redux/Actions.js'
-import ReactDOMServer from 'react-dom/server'
 import { geocodeByAddress } from 'react-places-autocomplete';
-import CreateDropModal from './CreateDropModal.jsx'
+import { GOOGLE_API_KEY } from '../../../config.js'
 
 @connect((state) => ({
   markers: state.markers,
@@ -33,6 +33,10 @@ class MapContainer extends React.Component {
     this.toggleModal = this.toggleModal.bind(this)
     this.getUserPosition = this.getUserPosition.bind(this)
 
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.renderDropMarkers(nextProps.markers.markers)
   }
 
   componentDidMount() {
@@ -65,16 +69,15 @@ class MapContainer extends React.Component {
     window.markerBounds = new google.maps.LatLngBounds();
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.renderDropMarkers(nextProps.markers.markers)
+  componentDidUpdate(prevProps, prevState) {
+  // only update chart if the data has changed
+  console.log("PREV MARKERS", prevProps.markers)
+  console.log("THIS MARKERS", this.props.markers)
+  if (prevProps.markers.markers !== this.props.markers.markers) {
+    console.log("HARO")
+    this.renderDropMarkers(this.props.markers.markers)
   }
-
-  // componentDidMount() {
-  //   let retrievedObj = localStorage.getItem('markers')
-  //   let markers = JSON.parse(retrievedObj)
-  //   console.log('marker', markers)
-  //   this.renderDropMarkers(markers)    
-  // }
+}
 
   getUserPosition() {
     navigator.geolocation.getCurrentPosition( position => {
@@ -82,7 +85,7 @@ class MapContainer extends React.Component {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
-      window.map.setCenter(pos);
+      // window.map.setCenter(pos);
     })
   }
 
@@ -179,24 +182,6 @@ class MapContainer extends React.Component {
     this.setState({ showModal: !this.state.showModal });
     this.deleteMarker()
   }
-
-  //     componentDidUpdate() {
-  //   console.log("THE SHIT IS THE SHIT IS FUCKING THE SHIT! PART DEUX!")
-  //   let data = this.state.markers
-  //   this.renderDropMarkers(data)
-  // }
-
-
-componentDidUpdate(prevProps, prevState) {
-  // only update chart if the data has changed
-  console.log("PREV MARKERS", prevProps.markers)
-  console.log("THIS MARKERS", this.props.markers)
-  if (prevProps.markers.markers !== this.props.markers.markers) {
-    console.log("HARO")
-    this.renderDropMarkers(this.props.markers.markers)
-  }
-}
-
 
   render() {
     return (
