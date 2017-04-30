@@ -40,6 +40,7 @@ class MapContainer extends React.Component {
   }
 
   componentDidMount() {
+    
     window.map = new google.maps.Map(this.refs.mapCanvas, {
       zoom: 13,
       center: {
@@ -74,7 +75,6 @@ class MapContainer extends React.Component {
   console.log("PREV MARKERS", prevProps.markers)
   console.log("THIS MARKERS", this.props.markers)
   if (prevProps.markers.markers !== this.props.markers.markers) {
-    console.log("HARO")
     this.renderDropMarkers(this.props.markers.markers)
   }
 }
@@ -208,7 +208,6 @@ class MapContainer extends React.Component {
             toggleModal={this.toggleModal}
             address={this.state.address}
             position={this.state.markerId}
-            // toggleNewDropModal={this.toggleNewDropModal}
           /> 
           : ''}
       </div>

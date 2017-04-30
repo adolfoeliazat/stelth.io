@@ -42,12 +42,9 @@ componentDidMount() {
     return (
       <div className="gamemaster-view">
         <MapContainer />
-        {/*<div className="drop-list">
-          <DropList />
-        </div>*/}
-        <div className='newdrop-button'>
-          <Button onClick={() => this.toggleModal()}> CREATE NEW DROP </Button>
-        </div>
+          <div className='newdrop-button'>
+            <Button onClick={() => this.toggleModal()}> CREATE NEW DROP </Button>
+          </div>
         {this.state.modalClicked ? <CreateDropModal toggleModal={this.toggleModal} modalClicked={this.state.modalClicked} /> : ''}
       </div>
     )

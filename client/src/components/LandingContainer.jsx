@@ -7,19 +7,6 @@ class LandingContainer extends Component {
     super(props)
   }
 
-  // componentDidMount() {
-  //   createFallingDrops()
-  // }
-
-  // randomRange(min, max) {
-  //   return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
-  // }
-
-  // createFallingDrops() {
-  //   let dropLeft = this.randRange(0,1600);
-  //   let dropTop = this.randRange(-1000,1400);
-  // }
-
   render() {
     return (
       <div className="landing-page">
@@ -79,7 +66,7 @@ class LandingContainer extends Component {
         </Parallax>
         <Parallax className="parallax-3" strength={400}>
           <div className="parallax-3-container">
-            <h3>Download our free app in the App Store</h3>
+            <h3 className="downloadText">Download our free app in the App Store</h3>
             <img src="./images/downloadFromAppStore.png" className="app-store"/>
           </div>
         </Parallax>
