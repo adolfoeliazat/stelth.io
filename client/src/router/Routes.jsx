@@ -5,6 +5,7 @@ import AppContainer from '../containers/AppContainer.jsx'
 import LandingContainer from '../components/LandingContainer.jsx'
 import GameMasterView from '../containers/GameMasterView.jsx';
 import NotFoundPage from '../components/NotFoundPage.jsx'
+import AboutPage from '../components/AboutPage.jsx'
 import NavBar from '../containers/NavBar.jsx';
 import { syncHistoryWithStore } from 'react-router-redux'
 
@@ -20,6 +21,7 @@ export default function createRoutes() {
     <Route path="/" component={AppContainer}>
       <IndexRoute component={LandingContainer} />
       <Route path='/home' component={GameMasterView} onEnter={requireAuth} />
+      <Route path='/about' component={AboutPage} />      
       <Route path='*' component={NotFoundPage} />
     </Route>
   )

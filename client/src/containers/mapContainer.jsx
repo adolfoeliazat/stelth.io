@@ -26,6 +26,7 @@ class MapContainer extends React.Component {
       address: '',
       markerId: null,
       currentMarker: null,
+      markers: []
     }
     this.deleteMarker = this.deleteMarker.bind(this)
     this.addMarker = this.addMarker.bind(this)
@@ -113,6 +114,7 @@ class MapContainer extends React.Component {
   renderDropMarkers(data) {
     console.log('rendering drops with ', data)
     data.forEach((drop, i) => {
+
       let center = {
         lat: drop.lat,
         lng: drop.lng
@@ -178,6 +180,9 @@ componentDidUpdate(prevProps, prevState) {
   if (prevProps.markers.markers !== this.props.markers.markers) {
     console.log("HARO")
     this.renderDropMarkers(this.props.markers.markers)
+    this.setState({
+      markers: this.props.markers
+    })
   }
 }
 

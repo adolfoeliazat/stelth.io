@@ -17,13 +17,13 @@
 }
 
 .newdrop-button > .ui.button {
-  color: black;
-  border: black solid 2px;
-  background-color: white;
+  color: white;
+  /*border: black solid 2px;*/
+  background-color: #333;
   font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: 1000px
+  font-weight: 400;
   /*font-size: 20px;*/
-  /*letter-spacing: 2px;*/
+  letter-spacing: 2px;
 }
 
 .ui.button {
@@ -39,8 +39,9 @@
 
 .dropZoneField {
   cursor: pointer;
-  height: 150px;
-  width: 150px;
+  height: 140px;
+  width: 80%;
+  margin: auto
 }
 
 .dropZoneText {
@@ -48,8 +49,7 @@
   border: dashed;
   text-align: center;
   padding-top: 60px;
-  height: 150px;
-  width: 150px;
+  height: 140px
 }
 
 .navbar {
@@ -78,26 +78,61 @@
   letter-spacing: 2px;
   font-weight: 300;
   background: none;
-}
-
-.login {
-  margin-top: 11px;
+    margin-top: 11px;
   background: none;
-  border-style: none   
+  border-style: none;
+  color: white
 }
 
-.login:hover {
+.about {
+  font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  background: none;
+  color: white;
+  font-size: 15px;
+  margin-right: 10px
+}
+
+.about-page {
+  background: url('./images/stelthnight.png') no-repeat;
+  background-size: 100%;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  color: white;
+  margin-top: -55px
+}
+
+.about-page-content {
+  margin: 100px
+}
+
+.about:hover {
   background: none
 }
 
-.login:active:focus {
+.about:active:focus {
   background:none;
 }
 
-.logout {
-  margin-top: 11px;
+.login {
+  outline: thin solid;  
+}
+
+.login:hover {
   background: none;
-  border-style: none 
+}
+
+.login.btn.btn-primary:focus {
+  background-color: transparent;
+  outline: thin solid;
+}
+
+.logout {
+  outline: thin solid; 
+  /*margin-top: 11px;
+  background: none;
+  border-style: none */
 }
 
 .logout:hover {
@@ -183,7 +218,7 @@
   font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 40px;
   color: white;
-  margin-top: 200px;  
+  margin-top: 140px;  
   padding: 10px;
   text-align: center
 }
@@ -289,11 +324,153 @@
   height: 400px;
   color: white;
   text-align: center;
-  margin-top: 70px
+  margin-top: 70px;
+  margin-bottom: 30px
+}
+
+.info {
+  margin-bottom: 100px
+}
+
+.info-col {
+  border-right: white solid
+}
+
+.github {
+  margin-left: 5px;
+  height: 15px;
+  margin-top: -3px
 }
 
 .app-store {
   height: 80px;
-  margin-top: 30px
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
 
+.falling-drop1 {
+    width: 10px;
+    height: 10px;
+    position: relative;
+    opacity: 0.5;
+    animation-name: fall1;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-delay: 5s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+}
+
+@keyframes fall1 {
+  0%   {left:50%; top:10px; opacity: 0}
+  50%  {left:50%; top:300px; opacity: 1}
+  100% {left: 50%; top: 500px; opacity: 0}
+}
+
+.falling-drop2 {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    opacity: 0.5;
+    animation-name: fall2;
+    animation-duration: 8s;
+    animation-timing-function: linear;
+    animation-delay: 6s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+}
+
+@keyframes fall2 {
+  0%   {left:10%; top:10px; opacity: 0}
+  50%  {left:10%; top:300px; opacity: 1}
+  100% {left: 10%; top: 500px; opacity: 0}
+}
+
+.falling-drop3 {
+    width: 15px;
+    height: 16px;
+    position: relative;
+    opacity: 0.5;
+    animation-name: fall3;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-delay: 7s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+}
+
+@keyframes fall3 {
+  0%   {left:80%; top:10px; opacity: 0}
+  50%  {left:80%; top:300px; opacity: 1}
+  100% {left: 80%; top: 500px; opacity: 0}
+}
+
+.falling-drop4 {
+    width: 25px;
+    height: 25px;
+    position: relative;
+    opacity: 0.5;
+    animation-name: fall4;
+    animation-duration: 8s;
+    animation-timing-function: linear;
+    animation-delay: 8s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+}
+
+@keyframes fall4 {
+  0%   {left:30%; top:10px; opacity: 0}
+  50%  {left:30%; top:300px; opacity: 1}
+  100% {left: 30%; top: 500px; opacity: 0}
+}
+
+.falling-drop5 {
+    width: 10px;
+    height: 10px;
+    position: relative;
+    opacity: 0.5;
+    animation-name: fall5;
+    animation-duration: 7s;
+    animation-timing-function: linear;
+    animation-delay: 9s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+}
+
+@keyframes fall5 {
+  0%   {left:70%; top:10px; opacity: 0}
+  50%  {left:70%; top:300px; opacity: 1}
+  100% {left: 70%; top: 500px; opacity: 0}
+}
+
+.falling-drop6 {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    opacity: 0.5;
+    animation-name: fall6;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-delay: 10s;
+    animation-iteration-count: infinite;
+    animation-direction: linear;
+}
+
+@keyframes fall6 {
+  0%   {left:90%; top:10px; opacity: 0}
+  50%  {left:90%; top:300px; opacity: 1}
+  100% {left: 90%; top: 500px; opacity: 0}
+}
+
+.profile-image {
+  height: 200px;
+  width: 200px;
+  margin: auto;
+  border-radius: 100px;
+  border: white 2px solid
+}
+
+.team-grid {
+  margin-top: 40px
+}
