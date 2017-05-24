@@ -32,17 +32,19 @@ class MapContainer extends React.Component {
     this.addMarker = this.addMarker.bind(this)
     this.toggleNewDropModal = this.toggleNewDropModal.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
+    this.gMap = null
+    this.markerBounds = null
   }
 
   componentDidMount() {
-    window.map = new google.maps.Map(this.refs.mapCanvas, {
+    this.gMap = new google.maps.Map(this.refs.mapCanvas, {
       zoom: 13,
       center: {
         lat: 33.9759,
         lng: -118.3907
       }
     })
-    window.map.addListener('click', (e) => {
+    this.gMap.addListener('click', (e) => {
       let _lat = e.latLng.lat()
       let _lng = e.latLng.lng()
       let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${_lat},${_lng}&key=${GOOGLE_API_KEY}`
@@ -57,11 +59,11 @@ class MapContainer extends React.Component {
           return data
         })
         .then((x) => {
-          this.placeMarkerAndPanTo(x, window.map)
-          window.map.setZoom(13)
+          this.placeMarkerAndPanTo(x, this.gMap)
+          this.gMap.setZoom(13)
         })
     })
-    window.markerBounds = new google.maps.LatLngBounds();
+    this.markerBounds = new google.maps.LatLngBounds();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -99,8 +101,8 @@ class MapContainer extends React.Component {
   }
 
   deleteMarker() {
-    this.state.currentMarker.setMap(null);
-    window.map.fitBounds(window.markerBounds)
+    // this.state.currentMarker.setMap(null);
+    this.gMap.fitBounds(this.markerBounds)
   }
 
   addMarker() {
@@ -121,7 +123,7 @@ class MapContainer extends React.Component {
       }
       let marker = new google.maps.Marker({
         position: center,
-        map: window.map
+        map: this.gMap
       })
       let contentString= '<div id="content">' +
         '<div id="siteNotice">' +
@@ -137,7 +139,7 @@ class MapContainer extends React.Component {
       })
 
       marker.addListener('click', () => {
-        infowindow.open(window.map, marker)
+        infowindow.open(this.gMap, marker)
       })
       marker.addListener('rightclick', () => {
         axios
@@ -147,11 +149,12 @@ class MapContainer extends React.Component {
             }
           })
           .then(()=> {
+            marker.setMap(null)
             this.props.action.deleteMarkerFromRedux(drop, i)
           })
       })
-      window.markerBounds.extend(center)
-      window.map.fitBounds(window.markerBounds)
+      this.markerBounds.extend(center)
+      this.gMap.fitBounds(this.markerBounds)
     })
   }
 
