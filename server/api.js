@@ -21,9 +21,6 @@ module.exports = (app) => {
   })
 
   app.post('/users', (req, res, next) => {
-    console.log('what is being posted? ', req.body)
-    console.log('what is being query? ', req.query)
-    console.log('what is being params? ', req.params)
     User
       .query()
       .insertAndFetch(req.body)
